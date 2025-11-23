@@ -72,9 +72,6 @@ export default function Home() {
             <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
               BARBERS
             </Link>
-            <Link href="/blog" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
-              BLOG
-            </Link>
             <Link href="/need-cut-now">
               <Button variant="primary" size="sm" className="text-xs md:text-sm whitespace-nowrap">
                 Need Cut Now

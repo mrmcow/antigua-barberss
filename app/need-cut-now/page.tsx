@@ -54,6 +54,43 @@ function getDriveTime(distanceMiles: number): number {
   return Math.round((distanceMiles / avgSpeed) * 60); // Convert to minutes
 }
 
+// Common LA area zip codes with approximate coordinates
+const LA_ZIP_CODES: Record<string, { lat: number; lng: number; area: string }> = {
+  '90210': { lat: 34.0901, lng: -118.4065, area: 'Beverly Hills' },
+  '90401': { lat: 34.0195, lng: -118.4912, area: 'Santa Monica' },
+  '90404': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' },
+  '90405': { lat: 34.0195, lng: -118.4912, area: 'Santa Monica' },
+  '90028': { lat: 34.1016, lng: -118.3432, area: 'Hollywood' },
+  '90027': { lat: 34.1067, lng: -118.2870, area: 'Los Feliz/Silver Lake' },
+  '90026': { lat: 34.0780, lng: -118.2608, area: 'Echo Park' },
+  '90013': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+  '90014': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+  '90015': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+  '90291': { lat: 33.9425, lng: -118.4329, area: 'Venice' },
+  '90292': { lat: 33.9930, lng: -118.4673, area: 'Marina del Rey' },
+  '90025': { lat: 34.0522, lng: -118.4437, area: 'West LA' },
+  '90024': { lat: 34.0631, lng: -118.4454, area: 'Westwood' },
+  '90069': { lat: 34.0901, lng: -118.3850, area: 'West Hollywood' },
+  '90046': { lat: 34.1030, lng: -118.3521, area: 'West Hollywood' },
+  '90048': { lat: 34.0730, lng: -118.3618, area: 'West Hollywood' },
+  '90036': { lat: 34.0757, lng: -118.3531, area: 'Mid-City' },
+  '90004': { lat: 34.0827, lng: -118.3089, area: 'Koreatown' },
+  '90005': { lat: 34.0589, lng: -118.3147, area: 'Koreatown' },
+  '90006': { lat: 34.0489, lng: -118.3075, area: 'Koreatown' },
+  '91604': { lat: 34.1478, lng: -118.3897, area: 'Studio City' },
+  '91602': { lat: 34.1392, lng: -118.3870, area: 'Studio City' },
+  '90065': { lat: 34.1081, lng: -118.2137, area: 'Glassell Park' },
+  '90039': { lat: 34.1161, lng: -118.2358, area: 'Atwater Village' },
+  '90029': { lat: 34.0889, lng: -118.2912, area: 'Los Feliz' },
+  '90068': { lat: 34.1349, lng: -118.3267, area: 'Hollywood Hills' },
+};
+
+function getLocationFromZip(zipCode: string): { lat: number; lng: number; area: string } | null {
+  // Remove any spaces and ensure 5 digits
+  const cleanZip = zipCode.replace(/\s/g, '').slice(0, 5);
+  return LA_ZIP_CODES[cleanZip] || null;
+}
+
 export default function NeedCutNowPage() {
   const [barbers, setBarbers] = useState<Barbershop[]>([]);
   const [loading, setLoading] = useState(true);
@@ -61,6 +98,7 @@ export default function NeedCutNowPage() {
   const [userLng, setUserLng] = useState<number | null>(null);
   const [locationError, setLocationError] = useState(false);
   const [zipInput, setZipInput] = useState("");
+  const [useZipMode, setUseZipMode] = useState(false);
 
   useEffect(() => {
     requestLocation();
@@ -133,6 +171,22 @@ export default function NeedCutNowPage() {
     setLoading(false);
   }
 
+  async function handleZipSearch() {
+    if (!zipInput.trim()) return;
+    
+    const location = getLocationFromZip(zipInput.trim());
+    if (location) {
+      setUserLat(location.lat);
+      setUserLng(location.lng);
+      setLocationError(false);
+      setUseZipMode(true);
+      await fetchNearbyBarbers(location.lat, location.lng);
+    } else {
+      // Invalid zip code
+      alert('Please enter a valid LA area zip code (e.g., 90210, 90401, 90028)');
+    }
+  }
+
   return (
     <main className="min-h-screen bg-white">
       {/* Navigation */}
@@ -159,7 +213,11 @@ export default function NeedCutNowPage() {
           </h1>
           <p className="text-lg md:text-xl font-medium">
             {userLat && userLng ? (
-              <>Top barbers near you, sorted by distance</>
+              useZipMode ? (
+                <>Top barbers near {LA_ZIP_CODES[zipInput]?.area || zipInput}, sorted by distance</>
+              ) : (
+                <>Top barbers near you, sorted by distance</>
+              )
             ) : (
               <>Finding barbers in LA...</>
             )}
@@ -167,16 +225,55 @@ export default function NeedCutNowPage() {
         </div>
       </section>
 
-      {/* Location Status */}
-      {locationError && (
-        <div className="border-b-2 border-black bg-yellow-100 py-3">
-          <div className="container-brutal">
-            <p className="text-sm font-medium">
-              LOCATION ACCESS DENIED. SHOWING RESULTS FOR DOWNTOWN LA.
-            </p>
+      {/* Location Status & Zip Code Input */}
+      <div className="border-b-2 border-black bg-gray-50 py-4">
+        <div className="container-brutal">
+          {locationError && (
+            <div className="bg-yellow-100 border-2 border-yellow-400 p-3 mb-4 rounded">
+              <p className="text-sm font-medium text-yellow-800 mb-2">
+                ⚠️ LOCATION ACCESS DENIED. SHOWING RESULTS FOR DOWNTOWN LA.
+              </p>
+              <p className="text-xs text-yellow-700">
+                Enter your zip code below for more accurate results.
+              </p>
+            </div>
+          )}
+
+          {/* Zip Code Input */}
+          <div className="flex gap-2 items-center">
+            <div className="flex-1">
+              <label htmlFor="zip" className="block text-sm font-bold uppercase mb-1">
+                Enter ZIP Code for Better Results:
+              </label>
+              <input
+                id="zip"
+                type="text"
+                value={zipInput}
+                onChange={(e) => setZipInput(e.target.value)}
+                placeholder="90210, 90401, 90028..."
+                className="w-full border-2 border-black p-2 text-lg font-bold uppercase tracking-wide focus:border-la-orange focus:outline-none"
+                maxLength={5}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleZipSearch();
+                  }
+                }}
+              />
+            </div>
+            <button
+              onClick={handleZipSearch}
+              disabled={!zipInput.trim() || loading}
+              className="bg-black text-white px-4 py-3 border-2 border-black hover:bg-la-orange hover:border-la-orange disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-bold uppercase text-sm mt-6"
+            >
+              <Search className="w-5 h-5" />
+            </button>
           </div>
+
+          <p className="text-xs text-gray-600 mt-2">
+            💡 TIP: Works with all LA area zip codes (90210, 90401, 91604, etc.)
+          </p>
         </div>
-      )}
+      </div>
 
       {/* Results */}
       <section className="py-4 md:py-6">
@@ -196,7 +293,9 @@ export default function NeedCutNowPage() {
             <>
               <div className="mb-4 text-sm text-gray-600 flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Showing {barbers.length} barbers near you</span>
+                <span>
+                  Showing {barbers.length} barbers near {useZipMode ? (LA_ZIP_CODES[zipInput]?.area || zipInput) : 'you'}
+                </span>
               </div>
 
               {/* Barber Cards - URGENT LAYOUT */}
