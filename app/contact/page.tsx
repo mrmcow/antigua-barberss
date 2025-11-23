@@ -16,7 +16,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Logo size={32} />
+              <Logo size="md" />
               <span className="font-bebas text-xl text-white">BARBER GUIDE</span>
             </Link>
             <nav className="flex space-x-6">
