@@ -1,16 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Debug logging for deployment
-console.log('🔍 SUPABASE CONFIG DEBUG:');
-console.log('ENV URL exists:', !!process.env.NEXT_PUBLIC_SUPABASE_URL);
-console.log('ENV KEY exists:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-console.log('URL value:', process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 30) + '...');
-
-// Hardcode values to bypass env var issues - FULL KEYS
+// FORCE HARDCODED VALUES - IGNORE ALL ENV VARS
 const supabaseUrl = 'https://hntjqndjdfmuzcxbqbva.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhudGpxbmRqZGZtdXpjeGJxYnZhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2Mzg4MTcxMSwiZXhwIjoyMDc5NDU3NzExfQ.oWGU2aNWAQCuqFbLH__p9POM1MKIwD42Ktvh3n7LKkU';
 
-console.log('✅ Using hardcoded Supabase config for deployment');
+console.log('🚀 FORCED HARDCODED SUPABASE CONFIG');
+console.log('URL:', supabaseUrl);
+console.log('KEY (first 20 chars):', supabaseAnonKey.substring(0, 20) + '...');
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
