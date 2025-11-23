@@ -228,6 +228,28 @@ export default function NeedCutNowPage() {
                         </div>
                       </div>
 
+                      {/* Work Preview - LA COOL */}
+                      {barber.images && barber.images.length > 0 && (
+                        <div className="flex gap-2 mb-3">
+                          {barber.images.slice(0, 3).map((image, imgIndex) => (
+                            <div 
+                              key={imgIndex}
+                              className="w-12 h-12 md:w-14 md:h-14 bg-gray-200 rounded-sm overflow-hidden border border-black/20"
+                            >
+                              <img
+                                src={image}
+                                alt={`${barber.name} work ${imgIndex + 1}`}
+                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-200"
+                                loading="lazy"
+                              />
+                            </div>
+                          ))}
+                          <div className="flex items-center text-xs text-gray-500 ml-2">
+                            📸 {barber.name}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Second Row: Rating, Price, Location */}
                       <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3 text-sm">
                         {barber.rating && (

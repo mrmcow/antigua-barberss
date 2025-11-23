@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Important pages for SEO
+Allow: /browse
+Allow: /match/results
+Allow: /about
+Allow: /contact
+
+# Block admin/test areas
+Disallow: /admin
+Disallow: /test
+Disallow: /api
+
+# Sitemap location
+Sitemap: https://labarberguide.xyz/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

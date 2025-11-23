@@ -64,20 +64,52 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
   async function handleVote(voteType: 'up' | 'down') {
     if (!barber) return;
 
-    try {
-      const fingerprint = getUserFingerprint();
+    const fingerprint = getUserFingerprint();
+    const previousVote = userVote;
+    const previousUpvotes = barber.upvotes || 0;
+    const previousDownvotes = barber.downvotes || 0;
 
-      // If clicking same vote, remove it
+    // OPTIMISTIC UPDATE - Update UI immediately
+    let newUpvotes = previousUpvotes;
+    let newDownvotes = previousDownvotes;
+
+    // Calculate new vote counts optimistically
+    if (userVote === voteType) {
+      // Removing existing vote
+      if (voteType === 'up') newUpvotes--;
+      else newDownvotes--;
+      setUserVote(null);
+    } else {
+      // Adding new vote or changing vote
+      if (previousVote === 'up') newUpvotes--;
+      if (previousVote === 'down') newDownvotes--;
+      
+      if (voteType === 'up') newUpvotes++;
+      else newDownvotes++;
+      setUserVote(voteType);
+    }
+
+    // Update UI immediately (optimistic)
+    setBarber({
+      ...barber,
+      upvotes: newUpvotes,
+      downvotes: newDownvotes,
+      vote_score: newUpvotes + newDownvotes > 0 
+        ? (newUpvotes - newDownvotes) / (newUpvotes + newDownvotes)
+        : 0
+    });
+
+    try {
+      // Sync with database (in background)
       if (userVote === voteType) {
+        // Remove vote
         await supabase
           .from('votes')
           .delete()
           .eq('barbershop_id', barber.id)
           .eq('voter_fingerprint', fingerprint);
-        
-        setUserVote(null);
       } else {
-        // Upsert vote (replace if exists)
+        // Add/update vote
         await supabase
           .from('votes')
           .upsert({
@@ -87,15 +119,17 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
           }, {
             onConflict: 'barbershop_id,voter_fingerprint'
           });
-        
-        setUserVote(voteType);
       }
-
-      // Refresh barber data to get updated counts
-      fetchBarber();
     } catch (error) {
       console.error('Error voting:', error);
-      alert('Voting not available yet. Database needs to be set up.');
+      
+      // REVERT optimistic update on error
+      setUserVote(previousVote);
+      setBarber({
+        ...barber,
+        upvotes: previousUpvotes,
+        downvotes: previousDownvotes
+      });
     }
   }
 
@@ -445,37 +479,45 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                 )}
               </div>
 
-              {/* Vote Buttons - Desktop */}
+              {/* Vote Buttons - Desktop (Smooth & Instant) */}
               <div className="hidden md:flex items-center gap-3 mb-6">
                 <button
                   onClick={() => handleVote('up')}
-                  className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
+                  className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-all duration-200 hover:scale-105 active:scale-95 ${
                     userVote === 'up' 
-                      ? 'bg-green-500 border-green-500 text-white' 
-                      : 'border-black hover:bg-green-500 hover:border-green-500 hover:text-white'
+                      ? 'bg-green-500 border-green-500 text-white shadow-lg shadow-green-500/25' 
+                      : 'border-black hover:bg-green-500 hover:border-green-500 hover:text-white hover:shadow-md'
                   }`}
                 >
-                  <ThumbsUp className="w-5 h-5" />
-                  Upvote ({barber.upvotes || 0})
+                  <ThumbsUp className={`w-5 h-5 transition-transform duration-200 ${
+                    userVote === 'up' ? 'scale-110' : ''
+                  }`} />
+                  <span className="transition-all duration-200">
+                    Upvote ({barber.upvotes || 0})
+                  </span>
                 </button>
                 <button
                   onClick={() => handleVote('down')}
-                  className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
+                  className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-all duration-200 hover:scale-105 active:scale-95 ${
                     userVote === 'down' 
-                      ? 'bg-red-500 border-red-500 text-white' 
-                      : 'border-black hover:bg-red-500 hover:border-red-500 hover:text-white'
+                      ? 'bg-red-500 border-red-500 text-white shadow-lg shadow-red-500/25' 
+                      : 'border-black hover:bg-red-500 hover:border-red-500 hover:text-white hover:shadow-md'
                   }`}
                 >
-                  <ThumbsDown className="w-5 h-5" />
-                  Downvote ({barber.downvotes || 0})
+                  <ThumbsDown className={`w-5 h-5 transition-transform duration-200 ${
+                    userVote === 'down' ? 'scale-110' : ''
+                  }`} />
+                  <span className="transition-all duration-200">
+                    Downvote ({barber.downvotes || 0})
+                  </span>
                 </button>
                 
-                {barber.vote_score !== 0 && (
-                  <div className="text-sm text-gray-600">
-                    {barber.vote_score > 0 ? '🔥' : '⚠️'} 
+                {(barber.upvotes || 0) + (barber.downvotes || 0) > 0 && (
+                  <div className="text-sm text-gray-600 transition-opacity duration-300">
+                    {barber.vote_score > 0 ? '🔥' : barber.vote_score < 0 ? '⚠️' : '🤷'} 
                     {' '}
-                    {Math.abs(barber.vote_score * 100).toFixed(0)}% 
-                    {barber.vote_score > 0 ? ' recommended' : ' not recommended'}
+                    {Math.abs((barber.vote_score || 0) * 100).toFixed(0)}% 
+                    {barber.vote_score > 0 ? ' recommended' : barber.vote_score < 0 ? ' not recommended' : ' mixed'}
                   </div>
                 )}
               </div>

@@ -286,6 +286,31 @@ export default function BrowsePage() {
                             <MapPin className="w-3 h-3" />
                             {barber.neighborhood || 'LA'}
                           </p>
+                        </Link>
+
+                        {/* Work Preview - LA COOL */}
+                        {barber.images && barber.images.length > 1 && (
+                          <div className="flex gap-1.5 mb-2">
+                            {barber.images.slice(1, 4).map((image, imgIndex) => (
+                              <div 
+                                key={imgIndex}
+                                className="w-8 h-8 md:w-10 md:h-10 bg-gray-200 rounded-sm overflow-hidden border border-black/20"
+                              >
+                                <img
+                                  src={image}
+                                  alt={`${barber.name} work ${imgIndex + 2}`}
+                                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-200"
+                                  loading="lazy"
+                                />
+                              </div>
+                            ))}
+                            <div className="flex items-center text-xs text-gray-500 ml-1">
+                              📸
+                            </div>
+                          </div>
+                        )}
+
+                        <Link href={`/barbers/${barber.id}`}>
 
                           {barber.rating && (
                             <div className="flex items-center gap-2 mb-2">

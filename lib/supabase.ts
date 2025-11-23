@@ -1,12 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-// FORCE HARDCODED VALUES - IGNORE ALL ENV VARS
+// Production Supabase configuration
 const supabaseUrl = 'https://hntjqndjdfmuzcxbqbva.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhudGpxbmRqZGZtdXpjeGJxYnZhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2Mzg4MTcxMSwiZXhwIjoyMDc5NDU3NzExfQ.oWGU2aNWAQCuqFbLH__p9POM1MKIwD42Ktvh3n7LKkU';
-
-console.log('🚀 FORCED HARDCODED SUPABASE CONFIG');
-console.log('URL:', supabaseUrl);
-console.log('KEY (first 20 chars):', supabaseAnonKey.substring(0, 20) + '...');
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
