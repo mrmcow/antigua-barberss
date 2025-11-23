@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
+// Trigger fresh deployment for Vercel
+
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
