@@ -527,11 +527,18 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                 <div id="reviews-section" className="mb-12 scroll-mt-32 md:scroll-mt-24">
                   {reviews.length > 0 ? (
                     <>
-                      <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-6">
-                        Reviews ({reviews.length} shown)
-                      </h2>
+                      <div className="flex items-center justify-between mb-6">
+                        <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight">
+                          Reviews
+                        </h2>
+                        {barber.review_count > reviews.length && (
+                          <span className="text-sm text-gray-600">
+                            Showing {reviews.length} of {barber.review_count}
+                          </span>
+                        )}
+                      </div>
 
-                      <div className="space-y-4">
+                      <div className="space-y-4 mb-6">
                         {reviews.map((review) => (
                           <div key={review.id} className="border-2 border-black p-4 md:p-6">
                             <div className="flex items-start justify-between mb-3">
@@ -556,6 +563,24 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                           </div>
                         ))}
                       </div>
+
+                      {/* View All Reviews on Google */}
+                      {barber.review_count > reviews.length && (
+                        <div className="border-2 border-black p-6 md:p-8 text-center bg-concrete/5">
+                          <p className="text-gray-600 mb-4">
+                            Want to see all {barber.review_count} reviews?
+                          </p>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.name)}&query_place_id=${barber.google_place_id || ''}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 font-bold uppercase text-sm hover:bg-la-orange transition-colors"
+                          >
+                            <ExternalLink className="w-5 h-5" />
+                            View All {barber.review_count} Reviews on Google
+                          </a>
+                        </div>
+                      )}
                     </>
                   ) : (
                     <>
