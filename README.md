@@ -163,3 +163,4 @@ Private project. All rights reserved.
 
 **Let's build something people actually want to use.** 🚀
 
+# Force Vercel deploy for blog infrastructure
