@@ -9,6 +9,7 @@ import { Logo } from "@/components/ui/Logo";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { MapPin, Star, Phone, Globe, Instagram, Clock, Navigation, ArrowLeft, ExternalLink, ThumbsUp, ThumbsDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { trackAndNavigate, trackClickEvent } from "@/lib/analytics";
 
 interface Barbershop {
   id: string;
@@ -31,6 +32,7 @@ interface Barbershop {
   downvotes: number;
   vote_score: number;
   google_place_id: string | null;
+  google_maps_url: string | null;
 }
 
 interface Review {
@@ -478,6 +480,7 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                   {barber.phone ? (
                     <a
                       href={`tel:${barber.phone}`}
+                      onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
                       className="border-4 border-black bg-black text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-la-orange active:border-la-orange transition-colors"
                     >
                       <Phone className="w-5 h-5 md:w-6 md:h-6" />
@@ -490,36 +493,33 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                     </div>
                   )}
                   
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => {
+                      const url = `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`;
+                      trackAndNavigate(barber.id, 'directions_click', url);
+                    }}
                     className="border-4 border-black bg-white text-black p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:text-white transition-colors"
                   >
                     <Navigation className="w-5 h-5 md:w-6 md:h-6" />
                     Directions
-                  </a>
+                  </button>
                   
                   {barber.booking_url ? (
-                    <a
-                      href={barber.booking_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => trackAndNavigate(barber.id, 'booking_click', barber.booking_url!)}
                       className="border-4 border-la-orange bg-la-orange text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:border-black transition-colors"
                     >
                       <ExternalLink className="w-5 h-5 md:w-6 md:h-6" />
                       Book Online
-                    </a>
+                    </button>
                   ) : barber.website ? (
-                    <a
-                      href={barber.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => trackAndNavigate(barber.id, 'website_click', barber.website!)}
                       className="border-4 border-la-orange bg-la-orange text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:border-black transition-colors"
                     >
                       <Globe className="w-5 h-5 md:w-6 md:h-6" />
                       Website
-                    </a>
+                    </button>
                   ) : null}
                 </div>
 
@@ -570,15 +570,16 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                           <p className="text-gray-600 mb-4">
                             Want to see all {barber.review_count} reviews?
                           </p>
-                          <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.name)}&query_place_id=${barber.google_place_id || ''}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button
+                            onClick={() => {
+                              const url = barber.google_maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.name)}&query_place_id=${barber.google_place_id || ''}`;
+                              trackAndNavigate(barber.id, 'google_reviews_click', url);
+                            }}
                             className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 font-bold uppercase text-sm hover:bg-la-orange transition-colors"
                           >
                             <ExternalLink className="w-5 h-5" />
                             View All {barber.review_count} Reviews on Google
-                          </a>
+                          </button>
                         </div>
                       )}
                     </>
@@ -595,15 +596,16 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                         <p className="text-gray-600 mb-6 max-w-md mx-auto">
                           This barber has {barber.review_count} reviews on Google. Check them out to see what people are saying!
                         </p>
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.name)}&query_place_id=${barber.google_place_id || ''}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={() => {
+                            const url = barber.google_maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.name)}&query_place_id=${barber.google_place_id || ''}`;
+                            trackAndNavigate(barber.id, 'google_reviews_click', url);
+                          }}
                           className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 font-bold uppercase text-sm md:text-base hover:bg-la-orange transition-colors"
                         >
                           <ExternalLink className="w-5 h-5" />
                           View All {barber.review_count} Reviews on Google
-                        </a>
+                        </button>
                       </div>
                     </>
                   )}

@@ -156,6 +156,7 @@ async function saveBarberToDatabase(place: PlaceResult) {
       phone: place.formatted_phone_number || null,
       website: place.website || null,
       google_place_id: place.place_id,
+      google_maps_url: place.url || `https://www.google.com/maps/place/?q=place_id:${place.place_id}`,
       rating: place.rating || null,
       review_count: place.user_ratings_total || 0,
       price_range: getPriceRange(place.price_level),

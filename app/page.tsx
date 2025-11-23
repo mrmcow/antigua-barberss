@@ -9,9 +9,20 @@ import { Logo } from "@/components/ui/Logo";
 import { Scissors, MapPin, Clock, Search, ArrowRight, Star } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
+interface Barbershop {
+  id: string;
+  name: string;
+  neighborhood: string | null;
+  rating: number | null;
+  review_count: number;
+  price_range: string | null;
+  images: string[];
+}
+
 export default function Home() {
   const [barberCount, setBarberCount] = useState<number>(500);
   const [reviewCount, setReviewCount] = useState<number>(100000);
+  const [featuredBarbers, setFeaturedBarbers] = useState<Barbershop[]>([]);
 
   useEffect(() => {
     async function fetchCounts() {
@@ -29,7 +40,24 @@ export default function Home() {
       if (reviews) setReviewCount(reviews);
     }
 
+    async function fetchFeaturedBarbers() {
+      const { data } = await supabase
+        .from('barbershops')
+        .select('id, name, neighborhood, rating, review_count, price_range, images')
+        .not('images', 'is', null)
+        .gte('rating', 4.5)
+        .order('rating', { ascending: false })
+        .limit(6);
+      
+      if (data) {
+        // Filter to only show barbers with images
+        const withImages = data.filter(b => b.images && b.images.length > 0);
+        setFeaturedBarbers(withImages);
+      }
+    }
+
     fetchCounts();
+    fetchFeaturedBarbers();
   }, []);
 
   return (
@@ -41,8 +69,8 @@ export default function Home() {
             <Logo size="sm" />
           </Link>
           <div className="flex gap-2 md:gap-4 items-center">
-            <Link href="/browse" className="hidden md:block text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
-              Browse
+            <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
+              BARBERS
             </Link>
             <Link href="/need-cut-now">
               <Button variant="primary" size="sm" className="text-xs md:text-sm whitespace-nowrap">
@@ -105,6 +133,92 @@ export default function Home() {
                 <span>Filter by hair type</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED BARBERS - LA'S FINEST */}
+      <section className="border-b-4 border-black py-12 md:py-20 bg-white">
+        <div className="container-brutal">
+          {/* Section Header */}
+          <div className="mb-8 md:mb-12">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-brutal-hero">
+                LA'S <span className="text-la-orange">FINEST</span>
+              </h2>
+              <Link 
+                href="/browse"
+                className="hidden md:inline-flex items-center gap-2 text-sm uppercase tracking-wider font-bold hover:text-la-orange transition-colors"
+              >
+                View All
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <p className="text-lg md:text-xl text-gray-600">
+              Top-rated barbers trusted by LA
+            </p>
+          </div>
+
+          {/* Featured Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
+            {featuredBarbers.map((barber) => (
+              <Link 
+                key={barber.id} 
+                href={`/barbers/${barber.id}`}
+                className="group"
+              >
+                <div className="border-4 border-black overflow-hidden bg-white hover:border-la-orange transition-all duration-300">
+                  {/* Image */}
+                  <div className="aspect-[4/3] overflow-hidden relative bg-gray-100">
+                    {barber.images?.[0] && (
+                      <img 
+                        src={barber.images[0]} 
+                        alt={barber.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    )}
+                    {/* Rating Badge */}
+                    {barber.rating && (
+                      <div className="absolute top-4 right-4 bg-black text-white px-3 py-2 flex items-center gap-1 font-bold">
+                        <Star className="w-4 h-4 fill-white" />
+                        {barber.rating.toFixed(1)}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Info */}
+                  <div className="p-4 md:p-6 bg-white">
+                    <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-2 group-hover:text-la-orange transition-colors">
+                      {barber.name}
+                    </h3>
+                    <div className="flex items-center justify-between text-sm text-gray-600">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-4 h-4" />
+                        {barber.neighborhood || 'LA'}
+                      </div>
+                      {barber.price_range && (
+                        <span className="font-bold text-black">{barber.price_range}</span>
+                      )}
+                    </div>
+                    {barber.review_count > 0 && (
+                      <p className="text-xs text-gray-500 mt-2">
+                        {barber.review_count} reviews
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile CTA */}
+          <div className="text-center md:hidden">
+            <Link href="/browse">
+              <Button variant="secondary" size="lg" className="w-full">
+                View All Barbers
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
