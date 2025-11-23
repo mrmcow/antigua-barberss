@@ -6,6 +6,12 @@ const nextConfig = {
   images: {
     domains: ['maps.googleapis.com', 'lh3.googleusercontent.com'],
     unoptimized: true
+  },
+  // Force Vercel to recognize all app directory routes
+  trailingSlash: false,
+  generateBuildId: async () => {
+    // Force new build ID to trigger complete rebuild
+    return 'force-rebuild-' + Date.now()
   }
 }
 

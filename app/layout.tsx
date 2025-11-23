@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
-// FORCE CLEAN DEPLOYMENT #6 - Nuclear option to fix Vercel routing!
+// AUTO-DEPLOY TRIGGER #7 - Push to trigger GitHub auto-deployment!
 
 const inter = Inter({ 
   subsets: ["latin"],
