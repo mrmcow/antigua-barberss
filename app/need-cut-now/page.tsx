@@ -172,7 +172,7 @@ export default function NeedCutNowPage() {
         <div className="border-b-2 border-black bg-yellow-100 py-3">
           <div className="container-brutal">
             <p className="text-sm font-medium">
-              📍 Location access denied. Showing results for Downtown LA.
+              LOCATION ACCESS DENIED. SHOWING RESULTS FOR DOWNTOWN LA.
             </p>
           </div>
         </div>
@@ -280,21 +280,21 @@ export default function NeedCutNowPage() {
                         {barber.hours?.open_now && (
                           <Badge variant="accent" className="text-xs">
                             <Clock className="w-3 h-3 inline mr-1" />
-                            Open Now
+                            OPEN NOW
                           </Badge>
                         )}
                         {barber.accepts_walk_ins && (
-                          <Badge variant="default" className="text-xs">Walk-In OK</Badge>
+                          <Badge variant="default" className="text-xs">WALK-IN OK</Badge>
                         )}
                         {barber.booking_platform && (
                           <Badge variant="outline" className="text-xs">
-                            📅 {barber.booking_platform === 'booksy' ? 'Booksy' : 
-                                 barber.booking_platform === 'vagaro' ? 'Vagaro' : 
-                                 'Book Online'}
+                            {barber.booking_platform === 'booksy' ? 'BOOKSY' : 
+                             barber.booking_platform === 'vagaro' ? 'VAGARO' : 
+                             'BOOK ONLINE'}
                           </Badge>
                         )}
-                        <Badge variant="outline" className="text-xs">Fade</Badge>
-                        <Badge variant="outline" className="text-xs">4C Hair</Badge>
+                        <Badge variant="outline" className="text-xs">FADE</Badge>
+                        <Badge variant="outline" className="text-xs">4C HAIR</Badge>
                       </div>
 
                       {/* Action Buttons */}
@@ -331,7 +331,7 @@ export default function NeedCutNowPage() {
                             rel="noopener noreferrer"
                             className="border-2 border-la-orange bg-la-orange text-white p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:border-black transition-colors"
                           >
-                            📅 Book
+                            BOOK
                           </a>
                         ) : (
                           <Link
@@ -347,7 +347,7 @@ export default function NeedCutNowPage() {
                     {/* Top Result Badge */}
                     {index === 0 && (
                       <div className="bg-la-orange text-white text-center py-2 font-bold uppercase text-xs tracking-wider">
-                        🔥 Closest to You
+                        CLOSEST TO YOU
                       </div>
                     )}
                   </div>

@@ -379,7 +379,7 @@ function MatchResultsContent() {
                     {/* Top Match Badge */}
                     {index === 0 && (
                       <div className="bg-la-orange text-white text-center py-2 font-bold uppercase text-xs tracking-wider">
-                        🔥 Best Match For You
+                        BEST MATCH FOR YOU
                       </div>
                     )}
                   </div>

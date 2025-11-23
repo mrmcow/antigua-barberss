@@ -388,7 +388,7 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
               )}
               {barber.rating && barber.rating >= 4.5 && (
                 <div className="absolute top-4 left-4 bg-la-orange text-white px-4 py-2 font-bold uppercase text-sm">
-                  ⭐ Featured Barber
+                  FEATURED BARBER
                 </div>
               )}
             </div>
@@ -464,17 +464,17 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
 
               {/* Specialization Badges */}
               <div className="flex flex-wrap gap-2 mb-6">
-                <Badge variant="default" className="text-sm">🔥 Fade Master</Badge>
-                <Badge variant="outline" className="text-sm">Walk-In Friendly</Badge>
-                <Badge variant="outline" className="text-sm">4C Hair Expert</Badge>
+                <Badge variant="default" className="text-sm">FADE MASTER</Badge>
+                <Badge variant="outline" className="text-sm">WALK-IN FRIENDLY</Badge>
+                <Badge variant="outline" className="text-sm">4C HAIR EXPERT</Badge>
                 {(barber.booking_url || barber.website) && (
                   <Badge variant="outline" className="text-sm">
-                    📅 Online Booking
+                    ONLINE BOOKING
                   </Badge>
                 )}
                 {barber.website && (
                   <Badge variant="outline" className="text-sm">
-                    🌐 Website
+                    WEBSITE
                   </Badge>
                 )}
               </div>
@@ -514,7 +514,7 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                 
                 {(barber.upvotes || 0) + (barber.downvotes || 0) > 0 && (
                   <div className="text-sm text-gray-600 transition-opacity duration-300">
-                    {barber.vote_score > 0 ? '🔥' : barber.vote_score < 0 ? '⚠️' : '🤷'} 
+                    {barber.vote_score > 0 ? 'HOT' : barber.vote_score < 0 ? 'MEH' : 'NEW'} 
                     {' '}
                     {Math.abs((barber.vote_score || 0) * 100).toFixed(0)}% 
                     {barber.vote_score > 0 ? ' recommended' : barber.vote_score < 0 ? ' not recommended' : ' mixed'}

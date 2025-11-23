@@ -179,7 +179,7 @@ export default function BrowsePage() {
                   >
                     <div className="relative">
                       <div className="absolute top-0 left-0 bg-la-orange text-white px-3 py-1 text-xs font-bold uppercase z-10">
-                        ⭐ Featured
+                        FEATURED
                       </div>
                       
                       {barber.images && barber.images.length > 0 ? (
