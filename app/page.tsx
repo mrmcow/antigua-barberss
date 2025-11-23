@@ -95,42 +95,44 @@ export default function Home() {
               IN 30 SEC
             </h1>
             
-            {/* Immediate CTA - HUGE TOUCH TARGETS */}
+            {/* BRUTAL CTA BUTTONS - MASSIVE TOUCH TARGETS */}
             <div className="space-y-4 mb-8">
-              <Link href="/match" className="block">
-                <div className="border-4 border-black bg-black text-white p-6 md:p-8 active:bg-la-orange active:border-la-orange transition-colors min-h-[100px] flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1">START MATCHING</div>
-                    <div className="text-sm md:text-base opacity-80">Answer 3 questions → Get results</div>
+              <Link href="/match" className="block group">
+                <div className="border-4 border-black bg-black text-white p-6 md:p-8 hover:bg-la-orange hover:border-la-orange active:scale-[0.98] transition-all duration-150 min-h-[100px] flex items-center justify-between relative overflow-hidden">
+                  <div className="absolute inset-0 bg-la-orange translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
+                  <div className="flex-1 relative z-10">
+                    <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1">FIND MY BARBER</div>
+                    <div className="text-sm md:text-base opacity-90">3 questions · Smart matching · LA's best</div>
                   </div>
-                  <ArrowRight className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 ml-4" />
+                  <ArrowRight className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 ml-4 relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
               </Link>
               
-              <Link href="/browse?urgency=now" className="block">
-                <div className="border-4 border-la-orange bg-la-orange text-white p-6 md:p-8 active:bg-black active:border-black transition-colors min-h-[100px] flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1">I NEED CUT NOW</div>
-                    <div className="text-sm md:text-base opacity-90">Open now · Walk-ins · Near you</div>
+              <Link href="/browse?urgency=now" className="block group">
+                <div className="border-4 border-la-orange bg-la-orange text-white p-6 md:p-8 hover:bg-black hover:border-black active:scale-[0.98] transition-all duration-150 min-h-[100px] flex items-center justify-between relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
+                  <div className="flex-1 relative z-10">
+                    <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1">CUT TODAY</div>
+                    <div className="text-sm md:text-base opacity-90">Open right now · Walk-ins welcome · Drive time</div>
                   </div>
-                  <Clock className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 ml-4" />
+                  <Clock className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 ml-4 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                 </div>
               </Link>
             </div>
             
-            {/* Social proof - minimal */}
-            <div className="flex flex-wrap items-center gap-4 md:gap-6 text-xs md:text-sm font-medium text-gray-600">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-la-orange rounded-full"></div>
-                <span>{barberCount.toLocaleString()}+ LA barbers</span>
+            {/* LA PROOF - NUMBERS DON'T LIE */}
+            <div className="flex flex-wrap items-center gap-4 md:gap-6 text-xs md:text-sm font-bold text-black">
+              <div className="flex items-center gap-2 hover:text-la-orange transition-colors cursor-default">
+                <div className="w-3 h-3 bg-la-orange rotate-45 animate-pulse"></div>
+                <span>{barberCount.toLocaleString()}+ BARBERS</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-la-orange rounded-full"></div>
-                <span>{reviewCount.toLocaleString()}+ reviews</span>
+              <div className="flex items-center gap-2 hover:text-la-orange transition-colors cursor-default">
+                <div className="w-3 h-3 bg-la-orange rotate-45 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                <span>{reviewCount.toLocaleString()}+ REVIEWS</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-la-orange rounded-full"></div>
-                <span>Filter by hair type</span>
+              <div className="flex items-center gap-2 hover:text-la-orange transition-colors cursor-default">
+                <div className="w-3 h-3 bg-la-orange rotate-45 animate-pulse" style={{animationDelay: '1s'}}></div>
+                <span>ALL HAIR TYPES</span>
               </div>
             </div>
           </div>
@@ -227,58 +229,55 @@ export default function Home() {
       <section className="border-b-4 border-black py-12 md:py-20 bg-black text-white">
         <div className="container-brutal">
           <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
-            <h2 className="text-brutal-hero mb-4">HOW IT WORKS</h2>
+            <h2 className="text-brutal-hero mb-4">HOW WE ROLL</h2>
             <p className="text-lg md:text-xl text-gray-300">
-              3 questions. Get matched. That's it.
+              Three questions. Perfect match. LA's way.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
-            {/* Step 1 - No hover, always visible */}
-            <div className="bg-white text-black p-6 md:p-8 border-4 border-white text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-la-orange text-white flex items-center justify-center text-3xl md:text-4xl font-bold mx-auto mb-4">
+            {/* Step 1 - Interactive */}
+            <div className="bg-white text-black p-6 md:p-8 border-4 border-white text-center hover:border-la-orange hover:scale-105 transition-all duration-300 cursor-pointer group">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-la-orange text-white flex items-center justify-center text-3xl md:text-4xl font-bold mx-auto mb-4 group-hover:rotate-12 transition-transform duration-300">
                 1
               </div>
-              <h3 className="text-xl md:text-2xl font-bold uppercase mb-2 tracking-tight">Your Hair</h3>
+              <h3 className="text-xl md:text-2xl font-bold uppercase mb-2 tracking-tight group-hover:text-la-orange transition-colors">YOUR HAIR</h3>
               <p className="text-sm md:text-base text-gray-700">
-                4C · Curly · Wavy · Straight
+                4C · Curly · Wavy · Straight · Whatever
               </p>
             </div>
             
-            {/* Step 2 */}
-            <div className="bg-white text-black p-6 md:p-8 border-4 border-white text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-la-orange text-white flex items-center justify-center text-3xl md:text-4xl font-bold mx-auto mb-4">
+            {/* Step 2 - Interactive */}
+            <div className="bg-white text-black p-6 md:p-8 border-4 border-white text-center hover:border-la-orange hover:scale-105 transition-all duration-300 cursor-pointer group" style={{transitionDelay: '0.1s'}}>
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-la-orange text-white flex items-center justify-center text-3xl md:text-4xl font-bold mx-auto mb-4 group-hover:-rotate-12 transition-transform duration-300">
                 2
               </div>
-              <h3 className="text-xl md:text-2xl font-bold uppercase mb-2 tracking-tight">Your Style</h3>
+              <h3 className="text-xl md:text-2xl font-bold uppercase mb-2 tracking-tight group-hover:text-la-orange transition-colors">YOUR STYLE</h3>
               <p className="text-sm md:text-base text-gray-700">
-                Fade · Crop · Beard · Color
+                Fade · Lineup · Beard · Fresh Cut
               </p>
             </div>
             
-            {/* Step 3 */}
-            <div className="bg-white text-black p-6 md:p-8 border-4 border-white text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-la-orange text-white flex items-center justify-center text-3xl md:text-4xl font-bold mx-auto mb-4">
+            {/* Step 3 - Interactive */}
+            <div className="bg-white text-black p-6 md:p-8 border-4 border-white text-center hover:border-la-orange hover:scale-105 transition-all duration-300 cursor-pointer group" style={{transitionDelay: '0.2s'}}>
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-la-orange text-white flex items-center justify-center text-3xl md:text-4xl font-bold mx-auto mb-4 group-hover:rotate-12 transition-transform duration-300">
                 3
               </div>
-              <h3 className="text-xl md:text-2xl font-bold uppercase mb-2 tracking-tight">Your Vibe</h3>
+              <h3 className="text-xl md:text-2xl font-bold uppercase mb-2 tracking-tight group-hover:text-la-orange transition-colors">YOUR VIBE</h3>
               <p className="text-sm md:text-base text-gray-700">
-                Budget · Premium · Walk-In
+                Budget · Premium · Walk-In · LA Cool
               </p>
             </div>
           </div>
 
-          {/* CTA - Large touch target */}
+          {/* BRUTAL CTA - LARGE TOUCH TARGET */}
           <div className="text-center">
-            <Link href="/match" className="block">
-              <Button 
-                variant="secondary" 
-                size="lg" 
-                icon={<ArrowRight className="w-6 h-6" />}
-                className="w-full md:w-auto bg-white text-black active:bg-la-orange active:text-white border-white text-xl py-8 px-12 min-h-[80px]"
-              >
-                START NOW
-              </Button>
+            <Link href="/match" className="block group">
+              <div className="inline-flex items-center gap-4 bg-white text-black px-12 py-8 border-4 border-white hover:bg-la-orange hover:text-white hover:border-la-orange active:scale-95 transition-all duration-300 text-xl md:text-2xl font-bold uppercase tracking-tight min-h-[80px] relative overflow-hidden">
+                <div className="absolute inset-0 bg-la-orange translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                <span className="relative z-10">FIND MY BARBER</span>
+                <ArrowRight className="w-6 h-6 md:w-8 md:h-8 relative z-10 group-hover:translate-x-2 transition-transform duration-500" />
+              </div>
             </Link>
           </div>
         </div>
