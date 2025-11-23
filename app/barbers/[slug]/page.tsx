@@ -258,8 +258,8 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
             <Logo size="sm" />
           </Link>
           <div className="flex gap-2 md:gap-4 items-center">
-            <Link href="/browse" className="hidden md:block text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
-              Browse
+            <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
+              BARBERS
             </Link>
             <Link href="/need-cut-now">
               <Button variant="primary" size="sm">
@@ -376,72 +376,69 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
       ) : null}
 
       {/* Main Content */}
-      <section className="py-8 md:py-12">
+      <section className="py-6 md:py-8">
         <div className="container-brutal">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Left: Main Info */}
             <div className="lg:col-span-2">
               {/* Header */}
-              <div className="mb-8">
-                <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                  <div className="flex-1">
-                    <h1 className="text-brutal-h1 mb-2">
-                      {barber.name.toUpperCase()}
-                    </h1>
-                    <p className="text-base md:text-lg text-gray-600 flex items-center gap-2 mb-3">
-                      <MapPin className="w-5 h-5" />
-                      {barber.neighborhood || 'Los Angeles'}
-                    </p>
-                  </div>
-                </div>
+              <div className="mb-6">
+                <h1 className="text-brutal-h1 mb-2">
+                  {barber.name.toUpperCase()}
+                </h1>
+                <p className="text-base md:text-lg text-gray-600 flex items-center gap-2">
+                  <MapPin className="w-5 h-5" />
+                  {barber.neighborhood || 'Los Angeles'}
+                </p>
+              </div>
 
-                {/* Rating & Status */}
-                <div className="flex flex-wrap items-center gap-4 mb-6">
-                  {barber.rating && (
-                    <button
-                      onClick={() => {
-                        setTimeout(() => {
-                          const reviewsSection = document.getElementById('reviews-section');
-                          if (reviewsSection) {
-                            reviewsSection.scrollIntoView({ 
-                              behavior: 'smooth',
-                              block: 'start'
-                            });
-                          }
-                        }, 100);
-                      }}
-                      className="flex items-center gap-2 hover:text-la-orange transition-colors cursor-pointer group active:scale-95"
-                    >
-                      <Star className="w-6 h-6 fill-black group-hover:fill-la-orange transition-colors" />
-                      <span className="text-2xl font-bold">{barber.rating.toFixed(1)}</span>
-                      <span className="text-gray-600 underline decoration-dotted decoration-2">({barber.review_count} reviews)</span>
-                    </button>
-                  )}
-                  {isOpen && (
-                    <Badge variant="accent" className="text-sm">
-                      <Clock className="w-4 h-4 inline mr-1" />
-                      OPEN NOW
-                    </Badge>
-                  )}
-                  {barber.price_range && (
-                    <span className="text-lg font-bold">{barber.price_range}</span>
-                  )}
-                </div>
+              {/* Rating & Status */}
+              <div className="flex flex-wrap items-center gap-4 mb-4">
+                {barber.rating && (
+                  <button
+                    onClick={() => {
+                      setTimeout(() => {
+                        const reviewsSection = document.getElementById('reviews-section');
+                        if (reviewsSection) {
+                          reviewsSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                          });
+                        }
+                      }, 100);
+                    }}
+                    className="flex items-center gap-2 hover:text-la-orange transition-colors cursor-pointer group active:scale-95"
+                  >
+                    <Star className="w-6 h-6 fill-black group-hover:fill-la-orange transition-colors" />
+                    <span className="text-2xl font-bold">{barber.rating.toFixed(1)}</span>
+                    <span className="text-gray-600 underline decoration-dotted decoration-2">({barber.review_count} reviews)</span>
+                  </button>
+                )}
+                {isOpen && (
+                  <Badge variant="accent" className="text-sm">
+                    <Clock className="w-4 h-4 inline mr-1" />
+                    OPEN NOW
+                  </Badge>
+                )}
+                {barber.price_range && (
+                  <span className="text-lg font-bold">{barber.price_range}</span>
+                )}
+              </div>
 
-                {/* Specialization Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="default" className="text-sm">🔥 Fade Master</Badge>
-                  <Badge variant="outline" className="text-sm">Walk-In Friendly</Badge>
-                  <Badge variant="outline" className="text-sm">4C Hair Expert</Badge>
-                  {barber.booking_platform && (
-                    <Badge variant="outline" className="text-sm">
-                      📅 {barber.booking_platform === 'booksy' ? 'Booksy' : 'Book Online'}
-                    </Badge>
-                  )}
-                </div>
+              {/* Specialization Badges */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                <Badge variant="default" className="text-sm">🔥 Fade Master</Badge>
+                <Badge variant="outline" className="text-sm">Walk-In Friendly</Badge>
+                <Badge variant="outline" className="text-sm">4C Hair Expert</Badge>
+                {barber.booking_platform && (
+                  <Badge variant="outline" className="text-sm">
+                    📅 {barber.booking_platform === 'booksy' ? 'Booksy' : 'Book Online'}
+                  </Badge>
+                )}
+              </div>
 
-                {/* Vote Buttons - Desktop */}
-                <div className="hidden md:flex items-center gap-3 mb-8">
+              {/* Vote Buttons - Desktop */}
+              <div className="hidden md:flex items-center gap-3 mb-6">
                   <button
                     onClick={() => handleVote('up')}
                     className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
