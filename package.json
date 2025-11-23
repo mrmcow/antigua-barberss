@@ -13,7 +13,7 @@
     "classify": "tsx scripts/classify-barbers.ts",
     "seed": "tsx scripts/seed-mock-data.ts",
     "generate:content": "node scripts/generate-blog-content.js",
-    "generate:test": "node scripts/generate-mock-blog-content.js --test --limit=10", 
+    "generate:test": "node scripts/generate-mock-blog-content.js --test --limit=10",
     "generate:full": "node scripts/generate-mock-blog-content.js --full --limit=750",
     "generate:mock": "node scripts/generate-mock-blog-content.js --limit=750"
   },
@@ -23,6 +23,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.6.1",
     "framer-motion": "^11.2.0",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.395.0",
     "next": "14.2.0",
     "openai": "^4.104.0",

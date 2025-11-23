@@ -63,12 +63,40 @@ interface BlogPost {
   featured: boolean;
 }
 
-// In production, this would read from your generated markdown files
+// Read actual blog posts from content/blog/ directory
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  // Simulate fetching from generated content
-  // In reality, you'd read from content/blog/ directory
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const matter = require('gray-matter');
+    
+    const filePath = path.join(process.cwd(), 'content', 'blog', `${slug}.md`);
+    
+    if (!fs.existsSync(filePath)) {
+      return null;
+    }
+    
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(fileContent);
+    
+    return {
+      title: data.title,
+      slug: data.slug,
+      category: data.category,
+      publishedAt: new Date(data.date).toISOString(),
+      description: data.description,
+      keywords: data.keywords,
+      author: "LA Barber Guide",
+      content: content,
+      readTime: Math.ceil(content.split(' ').length / 200) + " min read",
+      featured: false
+    };
+  } catch (error) {
+    console.error('Error reading blog post:', error);
+    return null;
+  }
   
-  // Mock data - replace with actual file reading
+  // FALLBACK: Mock data for development
   const mockPosts: Record<string, BlogPost> = {
     "ez-the-barber-review-downtown-la-barber": {
       title: "EZ The Barber Review: Downtown LA's 4C Hair Specialist Worth the Hype?",
