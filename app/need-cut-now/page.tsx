@@ -341,12 +341,6 @@ export default function NeedCutNowPage() {
                               />
                             </Link>
                           ))}
-                          <Link 
-                            href={`/barbers/${barber.id}`}
-                            className="flex items-center text-xs text-gray-500 hover:text-la-orange transition-colors ml-2 cursor-pointer"
-                          >
-                            📸 {barber.name}
-                          </Link>
                         </div>
                       )}
 
