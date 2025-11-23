@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
-// Trigger fresh deployment for Vercel
+// Fresh deployment trigger - December 2024
 
 const inter = Inter({ 
   subsets: ["latin"],
