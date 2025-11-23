@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
@@ -47,7 +47,7 @@ interface ScoredBarber extends Barbershop {
   driveTime?: number;
 }
 
-export default function MatchResultsPage() {
+function MatchResultsContent() {
   const searchParams = useSearchParams();
   const [results, setResults] = useState<ScoredBarber[]>([]);
   const [loading, setLoading] = useState(true);
@@ -390,6 +390,20 @@ export default function MatchResultsPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function MatchResultsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white">
+        <div className="container-brutal py-20 text-center">
+          <div className="text-2xl font-bold uppercase">Loading matches...</div>
+        </div>
+      </main>
+    }>
+      <MatchResultsContent />
+    </Suspense>
   );
 }
 
