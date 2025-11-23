@@ -3,9 +3,8 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
 import { Search, Calendar, ArrowRight, TrendingUp, MapPin } from "lucide-react";
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+// Static import of blog data - works with Vercel
+import blogPostsData from '@/data/blog-posts.json';
 
 export const metadata: Metadata = {
   title: "LA Barber Blog — Reviews, Guides & Local Insights",
@@ -13,39 +12,27 @@ export const metadata: Metadata = {
   keywords: "LA barber reviews, Los Angeles barbershop guides, best barbers LA, barber blog",
 };
 
-// Server component to load actual blog posts
-async function getBlogPosts() {
+// Get blog posts from static JSON data (Vercel compatible)
+function getBlogPosts() {
   try {
-    const blogDir = path.join(process.cwd(), 'content', 'blog');
-    const files = fs.readdirSync(blogDir);
-    const markdownFiles = files.filter(file => file.endsWith('.md'));
-    
-    const posts = markdownFiles.map(file => {
-      const filePath = path.join(blogDir, file);
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      const { data, content } = matter(fileContent);
-      
-      return {
-        slug: data.slug || file.replace('.md', ''),
-        title: data.title,
-        description: data.description,
-        category: data.category,
-        publishedAt: data.date,
-        readTime: Math.ceil(content.split(' ').length / 200) + " min read",
-        featured: ['neighborhood-guides', 'hair-type-guides'].includes(data.category)
-      };
-    });
-    
-    // Sort by date, most recent first
-    return posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    // Use imported JSON data instead of file system access
+    return blogPostsData.map((post: any) => ({
+      slug: post.slug,
+      title: post.title,
+      description: post.description,
+      category: post.category,
+      publishedAt: post.date,
+      readTime: post.readTime,
+      featured: post.featured
+    }));
   } catch (error) {
     console.error('Error loading blog posts:', error);
     return [];
   }
 }
 
-export default async function BlogPage() {
-  const allPosts = await getBlogPosts();
+export default function BlogPage() {
+  const allPosts = getBlogPosts();
   const featuredPosts = allPosts.filter(post => post.featured).slice(0, 6);
   const recentPosts = allPosts.slice(0, 12);
   const categoryStats = allPosts.reduce((acc: any, post) => {

@@ -13,13 +13,12 @@ import {
   MapPin,
   Star
 } from "lucide-react";
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+// Static import of blog data - works with Vercel  
+import blogPostsData from '@/data/blog-posts.json';
 
 // Generate dynamic metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug);
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const post = getBlogPost(params.slug);
   
   if (!post) {
     return {
@@ -66,32 +65,29 @@ interface BlogPost {
   featured: boolean;
 }
 
-// Read actual blog posts from content/blog/ directory
-async function getBlogPost(slug: string): Promise<BlogPost | null> {
+// Get blog post from static JSON data (Vercel compatible)
+function getBlogPost(slug: string): BlogPost | null {
   try {
-    const filePath = path.join(process.cwd(), 'content', 'blog', `${slug}.md`);
+    const post = blogPostsData.find((p: any) => p.slug === slug);
     
-    if (!fs.existsSync(filePath)) {
+    if (!post) {
       return null;
     }
     
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContent);
-    
     return {
-      title: data.title,
-      slug: data.slug,
-      category: data.category,
-      publishedAt: new Date(data.date).toISOString(),
-      description: data.description,
-      keywords: data.keywords,
+      title: post.title,
+      slug: post.slug,
+      category: post.category,
+      publishedAt: new Date(post.date).toISOString(),
+      description: post.description,
+      keywords: post.keywords,
       author: "LA Barber Guide",
-      content: content,
-      readTime: Math.ceil(content.split(' ').length / 200) + " min read",
-      featured: false
+      content: post.content,
+      readTime: post.readTime,
+      featured: post.featured
     };
   } catch (error) {
-    console.error('Error reading blog post:', error);
+    console.error('Error loading blog post:', error);
     return null;
   }
   
@@ -220,8 +216,8 @@ EZ The Barber represents the gold standard for 4C hair specialists in Downtown L
 
 // Duplicate generateMetadata function removed - already exists above
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getBlogPost(params.slug);
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = getBlogPost(params.slug);
   
   if (!post) {
     notFound();
