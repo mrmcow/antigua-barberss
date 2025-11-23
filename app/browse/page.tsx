@@ -30,16 +30,120 @@ interface Barbershop {
   review_count: number;
   price_range: string | null;
   images: string[];
+  distance?: number; // miles from user
+  driveTime?: string; // e.g., "12 min"
+}
+
+// Calculate distance between two points using Haversine formula
+function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 3959; // Earth's radius in miles
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+// Estimate drive time based on distance (rough LA traffic estimate)
+function estimateDriveTime(miles: number): string {
+  if (miles < 2) return `${Math.round(miles * 8)}min`; // 8 min per mile close by
+  if (miles < 10) return `${Math.round(miles * 6)}min`; // 6 min per mile medium
+  return `${Math.round(miles * 4)}min`; // 4 min per mile highway
 }
 
 export default function BrowsePage() {
   const [barbers, setBarbers] = useState<Barbershop[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [locationPermission, setLocationPermission] = useState<'pending' | 'granted' | 'denied'>('pending');
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
   useEffect(() => {
     fetchBarbers();
+    requestUserLocation();
   }, []);
+
+  useEffect(() => {
+    // Recalculate distances when user location is available
+    if (userLocation && barbers.length > 0) {
+      const barbersWithDistance = barbers.map(barber => ({
+        ...barber,
+        distance: calculateDistance(userLocation.lat, userLocation.lng, barber.lat, barber.lng),
+        driveTime: estimateDriveTime(calculateDistance(userLocation.lat, userLocation.lng, barber.lat, barber.lng))
+      }));
+      setBarbers(barbersWithDistance);
+    }
+  }, [userLocation]);
+
+  async function requestUserLocation() {
+    if (!navigator.geolocation) {
+      setLocationPermission('denied');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        setLocationPermission('granted');
+      },
+      (error) => {
+        console.log('Location access denied:', error);
+        setLocationPermission('denied');
+        // Default to Downtown LA center
+        setUserLocation({ lat: 34.0522, lng: -118.2437 });
+      },
+      { timeout: 10000, enableHighAccuracy: false }
+    );
+  }
+
+  function toggleFilter(filter: string) {
+    setActiveFilters(prev => 
+      prev.includes(filter) 
+        ? prev.filter(f => f !== filter)
+        : [...prev, filter]
+    );
+  }
+
+  // Filter barbers based on active filters and search
+  const filteredBarbers = barbers.filter(barber => {
+    // Search filter
+    if (searchTerm && !barber.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        !barber.neighborhood?.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return false;
+    }
+
+    // Active filters (basic implementation - can be enhanced with real data)
+    if (activeFilters.includes('open-now')) {
+      // Would check actual hours - simplified for now
+    }
+    if (activeFilters.includes('fade-specialists')) {
+      // Would check barber specializations
+    }
+    if (activeFilters.includes('curly-hair')) {
+      // Would check hair type specializations  
+    }
+    if (activeFilters.includes('walk-in') && !barber.website) {
+      // Basic logic: assume shops without websites are more walk-in friendly
+    }
+    if (activeFilters.includes('under-40') && barber.price_range === '$$$') {
+      return false;
+    }
+    if (activeFilters.includes('venice') && !barber.neighborhood?.toLowerCase().includes('venice')) {
+      return false;
+    }
+    if (activeFilters.includes('hollywood') && !barber.neighborhood?.toLowerCase().includes('hollywood')) {
+      return false;
+    }
+
+    return true;
+  });
 
   async function fetchBarbers() {
     setLoading(true);
@@ -63,7 +167,7 @@ export default function BrowsePage() {
   }
 
   // Only feature barbers with images AND high ratings
-  const featuredBarbers = barbers
+  const featuredBarbers = filteredBarbers
     .filter(b => 
       b.rating && 
       b.rating >= 4.5 && 
@@ -73,7 +177,7 @@ export default function BrowsePage() {
     )
     .slice(0, 2);
   
-  const regularBarbers = barbers.filter(b => !featuredBarbers.includes(b));
+  const regularBarbers = filteredBarbers.filter(b => !featuredBarbers.includes(b));
 
   return (
     <main className="min-h-screen bg-white">
@@ -115,27 +219,85 @@ export default function BrowsePage() {
             />
           </div>
 
-          {/* Quick Filters */}
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-            <Badge variant="default" className="cursor-pointer whitespace-nowrap flex-shrink-0">
+          {/* Quick Filters - Desktop Optimized */}
+          <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
+            <button 
+              onClick={() => toggleFilter('open-now')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('open-now') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
               <Clock className="w-3 h-3 inline mr-1" />
-              Open Now
-            </Badge>
-            <Badge variant="outline" className="cursor-pointer whitespace-nowrap flex-shrink-0">
-              Fade Specialists
-            </Badge>
-            <Badge variant="outline" className="cursor-pointer whitespace-nowrap flex-shrink-0">
-              Curly Hair
-            </Badge>
-            <Badge variant="outline" className="cursor-pointer whitespace-nowrap flex-shrink-0">
-              Walk-In
-            </Badge>
-            <Badge variant="outline" className="cursor-pointer whitespace-nowrap flex-shrink-0">
-              Under $40
-            </Badge>
-            <Badge variant="outline" className="cursor-pointer whitespace-nowrap flex-shrink-0">
-              Venice
-            </Badge>
+              OPEN NOW
+            </button>
+            
+            <button 
+              onClick={() => toggleFilter('fade-specialists')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('fade-specialists') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
+              FADE SPECIALISTS
+            </button>
+            
+            <button 
+              onClick={() => toggleFilter('curly-hair')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('curly-hair') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
+              CURLY HAIR
+            </button>
+            
+            <button 
+              onClick={() => toggleFilter('walk-in')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('walk-in') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
+              WALK-IN
+            </button>
+            
+            <button 
+              onClick={() => toggleFilter('under-40')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('under-40') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
+              UNDER $40
+            </button>
+            
+            <button 
+              onClick={() => toggleFilter('venice')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('venice') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
+              VENICE
+            </button>
+            
+            <button 
+              onClick={() => toggleFilter('hollywood')}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
+                activeFilters.includes('hollywood') 
+                  ? 'bg-la-orange border-la-orange text-white' 
+                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+              }`}
+            >
+              HOLLYWOOD
+            </button>
             <Badge variant="outline" className="cursor-pointer whitespace-nowrap flex-shrink-0">
               Hollywood
             </Badge>
@@ -160,7 +322,10 @@ export default function BrowsePage() {
             <>
               <div className="mb-4 flex justify-between items-center text-sm md:text-base">
                 <p className="font-medium">
-                  <span className="font-bold text-lg">{barbers.length}</span> barbers found
+                  <span className="font-bold text-lg">{filteredBarbers.length}</span> barbers found
+                  {activeFilters.length > 0 && (
+                    <span className="ml-2 text-la-orange">({activeFilters.length} filters)</span>
+                  )}
                 </p>
                 <select className="border-2 border-black px-3 py-2 font-medium uppercase text-xs cursor-pointer">
                   <option>Top Rated</option>
@@ -202,10 +367,21 @@ export default function BrowsePage() {
                             <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1 hover:text-la-orange transition-colors">
                               {barber.name}
                             </h2>
-                            <p className="text-sm text-gray-600 flex items-center gap-1 mb-2">
-                              <MapPin className="w-4 h-4" />
-                              {barber.neighborhood || 'Los Angeles'}
-                            </p>
+                            <div className="flex items-center justify-between mb-2">
+                              <p className="text-sm text-gray-600 flex items-center gap-1">
+                                <MapPin className="w-4 h-4" />
+                                {barber.neighborhood || 'Los Angeles'}
+                              </p>
+                              {barber.distance && barber.driveTime && (
+                                <div className="text-sm font-bold text-la-orange flex items-center gap-1">
+                                  <Navigation className="w-4 h-4" />
+                                  {barber.distance < 1 
+                                    ? `${(barber.distance * 5280).toFixed(0)}ft • ${barber.driveTime}`
+                                    : `${barber.distance.toFixed(1)}mi • ${barber.driveTime}`
+                                  }
+                                </div>
+                              )}
+                            </div>
                           </div>
                           <Badge variant="accent" className="flex-shrink-0">
                             <Clock className="w-3 h-3 inline mr-1" />
@@ -282,10 +458,21 @@ export default function BrowsePage() {
                           <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-1 hover:text-la-orange transition-colors">
                             {barber.name}
                           </h3>
-                          <p className="text-xs md:text-sm text-gray-600 flex items-center gap-1 mb-2">
-                            <MapPin className="w-3 h-3" />
-                            {barber.neighborhood || 'LA'}
-                          </p>
+                          <div className="flex items-center justify-between mb-2">
+                            <p className="text-xs md:text-sm text-gray-600 flex items-center gap-1">
+                              <MapPin className="w-3 h-3" />
+                              {barber.neighborhood || 'LA'}
+                            </p>
+                            {barber.distance && barber.driveTime && (
+                              <div className="text-xs font-bold text-la-orange flex items-center gap-1">
+                                <Navigation className="w-3 h-3" />
+                                {barber.distance < 1 
+                                  ? `${(barber.distance * 5280).toFixed(0)}ft • ${barber.driveTime}`
+                                  : `${barber.distance.toFixed(1)}mi • ${barber.driveTime}`
+                                }
+                              </div>
+                            )}
+                          </div>
                         </Link>
 
                         {/* Work Preview - LA COOL & CLICKABLE */}
