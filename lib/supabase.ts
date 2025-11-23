@@ -1,12 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Supabase configuration with fallbacks for deployment
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://hntjqndjdfmuzcxbqbva.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhudGpxbmRqZGZtdXpjeGJxYnZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4ODE3MTEsImV4cCI6MjA3OTQ1NzcxMX0.3_9yZxqEU_sj6LJ0m3WZKtvshmeO10XqTsWWjY9OJc';
+// Debug logging for deployment
+console.log('🔍 SUPABASE CONFIG DEBUG:');
+console.log('ENV URL exists:', !!process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log('ENV KEY exists:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+console.log('URL value:', process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 30) + '...');
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables');
-}
+// Hardcode values to bypass env var issues
+const supabaseUrl = 'https://hntjqndjdfmuzcxbqbva.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhudGpxbmRqZGZtdXpjeGJxYnZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4ODE3MTEsImV4cCI6MjA3OTQ1NzcxMX0.3_9yZxqEU_sj6LJ0m3WZKtvshmeO10XqTsWWjY9OJc';
+
+console.log('✅ Using hardcoded Supabase config for deployment');
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
