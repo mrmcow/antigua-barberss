@@ -13,12 +13,12 @@ import {
   MapPin,
   Star
 } from "lucide-react";
-// Static import of blog data - works with Vercel  
-import blogPostsData from '@/data/blog-posts.json';
+import fs from 'fs';
+import path from 'path';
 
 // Generate dynamic metadata for SEO
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const post = getBlogPost(params.slug);
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getBlogPost(params.slug);
   
   if (!post) {
     return {
@@ -65,9 +65,13 @@ interface BlogPost {
   featured: boolean;
 }
 
-// Get blog post from static JSON data (Vercel compatible)
-function getBlogPost(slug: string): BlogPost | null {
+// Get blog post from JSON file in public directory (Vercel compatible)
+async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
+    const jsonPath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
+    const jsonData = fs.readFileSync(jsonPath, 'utf8');
+    const blogPostsData = JSON.parse(jsonData);
+    
     const post = blogPostsData.find((p: any) => p.slug === slug);
     
     if (!post) {
@@ -216,8 +220,8 @@ EZ The Barber represents the gold standard for 4C hair specialists in Downtown L
 
 // Duplicate generateMetadata function removed - already exists above
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getBlogPost(params.slug);
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getBlogPost(params.slug);
   
   if (!post) {
     notFound();

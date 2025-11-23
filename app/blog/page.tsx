@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
 import { Search, Calendar, ArrowRight, TrendingUp, MapPin } from "lucide-react";
-// Static import of blog data - works with Vercel
-import blogPostsData from '@/data/blog-posts.json';
+import fs from 'fs';
+import path from 'path';
 
 export const metadata: Metadata = {
   title: "LA Barber Blog — Reviews, Guides & Local Insights",
@@ -12,10 +12,13 @@ export const metadata: Metadata = {
   keywords: "LA barber reviews, Los Angeles barbershop guides, best barbers LA, barber blog",
 };
 
-// Get blog posts from static JSON data (Vercel compatible)
-function getBlogPosts() {
+// Get blog posts from JSON file in public directory (Vercel compatible)
+async function getBlogPosts() {
   try {
-    // Use imported JSON data instead of file system access
+    const jsonPath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
+    const jsonData = fs.readFileSync(jsonPath, 'utf8');
+    const blogPostsData = JSON.parse(jsonData);
+    
     return blogPostsData.map((post: any) => ({
       slug: post.slug,
       title: post.title,
@@ -31,11 +34,11 @@ function getBlogPosts() {
   }
 }
 
-export default function BlogPage() {
-  const allPosts = getBlogPosts();
-  const featuredPosts = allPosts.filter(post => post.featured).slice(0, 6);
+export default async function BlogPage() {
+  const allPosts = await getBlogPosts();
+  const featuredPosts = allPosts.filter((post: any) => post.featured).slice(0, 6);
   const recentPosts = allPosts.slice(0, 12);
-  const categoryStats = allPosts.reduce((acc: any, post) => {
+  const categoryStats = allPosts.reduce((acc: any, post: any) => {
     acc[post.category] = (acc[post.category] || 0) + 1;
     return acc;
   }, {});
@@ -107,7 +110,7 @@ export default function BlogPage() {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredPosts.map((post) => (
+              {featuredPosts.map((post: any) => (
                 <Link 
                   key={post.slug}
                   href={`/blog/${post.slug}`}
@@ -154,7 +157,7 @@ export default function BlogPage() {
           </div>
           
           <div className="grid gap-4">
-            {recentPosts.map((post) => (
+            {recentPosts.map((post: any) => (
               <Link 
                 key={post.slug}
                 href={`/blog/${post.slug}`}

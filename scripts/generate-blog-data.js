@@ -39,8 +39,8 @@ function generateBlogData() {
   // Sort by date, most recent first
   blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
-  // Write to data directory
-  const dataDir = path.join(process.cwd(), 'data');
+  // Write to public/data directory (Vercel compatible)
+  const dataDir = path.join(process.cwd(), 'public', 'data');
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
   }
