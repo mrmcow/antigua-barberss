@@ -241,7 +241,7 @@ export default function AnalyticsPage() {
               <div>
                 <p className="text-sm font-bold text-gray-600">AVG PER BARBER</p>
                 <p className="text-3xl font-bold">
-                  ${data?.topBarbers.length > 0 ? (data.totalRevenue / data.topBarbers.length).toFixed(0) : '0'}
+                  ${data?.topBarbers && data.topBarbers.length > 0 ? (data.totalRevenue / data.topBarbers.length).toFixed(0) : '0'}
                 </p>
               </div>
             </div>

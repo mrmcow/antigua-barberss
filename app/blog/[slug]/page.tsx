@@ -13,6 +13,9 @@ import {
   MapPin,
   Star
 } from "lucide-react";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -66,10 +69,6 @@ interface BlogPost {
 // Read actual blog posts from content/blog/ directory
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const fs = require('fs');
-    const path = require('path');
-    const matter = require('gray-matter');
-    
     const filePath = path.join(process.cwd(), 'content', 'blog', `${slug}.md`);
     
     if (!fs.existsSync(filePath)) {
@@ -219,35 +218,7 @@ EZ The Barber represents the gold standard for 4C hair specialists in Downtown L
   return mockPosts[slug] || null;
 }
 
-// Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug);
-  
-  if (!post) {
-    return {
-      title: "Post Not Found | LA Barber Guide Blog"
-    };
-  }
-  
-  return {
-    title: `${post.title} | LA Barber Guide`,
-    description: post.description,
-    keywords: post.keywords,
-    authors: [{ name: post.author }],
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: "article",
-      publishedTime: post.publishedAt,
-      authors: [post.author],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-    }
-  };
-}
+// Duplicate generateMetadata function removed - already exists above
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPost(params.slug);

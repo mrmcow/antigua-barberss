@@ -176,7 +176,7 @@ export default async function BlogPage() {
                 <article className="p-4 md:p-6 flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-2">
-                      <Badge variant="secondary" className="uppercase text-xs">
+                      <Badge variant="outline" className="uppercase text-xs">
                         {post.category.replace('-', ' ')}
                       </Badge>
                       <div className="flex items-center gap-1 text-xs text-gray-500">
