@@ -4,24 +4,6 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": {
-      "description": "Your Supabase project URL",
-      "value": "https://your-project.supabase.co"
-    },
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": {
-      "description": "Your Supabase anonymous key",
-      "value": ""
-    },
-    "GOOGLE_PLACES_API_KEY": {
-      "description": "Google Places API key for scraping barber data",
-      "value": ""
-    },
-    "OPENAI_API_KEY": {
-      "description": "OpenAI API key for review classification",
-      "value": ""
-    }
-  }
+  "regions": ["iad1"]
 }
 
