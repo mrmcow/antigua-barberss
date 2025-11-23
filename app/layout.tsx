@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
-// Blog SEO Launch - Deployment trigger #5 - 500+ SEO posts ready!
+// FORCE CLEAN DEPLOYMENT #6 - Nuclear option to fix Vercel routing!
 
 const inter = Inter({ 
   subsets: ["latin"],
