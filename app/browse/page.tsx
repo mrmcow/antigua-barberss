@@ -288,25 +288,29 @@ export default function BrowsePage() {
                           </p>
                         </Link>
 
-                        {/* Work Preview - LA COOL */}
+                        {/* Work Preview - LA COOL & CLICKABLE */}
                         {barber.images && barber.images.length > 1 && (
                           <div className="flex gap-1.5 mb-2">
                             {barber.images.slice(1, 4).map((image, imgIndex) => (
-                              <div 
+                              <Link 
                                 key={imgIndex}
-                                className="w-8 h-8 md:w-10 md:h-10 bg-gray-200 rounded-sm overflow-hidden border border-black/20"
+                                href={`/barbers/${barber.id}`}
+                                className="w-8 h-8 md:w-10 md:h-10 bg-gray-200 rounded-sm overflow-hidden border border-black/20 hover:border-la-orange transition-colors cursor-pointer group"
                               >
                                 <img
                                   src={image}
                                   alt={`${barber.name} work ${imgIndex + 2}`}
-                                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-200"
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
                                   loading="lazy"
                                 />
-                              </div>
+                              </Link>
                             ))}
-                            <div className="flex items-center text-xs text-gray-500 ml-1">
+                            <Link 
+                              href={`/barbers/${barber.id}`}
+                              className="flex items-center text-xs text-gray-500 hover:text-la-orange transition-colors ml-1 cursor-pointer"
+                            >
                               📸
-                            </div>
+                            </Link>
                           </div>
                         )}
 

@@ -228,25 +228,29 @@ export default function NeedCutNowPage() {
                         </div>
                       </div>
 
-                      {/* Work Preview - LA COOL */}
+                      {/* Work Preview - LA COOL & CLICKABLE */}
                       {barber.images && barber.images.length > 0 && (
                         <div className="flex gap-2 mb-3">
                           {barber.images.slice(0, 3).map((image, imgIndex) => (
-                            <div 
+                            <Link 
                               key={imgIndex}
-                              className="w-12 h-12 md:w-14 md:h-14 bg-gray-200 rounded-sm overflow-hidden border border-black/20"
+                              href={`/barbers/${barber.id}`}
+                              className="w-12 h-12 md:w-14 md:h-14 bg-gray-200 rounded-sm overflow-hidden border border-black/20 hover:border-la-orange transition-colors cursor-pointer group"
                             >
                               <img
                                 src={image}
                                 alt={`${barber.name} work ${imgIndex + 1}`}
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-200"
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
                                 loading="lazy"
                               />
-                            </div>
+                            </Link>
                           ))}
-                          <div className="flex items-center text-xs text-gray-500 ml-2">
+                          <Link 
+                            href={`/barbers/${barber.id}`}
+                            className="flex items-center text-xs text-gray-500 hover:text-la-orange transition-colors ml-2 cursor-pointer"
+                          >
                             📸 {barber.name}
-                          </div>
+                          </Link>
                         </div>
                       )}
 
