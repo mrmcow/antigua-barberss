@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
-// Deployment trigger #3 - Force deploy now!
+// Deployment trigger #4 - Force deploy now!
 
 const inter = Inter({ 
   subsets: ["latin"],
