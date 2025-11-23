@@ -175,11 +175,13 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
   // Fetch barber when slug changes
   useEffect(() => {
     fetchBarber();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.slug]);
 
   // Fetch all barber IDs once on mount
   useEffect(() => {
     fetchAllBarberIds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Keyboard navigation
@@ -199,6 +201,7 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
     if (barber) {
       checkUserVote();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [barber?.id]);
 
   // Preload images to prevent flicker
@@ -335,15 +338,15 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
       {/* Hero Gallery */}
       {mainImage ? (
         <section className="border-b-4 border-black">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:h-[500px]">
             {/* Main image */}
-            <div className="md:col-span-2 aspect-[16/9] md:aspect-auto md:h-[500px] relative border-b-2 md:border-b-0 md:border-r-2 border-black overflow-hidden bg-gray-100">
+            <div className="md:col-span-2 aspect-[16/9] md:aspect-auto h-full relative border-b-2 md:border-b-0 md:border-r-2 border-black overflow-hidden bg-black">
               {mainImage && (
                 <img 
                   key={barber.id}
                   src={mainImage} 
                   alt={barber.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                   loading="eager"
                   fetchPriority="high"
                   style={{ imageRendering: 'crisp-edges' }}
@@ -358,13 +361,13 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
 
             {/* Side images */}
             {sideImages.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-1 gap-0">
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-0 h-full">
                 {sideImages.map((img, idx) => (
-                  <div key={`${barber.id}-${idx}`} className={`aspect-square md:h-[250px] ${idx === 0 ? 'border-r-2 md:border-r-0 md:border-b-2' : ''} border-black overflow-hidden bg-gray-100`}>
+                  <div key={`${barber.id}-${idx}`} className={`aspect-square md:aspect-auto md:h-[250px] ${idx === 0 ? 'border-r-2 md:border-r-0 md:border-b-2' : ''} border-black overflow-hidden bg-black`}>
                     <img 
                       src={img} 
                       alt={`${barber.name} work sample ${idx + 1}`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-center"
                       loading="lazy"
                     />
                   </div>
@@ -378,9 +381,9 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
       {/* Main Content */}
       <section className="py-6 md:py-8">
         <div className="container-brutal">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 md:gap-8">
             {/* Left: Main Info */}
-            <div className="lg:col-span-2">
+            <div className="xl:col-span-3 max-w-4xl xl:max-w-none">
               {/* Header */}
               <div className="mb-6">
                 <h1 className="text-brutal-h1 mb-2">
@@ -430,97 +433,103 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                 <Badge variant="default" className="text-sm">🔥 Fade Master</Badge>
                 <Badge variant="outline" className="text-sm">Walk-In Friendly</Badge>
                 <Badge variant="outline" className="text-sm">4C Hair Expert</Badge>
-                {barber.booking_platform && (
+                {(barber.booking_url || barber.website) && (
                   <Badge variant="outline" className="text-sm">
-                    📅 {barber.booking_platform === 'booksy' ? 'Booksy' : 'Book Online'}
+                    📅 Online Booking
+                  </Badge>
+                )}
+                {barber.website && (
+                  <Badge variant="outline" className="text-sm">
+                    🌐 Website
                   </Badge>
                 )}
               </div>
 
               {/* Vote Buttons - Desktop */}
               <div className="hidden md:flex items-center gap-3 mb-6">
-                  <button
-                    onClick={() => handleVote('up')}
-                    className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
-                      userVote === 'up' 
-                        ? 'bg-green-500 border-green-500 text-white' 
-                        : 'border-black hover:bg-green-500 hover:border-green-500 hover:text-white'
-                    }`}
-                  >
-                    <ThumbsUp className="w-5 h-5" />
-                    Upvote ({barber.upvotes || 0})
-                  </button>
-                  <button
-                    onClick={() => handleVote('down')}
-                    className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
-                      userVote === 'down' 
-                        ? 'bg-red-500 border-red-500 text-white' 
-                        : 'border-black hover:bg-red-500 hover:border-red-500 hover:text-white'
-                    }`}
-                  >
-                    <ThumbsDown className="w-5 h-5" />
-                    Downvote ({barber.downvotes || 0})
-                  </button>
-                  
-                  {barber.vote_score !== 0 && (
-                    <div className="text-sm text-gray-600">
-                      {barber.vote_score > 0 ? '🔥' : '⚠️'} 
-                      {' '}
-                      {Math.abs(barber.vote_score * 100).toFixed(0)}% 
-                      {barber.vote_score > 0 ? ' recommended' : ' not recommended'}
-                    </div>
-                  )}
-                </div>
+                <button
+                  onClick={() => handleVote('up')}
+                  className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
+                    userVote === 'up' 
+                      ? 'bg-green-500 border-green-500 text-white' 
+                      : 'border-black hover:bg-green-500 hover:border-green-500 hover:text-white'
+                  }`}
+                >
+                  <ThumbsUp className="w-5 h-5" />
+                  Upvote ({barber.upvotes || 0})
+                </button>
+                <button
+                  onClick={() => handleVote('down')}
+                  className={`flex items-center gap-2 px-6 py-3 border-2 font-bold uppercase text-sm transition-colors ${
+                    userVote === 'down' 
+                      ? 'bg-red-500 border-red-500 text-white' 
+                      : 'border-black hover:bg-red-500 hover:border-red-500 hover:text-white'
+                  }`}
+                >
+                  <ThumbsDown className="w-5 h-5" />
+                  Downvote ({barber.downvotes || 0})
+                </button>
+                
+                {barber.vote_score !== 0 && (
+                  <div className="text-sm text-gray-600">
+                    {barber.vote_score > 0 ? '🔥' : '⚠️'} 
+                    {' '}
+                    {Math.abs(barber.vote_score * 100).toFixed(0)}% 
+                    {barber.vote_score > 0 ? ' recommended' : ' not recommended'}
+                  </div>
+                )}
+              </div>
 
-                {/* Mobile Action Buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
-                  {barber.phone ? (
-                    <a
-                      href={`tel:${barber.phone}`}
-                      onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
-                      className="border-4 border-black bg-black text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-la-orange active:border-la-orange transition-colors"
-                    >
-                      <Phone className="w-5 h-5 md:w-6 md:h-6" />
-                      Call Now
-                    </a>
-                  ) : (
-                    <div className="border-4 border-gray-300 bg-gray-100 text-gray-400 p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2">
-                      <Phone className="w-5 h-5 md:w-6 md:h-6" />
-                      No Phone
-                    </div>
-                  )}
-                  
-                  <button
-                    onClick={() => {
-                      const url = `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`;
-                      trackAndNavigate(barber.id, 'directions_click', url);
-                    }}
-                    className="border-4 border-black bg-white text-black p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:text-white transition-colors"
+              {/* Mobile Action Buttons */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+                {barber.phone ? (
+                  <a
+                    href={`tel:${barber.phone}`}
+                    onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
+                    className="border-4 border-black bg-black text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-la-orange active:border-la-orange transition-colors"
                   >
-                    <Navigation className="w-5 h-5 md:w-6 md:h-6" />
-                    Directions
+                    <Phone className="w-5 h-5 md:w-6 md:h-6" />
+                    Call Now
+                  </a>
+                ) : (
+                  <div className="border-4 border-gray-300 bg-gray-100 text-gray-400 p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2">
+                    <Phone className="w-5 h-5 md:w-6 md:h-6" />
+                    No Phone
+                  </div>
+                )}
+                
+                <button
+                  onClick={() => {
+                    const url = `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`;
+                    trackAndNavigate(barber.id, 'directions_click', url);
+                  }}
+                  className="border-4 border-black bg-white text-black p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:text-white transition-colors"
+                >
+                  <Navigation className="w-5 h-5 md:w-6 md:h-6" />
+                  Directions
+                </button>
+                
+{barber.booking_url || barber.website ? (
+                  <button
+                    onClick={() => trackAndNavigate(
+                      barber.id, 
+                      barber.booking_url ? 'booking_click' : 'website_booking_click', 
+                      barber.booking_url || barber.website!
+                    )}
+                    className="border-4 border-la-orange bg-la-orange text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:border-black transition-colors"
+                  >
+                    <ExternalLink className="w-5 h-5 md:w-6 md:h-6" />
+                    Book Now
                   </button>
-                  
-                  {barber.booking_url ? (
-                    <button
-                      onClick={() => trackAndNavigate(barber.id, 'booking_click', barber.booking_url!)}
-                      className="border-4 border-la-orange bg-la-orange text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:border-black transition-colors"
-                    >
-                      <ExternalLink className="w-5 h-5 md:w-6 md:h-6" />
-                      Book Online
-                    </button>
-                  ) : barber.website ? (
-                    <button
-                      onClick={() => trackAndNavigate(barber.id, 'website_click', barber.website!)}
-                      className="border-4 border-la-orange bg-la-orange text-white p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:border-black transition-colors"
-                    >
-                      <Globe className="w-5 h-5 md:w-6 md:h-6" />
-                      Website
-                    </button>
-                  ) : null}
-                </div>
+                ) : (
+                  <div className="border-4 border-gray-300 bg-gray-100 text-gray-400 p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2">
+                    <ExternalLink className="w-5 h-5 md:w-6 md:h-6" />
+                    Call to Book
+                  </div>
+                )}
+              </div>
 
-                {/* Reviews */}
+              {/* Reviews */}
                 <div id="reviews-section" className="mb-12 scroll-mt-32 md:scroll-mt-24">
                   {reviews.length > 0 ? (
                     <>
@@ -608,10 +617,9 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                   )}
                 </div>
               </div>
-            </div>
 
             {/* Right: Sidebar */}
-            <div className="lg:col-span-1">
+            <div className="xl:col-span-1">
               <div className="sticky top-24 space-y-6">
                 {/* Hours */}
                 {barber.hours?.weekday_text && (

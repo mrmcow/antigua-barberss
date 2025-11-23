@@ -15,6 +15,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { trackClickEvent } from "@/lib/analytics";
 
 interface Barbershop {
   id: string;
@@ -185,6 +186,15 @@ export default function MatchResultsPage() {
         reasons.push(`${barber.rating.toFixed(1)}★ rated`);
       }
 
+      // Bonus for online booking capability (5% weight)
+      if (barber.booking_url) {
+        score += 5;
+        reasons.push('Online booking');
+      } else if (barber.website) {
+        score += 3;
+        reasons.push('Website booking');
+      }
+
       // Penalty if no classification data
       if (!classification) {
         score = barber.rating ? barber.rating * 10 : 0;
@@ -339,6 +349,7 @@ export default function MatchResultsPage() {
                           {barber.phone && (
                             <a 
                               href={`tel:${barber.phone}`}
+                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
                               className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                             >
                               <Phone className="w-4 h-4" />
@@ -347,6 +358,7 @@ export default function MatchResultsPage() {
                           )}
                           <a
                             href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
+                            onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"

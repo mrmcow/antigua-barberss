@@ -15,6 +15,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { trackClickEvent } from "@/lib/analytics";
 
 interface Barbershop {
   id: string;
@@ -228,6 +229,7 @@ export default function BrowsePage() {
                         {barber.phone && (
                           <a 
                             href={`tel:${barber.phone}`}
+                            onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
                             className="border-2 border-black p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                           >
                             <Phone className="w-4 h-4" />
@@ -236,6 +238,7 @@ export default function BrowsePage() {
                         )}
                         <a
                           href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
+                          onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="border-2 border-black p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
@@ -300,6 +303,7 @@ export default function BrowsePage() {
                           {barber.phone && (
                             <a 
                               href={`tel:${barber.phone}`}
+                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
                               className="flex-1 border-2 border-black py-2 text-center font-bold uppercase text-xs active:bg-black active:text-white transition-colors"
                             >
                               Call

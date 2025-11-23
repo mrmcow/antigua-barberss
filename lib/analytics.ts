@@ -36,7 +36,7 @@ export function getSessionId(): string {
 // Track click event
 export async function trackClickEvent(
   barbershopId: string,
-  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'directions_click' | 'google_reviews_click',
+  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click',
   destinationUrl?: string
 ): Promise<void> {
   try {
@@ -63,7 +63,7 @@ export async function trackClickEvent(
 // Track and navigate - use this for external links
 export async function trackAndNavigate(
   barbershopId: string,
-  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'directions_click' | 'google_reviews_click',
+  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click',
   url: string
 ): Promise<void> {
   // Track the event (don't await - let it fire in background)
