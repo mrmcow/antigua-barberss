@@ -750,9 +750,9 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
               <Link href="/" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
                 Home
               </Link>
-              <Link href="/browse" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
-                Browse
-              </Link>
+              <a href="mailto:support@pagestash.app?subject=LA Barber Guide - Contact" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
+                Contact
+              </a>
             </div>
           </div>
         </div>

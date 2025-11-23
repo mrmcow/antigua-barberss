@@ -367,9 +367,9 @@ export default function BrowsePage() {
               <Link href="/" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
                 Home
               </Link>
-              <Link href="/about" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
-                About
-              </Link>
+              <a href="mailto:support@pagestash.app?subject=LA Barber Guide - Contact" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
+                Contact
+              </a>
             </div>
           </div>
         </div>

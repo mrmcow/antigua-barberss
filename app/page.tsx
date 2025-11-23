@@ -384,9 +384,9 @@ export default function Home() {
               <Link href="/about" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
                 About
               </Link>
-              <Link href="/contact" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
-                For Barbers
-              </Link>
+              <a href="mailto:support@pagestash.app?subject=LA Barber Guide - Contact" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
+                Contact
+              </a>
             </div>
           </div>
           
