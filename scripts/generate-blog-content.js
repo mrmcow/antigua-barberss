@@ -292,16 +292,23 @@ async function saveBlogPost(post) {
 }
 
 // Main content generation
-async function generateContent() {
+async function generateContent(options = { limit: 100, test: false, full: false }) {
   console.log('🚀 Starting content generation...\n');
   
   const barbershops = await fetchBarbershopData();
   const posts = [];
+  let generatedCount = 0;
+  
+  console.log(`🎯 TARGET: ${options.limit} posts | Mode: ${options.test ? 'TEST' : options.full ? 'FULL' : 'STANDARD'}`);
   
   // 1. Individual barber reviews (500+ posts)
   console.log('\n📝 Generating individual barber reviews...');
   for (const barber of barbershops) {
+    if (generatedCount >= options.limit) break;
+    
     if (barber.reviews && barber.reviews.length >= 3) {
+      console.log(`📝 [${generatedCount + 1}/${options.limit}] Generating: ${barber.name}`);
+      
       const post = await generateBlogPost(
         CONTENT_TEMPLATES.individual_review,
         barber,
@@ -310,97 +317,119 @@ async function generateContent() {
       if (post) {
         posts.push(post);
         await saveBlogPost(post);
+        generatedCount++;
       }
       
       // Rate limiting - don't hit OpenAI too hard
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, options.test ? 500 : 1000));
     }
   }
   
   // 2. Neighborhood guides
-  console.log('\n📍 Generating neighborhood guides...');
-  const neighborhoods = [...new Set(barbershops.map(b => b.neighborhood).filter(Boolean))];
-  
-  for (const neighborhood of neighborhoods) {
-    const neighborhoodBarbers = barbershops
-      .filter(b => b.neighborhood === neighborhood)
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, 10);
+  if (generatedCount < options.limit) {
+    console.log(`\n📍 Generating neighborhood guides... (${generatedCount}/${options.limit})`);
+    const neighborhoods = [...new Set(barbershops.map(b => b.neighborhood).filter(Boolean))];
+    
+    for (const neighborhood of neighborhoods) {
+      if (generatedCount >= options.limit) break;
       
-    if (neighborhoodBarbers.length >= 5) {
-      const post = await generateBlogPost(
-        CONTENT_TEMPLATES.neighborhood_guide,
-        neighborhood,
-        CONTENT_TEMPLATES.neighborhood_guide.prompt(neighborhood, neighborhoodBarbers)
-      );
-      if (post) {
-        posts.push(post);
-        await saveBlogPost(post);
+      const neighborhoodBarbers = barbershops
+        .filter(b => b.neighborhood === neighborhood)
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 10);
+        
+      if (neighborhoodBarbers.length >= 5) {
+        console.log(`📍 [${generatedCount + 1}/${options.limit}] Generating: ${neighborhood} Guide`);
+        
+        const post = await generateBlogPost(
+          CONTENT_TEMPLATES.neighborhood_guide,
+          neighborhood,
+          CONTENT_TEMPLATES.neighborhood_guide.prompt(neighborhood, neighborhoodBarbers)
+        );
+        if (post) {
+          posts.push(post);
+          await saveBlogPost(post);
+          generatedCount++;
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, options.test ? 500 : 1000));
       }
-      
-      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
   
   // 3. Hair type guides  
-  console.log('\n💇 Generating hair type guides...');
-  const hairTypes = ['4c', 'curly', 'wavy', 'straight'];
+  if (generatedCount < options.limit) {
+    console.log(`\n💇 Generating hair type guides... (${generatedCount}/${options.limit})`);
+    const hairTypes = ['4c', 'curly', 'wavy', 'straight'];
   
-  for (const hairType of hairTypes) {
-    const specialists = barbershops
-      .filter(b => getHairTypeScore(b, hairType) > 0.5)
-      .sort((a, b) => getHairTypeScore(b, hairType) - getHairTypeScore(a, hairType))
-      .slice(0, 15);
+    for (const hairType of hairTypes) {
+      if (generatedCount >= options.limit) break;
       
-    if (specialists.length >= 5) {
-      const post = await generateBlogPost(
-        CONTENT_TEMPLATES.hair_type_guide,
-        hairType,
-        CONTENT_TEMPLATES.hair_type_guide.prompt(hairType, specialists)
-      );
-      if (post) {
-        posts.push(post);
-        await saveBlogPost(post);
+      const specialists = barbershops
+        .filter(b => getHairTypeScore(b, hairType) > 0.5)
+        .sort((a, b) => getHairTypeScore(b, hairType) - getHairTypeScore(a, hairType))
+        .slice(0, 15);
+        
+      if (specialists.length >= 5) {
+        console.log(`💇 [${generatedCount + 1}/${options.limit}] Generating: ${hairType} Hair Guide`);
+        
+        const post = await generateBlogPost(
+          CONTENT_TEMPLATES.hair_type_guide,
+          hairType,
+          CONTENT_TEMPLATES.hair_type_guide.prompt(hairType, specialists)
+        );
+        if (post) {
+          posts.push(post);
+          await saveBlogPost(post);
+          generatedCount++;
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, options.test ? 500 : 1000));
       }
-      
-      await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
   
   // 4. Comparison posts (select top pairs)
-  console.log('\n⚔️ Generating comparison posts...');
-  const topBarbers = barbershops
-    .filter(b => b.rating >= 4.5 && b.review_count >= 20)
-    .slice(0, 20);
+  if (generatedCount < options.limit) {
+    console.log(`\n⚔️ Generating comparison posts... (${generatedCount}/${options.limit})`);
+    const topBarbers = barbershops
+      .filter(b => b.rating >= 4.5 && b.review_count >= 20)
+      .slice(0, 20);
+      
+    // Generate comparisons between barbers in same neighborhood
+    const neighborhoods2 = [...new Set(topBarbers.map(b => b.neighborhood))];
     
-  // Generate comparisons between barbers in same neighborhood
-  const neighborhoods2 = [...new Set(topBarbers.map(b => b.neighborhood))];
-  
-  for (const neighborhood of neighborhoods2) {
-    const areaBarbers = topBarbers.filter(b => b.neighborhood === neighborhood);
-    
-    for (let i = 0; i < areaBarbers.length - 1; i++) {
-      for (let j = i + 1; j < Math.min(i + 3, areaBarbers.length); j++) {
-        const barber1 = areaBarbers[i];
-        const barber2 = areaBarbers[j];
-        
-        const post = await generateBlogPost(
-          CONTENT_TEMPLATES.comparison_post,
-          [barber1, barber2],
-          CONTENT_TEMPLATES.comparison_post.prompt(
-            barber1, 
-            barber2, 
-            barber1.reviews, 
-            barber2.reviews
-          )
-        );
-        
-        if (post) {
-          posts.push(post);
-          await saveBlogPost(post);
+    for (const neighborhood of neighborhoods2) {
+      if (generatedCount >= options.limit) break;
+      
+      const areaBarbers = topBarbers.filter(b => b.neighborhood === neighborhood);
+      
+      for (let i = 0; i < areaBarbers.length - 1 && generatedCount < options.limit; i++) {
+        for (let j = i + 1; j < Math.min(i + 3, areaBarbers.length) && generatedCount < options.limit; j++) {
+          const barber1 = areaBarbers[i];
+          const barber2 = areaBarbers[j];
+          
+          console.log(`⚔️ [${generatedCount + 1}/${options.limit}] Generating: ${barber1.name} vs ${barber2.name}`);
+          
+          const post = await generateBlogPost(
+            CONTENT_TEMPLATES.comparison_post,
+            [barber1, barber2],
+            CONTENT_TEMPLATES.comparison_post.prompt(
+              barber1, 
+              barber2, 
+              barber1.reviews, 
+              barber2.reviews
+            )
+          );
+          
+          if (post) {
+            posts.push(post);
+            await saveBlogPost(post);
+            generatedCount++;
+          }
+          
+          await new Promise(resolve => setTimeout(resolve, options.test ? 500 : 1000));
         }
-        
-        await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
   }
@@ -434,9 +463,39 @@ Ready for SEO domination! 🚀
   console.log('📊 Report saved: content-generation-report.md');
 }
 
+// Parse command line arguments
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const options = {
+    test: false,
+    full: false,
+    limit: 100
+  };
+  
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--test') {
+      options.test = true;
+      options.limit = 10;
+    } else if (args[i] === '--full') {
+      options.full = true;
+      options.limit = 750;
+    } else if (args[i] === '--limit' && args[i + 1]) {
+      options.limit = parseInt(args[i + 1]);
+      i++;
+    }
+  }
+  
+  return options;
+}
+
 // Run it
 if (require.main === module) {
-  generateContent().catch(console.error);
+  const options = parseArgs();
+  console.log(`🚀 LAUNCHING CONTENT GENERATION`);
+  console.log(`Mode: ${options.test ? 'TEST' : options.full ? 'FULL PRODUCTION' : 'STANDARD'}`);
+  console.log(`Target Posts: ${options.limit}`);
+  
+  generateContent(options).catch(console.error);
 }
 
 module.exports = { generateContent };

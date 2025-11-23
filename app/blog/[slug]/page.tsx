@@ -14,6 +14,41 @@ import {
   Star
 } from "lucide-react";
 
+// Generate dynamic metadata for SEO
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getBlogPost(params.slug);
+  
+  if (!post) {
+    return {
+      title: "Blog Post Not Found | LA Barber Guide",
+      description: "This blog post could not be found. Explore our other LA barber guides and reviews.",
+    };
+  }
+  
+  return {
+    title: `${post.title} | LA Barber Guide`,
+    description: post.description,
+    keywords: post.keywords,
+    authors: [{ name: post.author }],
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+      publishedTime: post.publishedAt,
+      url: `https://labarberguide.xyz/blog/${post.slug}`,
+      siteName: "LA Barber Guide",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+    },
+    alternates: {
+      canonical: `https://labarberguide.xyz/blog/${post.slug}`,
+    },
+  };
+}
+
 // This would come from your generated content
 interface BlogPost {
   title: string;

@@ -557,6 +557,9 @@ export default function BrowsePage() {
               <a href="mailto:support@pagestash.app?subject=LA Barber Guide - Contact" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
                 Contact
               </a>
+              <Link href="/feedback" className="text-sm uppercase tracking-wider hover:text-la-orange transition-colors">
+                Feedback
+              </Link>
             </div>
           </div>
         </div>

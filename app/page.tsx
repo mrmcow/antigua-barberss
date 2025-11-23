@@ -72,6 +72,9 @@ export default function Home() {
             <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
               BARBERS
             </Link>
+            <Link href="/blog" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
+              BLOG
+            </Link>
             <Link href="/need-cut-now">
               <Button variant="primary" size="sm" className="text-xs md:text-sm whitespace-nowrap">
                 Need Cut Now
@@ -94,6 +97,17 @@ export default function Home() {
               <span className="text-la-orange">BARBER</span><br />
               IN 30 SEC
             </h1>
+            
+            {/* TOURIST-FOCUSED CONTENT */}
+            <div className="mb-8 p-4 md:p-6 bg-la-orange bg-opacity-10 border-2 border-la-orange">
+              <div className="text-lg md:text-xl font-bold text-black mb-2">
+                ✈️ <span className="text-la-orange">VISITING LA?</span> WE'VE GOT YOU COVERED
+              </div>
+              <div className="text-sm md:text-base text-gray-700 leading-relaxed">
+                From LAX Airport to Hollywood Walk of Fame • Same-day appointments near your hotel • 
+                Tourist-friendly barbers who speak English • Walk-ins welcome at top-rated shops
+              </div>
+            </div>
             
             {/* BRUTAL CTA BUTTONS - DESKTOP OPTIMIZED HOVERS */}
             <div className="space-y-4 mb-8">
@@ -393,8 +407,10 @@ export default function Home() {
           <div className="pt-6 md:pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs md:text-sm text-gray-500">
             <p>© 2025 LA Barber Guide. All rights reserved.</p>
             <div className="flex gap-4 md:gap-6">
-              <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/feedback" className="hover:text-la-orange transition-colors">Feedback</Link>
+              <Link href="/admin/analytics" className="hover:text-la-orange transition-colors text-xs">Analytics</Link>
             </div>
           </div>
         </div>

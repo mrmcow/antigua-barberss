@@ -4,8 +4,11 @@ Allow: /
 # Important pages for SEO
 Allow: /browse
 Allow: /match/results
+Allow: /blog
+Allow: /blog/*
 Allow: /about
 Allow: /contact
+Allow: /feedback
 
 # Block admin/test areas
 Disallow: /admin

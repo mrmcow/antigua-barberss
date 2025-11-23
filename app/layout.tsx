@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
-// Deployment trigger #4 - Force deploy now!
+// Blog SEO Launch - Deployment trigger #5 - 500+ SEO posts ready!
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -23,12 +23,19 @@ export const metadata: Metadata = {
     default: "LA Barber Guide — Find Your Perfect Barber in Los Angeles",
     template: "%s | LA Barber Guide"
   },
-  description: "Find the perfect barber in Los Angeles in 30 seconds. Smart matching by hair type, style & neighborhood. 500+ verified barbers across LA.",
+  description: "Find the perfect barber in Los Angeles in 30 seconds. Smart matching by hair type, style & neighborhood. 500+ verified barbers across LA. Perfect for tourists and locals.",
   keywords: [
     "LA barbers", "Los Angeles barbershops", "fade barbers LA", "curly hair barbers LA", 
     "best barbers Los Angeles", "Venice Beach barbers", "Hollywood barbers", "Santa Monica barbers",
     "Downtown LA barbers", "West Hollywood barbers", "Silver Lake barbers", "Beverly Hills barbers",
-    "haircut LA", "beard trim Los Angeles", "mens grooming LA", "barber shop near me LA"
+    "haircut LA", "beard trim Los Angeles", "mens grooming LA", "barber shop near me LA",
+    // TOURIST KEYWORDS 
+    "barber near LAX airport", "tourist haircut Los Angeles", "visiting LA need barber", "best LA barber tourists",
+    "Hollywood Walk of Fame barber", "Beverly Hills tourist barber", "Santa Monica Pier barber near me",
+    "Venice Beach barber shop", "get haircut while visiting LA", "LA vacation barber appointment",
+    "tourist friendly barber Los Angeles", "English speaking barber LA", "walk-in barber Hollywood tourist area",
+    "barber near hotels LA", "celebrity barber Los Angeles tourists", "quick haircut LA tourist",
+    "same day barber appointment LA", "barber shop Sunset Strip", "tourist barber Beverly Hills"
   ].join(", "),
   authors: [{ name: "LA Barber Guide" }],
   creator: "LA Barber Guide",
