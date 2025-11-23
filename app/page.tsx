@@ -98,16 +98,6 @@ export default function Home() {
               IN 30 SEC
             </h1>
             
-            {/* TOURIST-FOCUSED CONTENT */}
-            <div className="mb-8 p-4 md:p-6 bg-la-orange bg-opacity-10 border-2 border-la-orange">
-              <div className="text-lg md:text-xl font-bold text-black mb-2">
-                ✈️ <span className="text-la-orange">VISITING LA?</span> WE'VE GOT YOU COVERED
-              </div>
-              <div className="text-sm md:text-base text-gray-700 leading-relaxed">
-                From LAX Airport to Hollywood Walk of Fame • Same-day appointments near your hotel • 
-                Tourist-friendly barbers who speak English • Walk-ins welcome at top-rated shops
-              </div>
-            </div>
             
             {/* BRUTAL CTA BUTTONS - DESKTOP OPTIMIZED HOVERS */}
             <div className="space-y-4 mb-8">
