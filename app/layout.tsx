@@ -18,7 +18,7 @@ const bebas = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "LA Barber Guide — Find Your Barber in 30 Seconds", // With proper author
+  title: "LA Barber Guide — Find Your Barber in 30 Seconds", // GitHub author
   description: "The fastest, smartest way to find the right barber in Los Angeles. Filter by hair type, style, neighborhood, and vibe.",
   keywords: "LA barbers, Los Angeles barbershops, fade barbers LA, curly hair barbers, best barbers LA",
   icons: {
