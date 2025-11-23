@@ -269,9 +269,6 @@ export default function NeedCutNowPage() {
             </button>
           </div>
 
-          <p className="text-xs text-gray-600 mt-2">
-            💡 TIP: Works with all LA area zip codes (90210, 90401, 91604, etc.)
-          </p>
         </div>
       </div>
 
