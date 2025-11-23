@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-black;
+  }
+  
+  html {
+    @apply scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    @apply bg-white text-black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Aggressive selection color */
+  ::selection {
+    @apply bg-la-orange text-white;
+  }
+  
+  /* Remove default button styles */
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  /* Brutalist container - mobile optimized */
+  .container-brutal {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Brand text styles - AGGRESSIVE & MOBILE RESPONSIVE */
+  .text-brutal-display {
+    font-family: var(--font-bebas);
+    font-size: clamp(3rem, 12vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  
+  .text-brutal-hero {
+    font-family: var(--font-bebas);
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  
+  .text-brutal-h1 {
+    font-family: var(--font-bebas);
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  
+  /* Animation for page transitions */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+

@@ -1,0 +1,38 @@
+{
+  "name": "la-barber-guide",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "scrape": "tsx scripts/scrape-google-places.ts",
+    "scrape:reviews": "tsx scripts/scrape-reviews.ts",
+    "enrich": "tsx scripts/enrich-booking-data.ts",
+    "classify": "tsx scripts/classify-barbers.ts",
+    "seed": "tsx scripts/seed-mock-data.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.0",
+    "axios": "^1.7.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.6.1",
+    "framer-motion": "^11.2.0",
+    "lucide-react": "^0.395.0",
+    "next": "14.2.0",
+    "openai": "^4.104.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "tsx": "^4.7.0",
+    "typescript": "^5"
+  }
+}
