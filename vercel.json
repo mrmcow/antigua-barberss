@@ -4,6 +4,26 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"]
+  "regions": ["iad1"],
+  "functions": {
+    "app/blog/[slug]/page.tsx": {
+      "maxDuration": 10
+    },
+    "app/blog/page.tsx": {
+      "maxDuration": 10
+    },
+    "app/neighborhoods/[slug]/page.tsx": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/blog/:path*",
+      "destination": "/blog/:path*"
+    },
+    {
+      "source": "/neighborhoods/:path*", 
+      "destination": "/neighborhoods/:path*"
+    }
+  ]
 }
-
