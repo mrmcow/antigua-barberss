@@ -337,6 +337,32 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Browse by Neighborhood - SEO Internal Links */}
+      <section className="border-b-4 border-black py-12 md:py-16 bg-white">
+        <div className="container-brutal">
+          <h2 className="text-brutal-hero mb-8 text-center">
+            BROWSE BY <span className="text-la-orange">NEIGHBORHOOD</span>
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+            <Link href="/blog/best-barbers-venice-los-angeles-guide" className="border-4 border-black p-4 text-center font-bold uppercase hover:bg-la-orange hover:text-white hover:border-la-orange transition-all">
+              Venice
+            </Link>
+            <Link href="/blog/best-barbers-santa-monica-los-angeles-guide" className="border-4 border-black p-4 text-center font-bold uppercase hover:bg-la-orange hover:text-white hover:border-la-orange transition-all">
+              Santa Monica
+            </Link>
+            <Link href="/blog/best-barbers-west-hollywood-los-angeles-guide" className="border-4 border-black p-4 text-center font-bold uppercase hover:bg-la-orange hover:text-white hover:border-la-orange transition-all">
+              West Hollywood
+            </Link>
+            <Link href="/blog/best-barbers-culver-city-los-angeles-guide" className="border-4 border-black p-4 text-center font-bold uppercase hover:bg-la-orange hover:text-white hover:border-la-orange transition-all">
+              Culver City
+            </Link>
+            <Link href="/blog/best-barbers-los-angeles-los-angeles-guide" className="border-4 border-black p-4 text-center font-bold uppercase hover:bg-la-orange hover:text-white hover:border-la-orange transition-all">
+              Downtown LA
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t-4 border-black py-8 md:py-12 bg-black text-white">
         <div className="container-brutal">
