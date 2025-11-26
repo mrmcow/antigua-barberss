@@ -4,10 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import { 
-  ArrowRight, 
-  ArrowLeft, 
-  Scissors, 
+import {
+  ArrowRight,
+  ArrowLeft,
+  Scissors,
   Sparkles,
   Waves,
   Circle,
@@ -21,11 +21,11 @@ import {
 
 // Hair type options with icons
 const hairTypes = [
+  { id: "standard", label: "Standard", icon: UserCircle, description: "Regular cut, any type" },
   { id: "4c", label: "4C Coils", icon: Circle, description: "Tight, kinky coils" },
   { id: "curly", label: "3B/3C Curls", icon: Waves, description: "Defined curls" },
   { id: "wavy", label: "2A/2B Waves", icon: Wind, description: "Loose waves" },
   { id: "straight", label: "Straight", icon: MinusSquare, description: "Fine or thick" },
-  { id: "standard", label: "Standard", icon: UserCircle, description: "Regular cut, any type" },
   { id: "balding", label: "Thinning/Balding", icon: Scissors, description: "Receding or bald" },
 ];
 
@@ -59,7 +59,7 @@ export default function MatchPage() {
 
   const handleSelection = (field: string, value: string) => {
     setSelections({ ...selections, [field]: value });
-    
+
     // Auto-advance after selection
     setTimeout(() => {
       if (step < 3) {
@@ -106,7 +106,7 @@ export default function MatchPage() {
       {/* Step Content */}
       <section className="py-8 md:py-12 min-h-[70vh]">
         <div className="container-brutal max-w-4xl">
-          
+
           {/* Step 1: Hair Type */}
           {step === 1 && (
             <div className="animate-fade-in">
@@ -129,11 +129,10 @@ export default function MatchPage() {
                     <button
                       key={type.id}
                       onClick={() => handleSelection('hairType', type.id)}
-                      className={`border-4 p-6 md:p-8 text-left transition-all active:scale-95 ${
-                        selections.hairType === type.id
+                      className={`border-4 p-6 md:p-8 text-left transition-all active:scale-95 ${selections.hairType === type.id
                           ? 'border-la-orange bg-la-orange text-white'
                           : 'border-black bg-white hover:border-la-orange'
-                      }`}
+                        }`}
                     >
                       <IconComponent className="w-12 h-12 mb-3" strokeWidth={2} />
                       <h3 className="text-xl md:text-2xl font-bold uppercase mb-1 tracking-tight">
@@ -171,11 +170,10 @@ export default function MatchPage() {
                     <button
                       key={style.id}
                       onClick={() => handleSelection('style', style.id)}
-                      className={`border-4 p-6 md:p-8 text-left transition-all active:scale-95 ${
-                        selections.style === style.id
+                      className={`border-4 p-6 md:p-8 text-left transition-all active:scale-95 ${selections.style === style.id
                           ? 'border-la-orange bg-la-orange text-white'
                           : 'border-black bg-white hover:border-la-orange'
-                      }`}
+                        }`}
                     >
                       <IconComponent className="w-12 h-12 mb-3" strokeWidth={2} />
                       <h3 className="text-xl md:text-2xl font-bold uppercase mb-1 tracking-tight">
@@ -219,11 +217,10 @@ export default function MatchPage() {
                   <button
                     key={vibe.id}
                     onClick={() => handleSelection('vibe', vibe.id)}
-                    className={`border-4 p-6 md:p-8 text-left transition-all active:scale-95 ${
-                      selections.vibe === vibe.id
+                    className={`border-4 p-6 md:p-8 text-left transition-all active:scale-95 ${selections.vibe === vibe.id
                         ? 'border-la-orange bg-la-orange text-white'
                         : 'border-black bg-white hover:border-la-orange'
-                    }`}
+                      }`}
                   >
                     <div className="text-sm font-bold uppercase tracking-wider mb-2 opacity-60">
                       {vibe.price}
