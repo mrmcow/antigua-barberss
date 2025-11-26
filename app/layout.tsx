@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
 
 // AUTO-DEPLOY TRIGGER #7 - Push to trigger GitHub auto-deployment!
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   },
   description: "Find the perfect barber in Los Angeles in 30 seconds. Smart matching by hair type, style & neighborhood. 500+ verified barbers across LA. Perfect for tourists and locals.",
   keywords: [
-    "LA barbers", "Los Angeles barbershops", "fade barbers LA", "curly hair barbers LA", 
+    "LA barbers", "Los Angeles barbershops", "fade barbers LA", "curly hair barbers LA",
     "best barbers Los Angeles", "Venice Beach barbers", "Hollywood barbers", "Santa Monica barbers",
     "Downtown LA barbers", "West Hollywood barbers", "Silver Lake barbers", "Beverly Hills barbers",
     "haircut LA", "beard trim Los Angeles", "mens grooming LA", "barber shop near me LA",
@@ -113,6 +114,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${bebas.variable}`}>
+      <GoogleAnalytics gaId="G-2DKFFV7DQS" />
       <head>
         <script
           type="application/ld+json"

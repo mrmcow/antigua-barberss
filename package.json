@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev", 
+    "dev": "next dev",
     "prebuild": "node scripts/generate-blog-data.js",
     "build": "next build",
     "start": "next start",
@@ -19,6 +19,7 @@
     "generate:mock": "node scripts/generate-mock-blog-content.js --limit=750"
   },
   "dependencies": {
+    "@next/third-parties": "^16.0.4",
     "@supabase/supabase-js": "^2.43.0",
     "axios": "^1.7.0",
     "clsx": "^2.1.1",

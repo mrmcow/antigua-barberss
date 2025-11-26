@@ -6,10 +6,10 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { 
-  MapPin, 
-  Star, 
-  Phone, 
+import {
+  MapPin,
+  Star,
+  Phone,
   Navigation,
   ArrowLeft,
   Sparkles
@@ -72,11 +72,11 @@ function MatchResultsContent() {
     const R = 3959; // Earth's radius in miles
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
 
@@ -132,7 +132,7 @@ function MatchResultsContent() {
     // Score each barber
     const scoredBarbers: ScoredBarber[] = validBarbers.map(barber => {
       const classification = classifications?.find(c => c.barbershop_id === barber.id);
-      
+
       let score = 0;
       const reasons: string[] = [];
 
@@ -275,17 +275,16 @@ function MatchResultsContent() {
                 {results.map((barber, index) => (
                   <div
                     key={barber.id}
-                    className={`border-2 bg-white ${
-                      index === 0 
-                        ? 'border-la-orange border-4' 
-                        : 'border-black'
-                    }`}
+                    className={`border-2 bg-white ${index === 0
+                      ? 'border-la-orange border-4'
+                      : 'border-black'
+                      }`}
                   >
                     <div className="flex gap-4 p-4">
                       {/* Image */}
                       {barber.images?.[0] && (
-                        <img 
-                          src={barber.images[0]} 
+                        <img
+                          src={barber.images[0]}
                           alt={barber.name}
                           className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 object-cover border-2 border-black"
                         />
@@ -347,9 +346,9 @@ function MatchResultsContent() {
                         {/* Actions */}
                         <div className="grid grid-cols-3 gap-2">
                           {barber.phone && (
-                            <a 
+                            <a
                               href={`tel:${barber.phone}`}
-                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
+                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name, barber.neighborhood || undefined)}
                               className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                             >
                               <Phone className="w-4 h-4" />
@@ -358,7 +357,7 @@ function MatchResultsContent() {
                           )}
                           <a
                             href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
-                            onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`)}
+                            onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`, barber.name, barber.neighborhood || undefined)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"

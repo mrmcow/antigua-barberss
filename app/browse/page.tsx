@@ -5,17 +5,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
-import { 
-  Search, 
-  MapPin, 
-  Star, 
-  Clock, 
-  Phone, 
+import {
+  Search,
+  MapPin,
+  Star,
+  Clock,
+  Phone,
   Navigation,
   ArrowRight
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { trackClickEvent } from "@/lib/analytics";
+import { sendGAEvent } from '@next/third-parties/google';
 
 interface Barbershop {
   id: string;
@@ -39,7 +40,7 @@ function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
   const R = 3959; // Earth's radius in miles
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLng = (lng2 - lng1) * Math.PI / 180;
-  const a = 
+  const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
     Math.sin(dLng / 2) * Math.sin(dLng / 2);
@@ -58,7 +59,7 @@ export default function BrowsePage() {
   const [barbers, setBarbers] = useState<Barbershop[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [userLocation, setUserLocation] = useState<{ lat: number, lng: number } | null>(null);
   const [locationPermission, setLocationPermission] = useState<'pending' | 'granted' | 'denied'>('pending');
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
@@ -104,8 +105,8 @@ export default function BrowsePage() {
   }
 
   function toggleFilter(filter: string) {
-    setActiveFilters(prev => 
-      prev.includes(filter) 
+    setActiveFilters(prev =>
+      prev.includes(filter)
         ? prev.filter(f => f !== filter)
         : [...prev, filter]
     );
@@ -115,7 +116,7 @@ export default function BrowsePage() {
   const filteredBarbers = barbers.filter(barber => {
     // Search filter
     if (searchTerm && !barber.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        !barber.neighborhood?.toLowerCase().includes(searchTerm.toLowerCase())) {
+      !barber.neighborhood?.toLowerCase().includes(searchTerm.toLowerCase())) {
       return false;
     }
 
@@ -147,7 +148,7 @@ export default function BrowsePage() {
 
   async function fetchBarbers() {
     setLoading(true);
-    
+
     const { data, error } = await supabase
       .from('barbershops')
       .select('*')
@@ -162,21 +163,35 @@ export default function BrowsePage() {
       const validBarbers = (data || []).filter(b => b.images && b.images.length > 0);
       setBarbers(validBarbers);
     }
-    
+
     setLoading(false);
+
+    // Track view_item_list event
+    if (!error && data) {
+      sendGAEvent('event', 'view_item_list', {
+        item_list_id: 'browse_barbers',
+        item_list_name: 'Browse Barbers',
+        items: (data || []).map((barber, index) => ({
+          item_id: barber.id,
+          item_name: barber.name,
+          item_category: barber.neighborhood || 'Los Angeles',
+          index: index
+        }))
+      });
+    }
   }
 
   // Only feature barbers with images AND high ratings
   const featuredBarbers = filteredBarbers
-    .filter(b => 
-      b.rating && 
-      b.rating >= 4.5 && 
-      b.images && 
+    .filter(b =>
+      b.rating &&
+      b.rating >= 4.5 &&
+      b.images &&
       b.images.length > 0 &&
       b.review_count >= 10
     )
     .slice(0, 2);
-  
+
   const regularBarbers = filteredBarbers.filter(b => !featuredBarbers.includes(b));
 
   return (
@@ -221,80 +236,73 @@ export default function BrowsePage() {
 
           {/* Quick Filters - Desktop Optimized */}
           <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
-            <button 
+            <button
               onClick={() => toggleFilter('open-now')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('open-now') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('open-now')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               <Clock className="w-3 h-3 inline mr-1" />
               OPEN NOW
             </button>
-            
-            <button 
+
+            <button
               onClick={() => toggleFilter('fade-specialists')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('fade-specialists') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('fade-specialists')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               FADE SPECIALISTS
             </button>
-            
-            <button 
+
+            <button
               onClick={() => toggleFilter('curly-hair')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('curly-hair') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('curly-hair')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               CURLY HAIR
             </button>
-            
-            <button 
+
+            <button
               onClick={() => toggleFilter('walk-in')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('walk-in') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('walk-in')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               WALK-IN
             </button>
-            
-            <button 
+
+            <button
               onClick={() => toggleFilter('under-40')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('under-40') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('under-40')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               UNDER $40
             </button>
-            
-            <button 
+
+            <button
               onClick={() => toggleFilter('venice')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('venice') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('venice')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               VENICE
             </button>
-            
-            <button 
+
+            <button
               onClick={() => toggleFilter('hollywood')}
-              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${
-                activeFilters.includes('hollywood') 
-                  ? 'bg-la-orange border-la-orange text-white' 
-                  : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-              }`}
+              className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('hollywood')
+                ? 'bg-la-orange border-la-orange text-white'
+                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
+                }`}
             >
               HOLLYWOOD
             </button>
@@ -346,10 +354,10 @@ export default function BrowsePage() {
                       <div className="absolute top-0 left-0 bg-la-orange text-white px-3 py-1 text-xs font-bold uppercase z-10">
                         FEATURED
                       </div>
-                      
+
                       {barber.images && barber.images.length > 0 ? (
-                        <img 
-                          src={barber.images[0]} 
+                        <img
+                          src={barber.images[0]}
                           alt={barber.name}
                           className="aspect-[3/1] md:aspect-[4/1] w-full object-cover"
                         />
@@ -375,7 +383,7 @@ export default function BrowsePage() {
                               {barber.distance && barber.driveTime && (
                                 <div className="text-sm font-bold text-la-orange flex items-center gap-1">
                                   <Navigation className="w-4 h-4" />
-                                  {barber.distance < 1 
+                                  {barber.distance < 1
                                     ? `${(barber.distance * 5280).toFixed(0)}ft • ${barber.driveTime}`
                                     : `${barber.distance.toFixed(1)}mi • ${barber.driveTime}`
                                   }
@@ -403,9 +411,9 @@ export default function BrowsePage() {
 
                       <div className="grid grid-cols-3 gap-2">
                         {barber.phone && (
-                          <a 
+                          <a
                             href={`tel:${barber.phone}`}
-                            onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
+                            onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name, barber.neighborhood || undefined)}
                             className="border-2 border-black p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                           >
                             <Phone className="w-4 h-4" />
@@ -414,7 +422,7 @@ export default function BrowsePage() {
                         )}
                         <a
                           href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
-                          onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`)}
+                          onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`, barber.name, barber.neighborhood || undefined)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="border-2 border-black p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
@@ -442,8 +450,8 @@ export default function BrowsePage() {
                   >
                     <div className="flex gap-3 md:gap-4 p-3 md:p-4">
                       {barber.images && barber.images.length > 0 ? (
-                        <img 
-                          src={barber.images[0]} 
+                        <img
+                          src={barber.images[0]}
                           alt={barber.name}
                           className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 object-cover border-2 border-black"
                         />
@@ -466,7 +474,7 @@ export default function BrowsePage() {
                             {barber.distance && barber.driveTime && (
                               <div className="text-xs font-bold text-la-orange flex items-center gap-1">
                                 <Navigation className="w-3 h-3" />
-                                {barber.distance < 1 
+                                {barber.distance < 1
                                   ? `${(barber.distance * 5280).toFixed(0)}ft • ${barber.driveTime}`
                                   : `${barber.distance.toFixed(1)}mi • ${barber.driveTime}`
                                 }
@@ -479,7 +487,7 @@ export default function BrowsePage() {
                         {barber.images && barber.images.length > 1 && (
                           <div className="flex gap-1.5 mb-2">
                             {barber.images.slice(1, 4).map((image, imgIndex) => (
-                              <Link 
+                              <Link
                                 key={imgIndex}
                                 href={`/barbers/${barber.id}`}
                                 className="w-8 h-8 md:w-10 md:h-10 bg-gray-200 rounded-sm overflow-hidden border border-black/20 hover:border-la-orange transition-colors cursor-pointer group"
@@ -492,7 +500,7 @@ export default function BrowsePage() {
                                 />
                               </Link>
                             ))}
-                            <Link 
+                            <Link
                               href={`/barbers/${barber.id}`}
                               className="flex items-center text-xs text-gray-500 hover:text-la-orange transition-colors ml-1 cursor-pointer"
                             >
@@ -517,9 +525,9 @@ export default function BrowsePage() {
 
                         <div className="flex gap-2">
                           {barber.phone && (
-                            <a 
+                            <a
                               href={`tel:${barber.phone}`}
-                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`)}
+                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name, barber.neighborhood || undefined)}
                               className="flex-1 border-2 border-black py-2 text-center font-bold uppercase text-xs active:bg-black active:text-white transition-colors"
                             >
                               Call
