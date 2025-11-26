@@ -268,30 +268,48 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
 
   if (loading || !barber) {
     return (
-      <main className="min-h-screen bg-white">
-        {/* Keep navigation visible during load */}
-        <nav className="border-b-2 border-black sticky top-0 bg-white z-50">
-          <div className="container-brutal py-3 md:py-4 flex items-center justify-between">
-            <Link href="/" className="hover:opacity-80 transition-opacity">
-              <Logo size="sm" />
-            </Link>
-            <div className="flex gap-2 md:gap-4 items-center">
-              <Link href="/browse" className="hidden md:block text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
-                Browse
-              </Link>
-              <Link href="/need-cut-now">
-                <Button variant="primary" size="sm">
-                  Need Cut Now
-                </Button>
-              </Link>
-            </div>
+      <main className="min-h-screen bg-black flex items-center justify-center">
+        {/* LA BRANDED LOADING INTERSTITIAL */}
+        <div className="text-center">
+          {/* Animated Logo */}
+          <div className="mb-8 animate-pulse">
+            <Logo size="lg" className="invert mx-auto" />
           </div>
-        </nav>
 
-        {/* Minimal loading state */}
-        <div className="container-brutal py-20">
-          <div className="h-96 border-2 border-gray-200 animate-pulse"></div>
+          {/* Bold LA Text */}
+          <div className="overflow-hidden">
+            <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter animate-[slideIn_0.5s_ease-out]">
+              LA
+            </h1>
+          </div>
+
+          {/* Minimal loader bar */}
+          <div className="mt-8 w-64 mx-auto h-2 bg-gray-800 overflow-hidden">
+            <div className="h-full bg-la-orange animate-[loadBar_1s_ease-in-out_infinite]"></div>
+          </div>
         </div>
+
+        <style jsx>{`
+          @keyframes slideIn {
+            from {
+              transform: translateY(20px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+          
+          @keyframes loadBar {
+            0% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(400%);
+            }
+          }
+        `}</style>
       </main>
     );
   }
@@ -574,10 +592,16 @@ export default function BarberProfile({ params }: { params: { slug: string } }) 
                     Book Now
                   </button>
                 ) : (
-                  <div className="border-4 border-gray-300 bg-gray-100 text-gray-400 p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => {
+                      const url = barber.google_maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.name)}&query_place_id=${barber.google_place_id || ''}`;
+                      trackAndNavigate(barber.id, 'google_view_click', url, barber.name, barber.neighborhood || undefined);
+                    }}
+                    className="border-4 border-black bg-white text-black p-4 md:p-5 text-center font-bold uppercase text-base md:text-lg flex items-center justify-center gap-2 active:bg-black active:text-white transition-colors"
+                  >
                     <ExternalLink className="w-5 h-5 md:w-6 md:h-6" />
-                    Call to Book
-                  </div>
+                    View on Google
+                  </button>
                 )}
               </div>
 
