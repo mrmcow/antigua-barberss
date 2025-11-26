@@ -170,9 +170,9 @@ export default function Home() {
               <Link
                 key={barber.id}
                 href={`/barbers/${barber.id}`}
-                className="group"
+                className="group h-full"
               >
-                <div className="border-4 border-black overflow-hidden bg-white hover:border-la-orange transition-all duration-300">
+                <div className="h-full flex flex-col border-4 border-black overflow-hidden bg-white hover:border-la-orange transition-all duration-300">
                   {/* Image */}
                   <div className="aspect-[4/3] overflow-hidden relative bg-gray-100">
                     {barber.images?.[0] && (
@@ -192,7 +192,7 @@ export default function Home() {
                   </div>
 
                   {/* Info */}
-                  <div className="p-4 md:p-6 bg-white">
+                  <div className="flex-1 p-4 md:p-6 bg-white">
                     <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight mb-2 group-hover:text-la-orange transition-colors">
                       {barber.name}
                     </h3>
@@ -384,6 +384,9 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 md:gap-8">
               <Link href="/about" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
                 About
+              </Link>
+              <Link href="/blog" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
+                Blog
               </Link>
               <a href="mailto:support@pagestash.app?subject=LA Barber Guide - Contact" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
                 Contact

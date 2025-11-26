@@ -6,23 +6,23 @@
   * {
     @apply border-black;
   }
-  
+
   html {
     @apply scroll-smooth;
     -webkit-tap-highlight-color: transparent;
   }
-  
+
   body {
     @apply bg-white text-black;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* Aggressive selection color */
   ::selection {
     @apply bg-la-orange text-white;
   }
-  
+
   /* Remove default button styles */
   button {
     -webkit-tap-highlight-color: transparent;
@@ -30,11 +30,12 @@
 }
 
 @layer utilities {
+
   /* Brutalist container - mobile optimized */
   .container-brutal {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   /* Brand text styles - AGGRESSIVE & MOBILE RESPONSIVE */
   .text-brutal-display {
     font-family: var(--font-bebas);
@@ -44,7 +45,7 @@
     text-transform: uppercase;
     font-weight: 400;
   }
-  
+
   .text-brutal-hero {
     font-family: var(--font-bebas);
     font-size: clamp(2rem, 8vw, 3.5rem);
@@ -53,7 +54,7 @@
     text-transform: uppercase;
     font-weight: 400;
   }
-  
+
   .text-brutal-h1 {
     font-family: var(--font-bebas);
     font-size: clamp(1.75rem, 6vw, 2.5rem);
@@ -62,21 +63,99 @@
     text-transform: uppercase;
     font-weight: 400;
   }
-  
+
+  /* BRUTAL BLOG STYLING */
+  .blog-brutal h1 {
+    @apply text-4xl font-black uppercase tracking-tight mt-12 mb-6 border-4 border-black bg-la-orange text-white p-6;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .blog-brutal h2 {
+    @apply text-3xl font-black uppercase tracking-tight mt-10 mb-5 border-b-4 border-black pb-4 text-black;
+  }
+
+  .blog-brutal h3 {
+    @apply text-2xl font-black uppercase tracking-tight mt-8 mb-4 text-black border-l-4 border-la-orange pl-4;
+  }
+
+  .blog-brutal p {
+    @apply text-base leading-relaxed mb-6 text-gray-900;
+  }
+
+  .blog-brutal strong {
+    @apply text-black font-black bg-yellow-200 px-1;
+  }
+
+  .blog-brutal a {
+    @apply text-la-orange font-bold no-underline border-b-2 border-la-orange transition-all;
+    cursor: pointer;
+  }
+
+  .blog-brutal a:hover {
+    @apply bg-la-orange text-white;
+    cursor: pointer;
+    transform: translateY(-1px);
+  }
+
+  .blog-brutal ul {
+    @apply my-6 space-y-3 border-l-4 border-black pl-8 py-4 bg-gray-50;
+  }
+
+  .blog-brutal ol {
+    @apply my-6 space-y-3 border-l-4 border-la-orange pl-8 py-4;
+  }
+
+  .blog-brutal li {
+    @apply text-gray-900 leading-relaxed font-medium;
+  }
+
+  .blog-brutal blockquote {
+    @apply border-l-8 border-la-orange bg-black text-white p-6 my-8 italic font-medium;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .blog-brutal table {
+    @apply border-4 border-black my-8 w-full;
+  }
+
+  .blog-brutal thead {
+    @apply bg-black text-white;
+  }
+
+  .blog-brutal th {
+    @apply border-2 border-white p-4 text-left font-black uppercase tracking-wide;
+  }
+
+  .blog-brutal td {
+    @apply border-2 border-black p-4 bg-white;
+  }
+
+  .blog-brutal tr:nth-child(even) {
+    @apply bg-gray-50;
+  }
+
+  .blog-brutal hr {
+    @apply border-4 border-black my-10;
+  }
+
+  .blog-brutal code {
+    @apply bg-gray-900 text-la-orange px-2 py-1 font-mono text-sm;
+  }
+
   /* Animation for page transitions */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 }
-

@@ -3,30 +3,49 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
-import { 
-  Calendar, 
-  Clock, 
-  ArrowLeft, 
-  ArrowRight, 
+import {
+  Calendar,
+  Clock,
+  ArrowLeft,
+  ArrowRight,
   Share2,
   ExternalLink,
   MapPin,
   Star
 } from "lucide-react";
+import { LinkedBlogContent } from "@/components/LinkedBlogContent";
+import { ShareButton } from "@/components/ShareButton";
+import { supabase } from "@/lib/supabase";
 import fs from 'fs';
 import path from 'path';
+
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  try {
+    const jsonPath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
+    const jsonData = fs.readFileSync(jsonPath, 'utf8');
+    const blogPostsData = JSON.parse(jsonData);
+
+    return blogPostsData.map((post: any) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+}
 
 // Generate dynamic metadata for SEO
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getBlogPost(params.slug);
-  
+
   if (!post) {
     return {
       title: "Blog Post Not Found | LA Barber Guide",
       description: "This blog post could not be found. Explore our other LA barber guides and reviews.",
     };
   }
-  
+
   return {
     title: `${post.title} | LA Barber Guide`,
     description: post.description,
@@ -71,13 +90,13 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     const jsonPath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
     const jsonData = fs.readFileSync(jsonPath, 'utf8');
     const blogPostsData = JSON.parse(jsonData);
-    
+
     const post = blogPostsData.find((p: any) => p.slug === slug);
-    
+
     if (!post) {
       return null;
     }
-    
+
     return {
       title: post.title,
       slug: post.slug,
@@ -94,147 +113,80 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     console.error('Error loading blog post:', error);
     return null;
   }
-  
-  // FALLBACK: Mock data for development
-  const mockPosts: Record<string, BlogPost> = {
-    "ez-the-barber-review-downtown-la-barber": {
-      title: "EZ The Barber Review: Downtown LA's 4C Hair Specialist Worth the Hype?",
-      slug: "ez-the-barber-review-downtown-la-barber",
-      category: "barber-reviews",
-      publishedAt: "2025-01-20T00:00:00.000Z",
-      description: "Comprehensive review of EZ The Barber in Downtown LA based on 127 customer reviews. Is he really worth the premium price for 4C hair cuts?",
-      keywords: "EZ The Barber review, Downtown LA barber, 4C hair specialist, fade barber",
-      author: "LA Barber Guide",
-      content: `# EZ The Barber Review: Downtown LA's 4C Hair Specialist Worth the Hype?
-
-**Rating: 4.8/5 ⭐ (127 reviews)**
-**Location:** Downtown LA | **Price:** $$$ | **Specialty:** 4C Hair, Fades
-
-## The Verdict Up Front
-
-After analyzing 127 real customer reviews and cross-referencing with our barbershop database, EZ The Barber earns our strong recommendation for 4C hair specialists in Downtown LA. Here's why he's worth the premium price.
-
-## What Makes EZ Special
-
-Based on comprehensive customer feedback analysis:
-
-- **89% of reviewers** specifically mention "perfect fade execution"
-- **76% explicitly praise** his 4C hair expertise and technique
-- **Average wait time:** 15 minutes (well-managed scheduling)
-- **Booking success rate:** 94% same-week availability
-- **Repeat customer rate:** 82% (extremely high loyalty)
-
-The data shows EZ consistently delivers what other barbers struggle with: precision fades on textured hair that grow out cleanly.
-
-## Real Customer Experiences
-
-Our review analysis reveals consistent themes:
-
-> "Finally found someone in LA who truly understands 4C hair texture. The fade is immaculate and grows out perfectly." - Marcus T., 5 stars
-
-> "Worth every penny of the $55. The attention to detail is incredible - he takes time to understand your hair pattern before cutting." - David R., 5 stars
-
-> "Been going to EZ for 2 years. Never had a bad cut. Books up fast but worth the wait." - Anthony K., 5 stars
-
-## Pricing & Value Analysis
-
-**EZ's Pricing Structure:**
-- Standard Cut + Fade: $55
-- Beard Trim Addition: +$15  
-- Hair Wash: Included
-- Styling: Included
-
-**Value Comparison:**
-Compared to other Downtown LA premium barbers charging $45-65, EZ's pricing sits in the middle-premium range. However, customer satisfaction data shows:
-
-- **92% say "worth the price"** vs 67% average for $50+ barbershops
-- **Zero complaints** about pricing in recent reviews
-- **High rebooking rate** indicates perceived value
-
-## How EZ Compares to Competition
-
-**vs Other Downtown LA Specialists:**
-
-| Metric | EZ The Barber | Area Average |
-|--------|---------------|--------------|
-| Rating | 4.8/5 | 4.2/5 |
-| 4C Expertise | 89% mention | 34% mention |
-| Booking Difficulty | Moderate | Easy-Hard |
-| Price Range | $$$ | $$-$$$ |
-
-**Advantages:**
-- Superior technical skill with textured hair
-- Consistent quality (low variance in reviews)
-- Professional shop environment
-- Reliable scheduling
-
-**Disadvantages:**  
-- Higher price point than budget options
-- Books up 1-2 weeks in advance
-- Limited walk-in availability
-
-## Who Should Go to EZ?
-
-**Ideal Customers:**
-- 4C hair texture seeking precision fades
-- Professionals needing consistent, clean cuts
-- Anyone willing to pay premium for expertise
-- Clients who value reliability over convenience
-
-**Maybe Look Elsewhere If:**
-- Budget is primary concern (under $40)
-- Need immediate/walk-in availability  
-- Prefer basic cuts without fades
-- Looking for experimental/avant-garde styles
-
-## Booking & Location Details
-
-**Address:** [Actual address would go here]
-**Hours:** [Actual hours]
-**Booking:** Online preferred, 1-2 week lead time
-**Parking:** Street parking, some nearby lots
-
-**Pro Tips:**
-- Book 2 weeks ahead for weekend slots
-- Mention specific fade style preferences when booking
-- Bring reference photos for complex requests
-
-## Bottom Line
-
-EZ The Barber represents the gold standard for 4C hair specialists in Downtown LA. The premium pricing reflects genuine expertise - this isn't just marketing. 
-
-**We recommend** if you have textured hair and want consistent, professional results. The 89% customer satisfaction rate for 4C hair specifically speaks volumes.
-
-**Skip if** you're looking for budget cuts or need immediate availability. But for quality 4C fades, EZ is currently unmatched in downtown.
-
----
-
-*Looking for more barber options? Check out our [complete Downtown LA barber guide](/blog/best-barbers-downtown-la-2025) or use our [smart matching system](/match) to find barbers perfect for your hair type.*`,
-      readTime: "8 min read",
-      featured: true
-    }
-  };
-  
-  return mockPosts[slug] || null;
 }
 
-// Duplicate generateMetadata function removed - already exists above
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = await getBlogPost(params.slug);
-  
+
   if (!post) {
     notFound();
   }
 
   const publishDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long', 
+    month: 'long',
     day: 'numeric'
   });
 
+  // Fetch barbershop data for linking
+  const { data: barbershops } = await supabase
+    .from('barbershops')
+    .select('id, name');
+
+  const barberMap: Record<string, string> = {};
+  if (barbershops) {
+    barbershops.forEach((barber: any) => {
+      barberMap[barber.name] = barber.id;
+    });
+  }
+
+  // Structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "author": {
+      "@type": "Organization",
+      "name": "LA Barber Guide"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LA Barber Guide",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://labarberguide.xyz/logo.png"
+      }
+    },
+    "datePublished": post.publishedAt,
+    "dateModified": post.publishedAt,
+    "description": post.description,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://labarberguide.xyz/blog/${post.slug}`
+    },
+    "about": {
+      "@type": "LocalBusiness",
+      "@businessType": "Barbershop",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    "keywords": post.keywords
+  };
+
   return (
     <main className="min-h-screen bg-white">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       {/* Navigation */}
       <nav className="border-b-2 border-black sticky top-0 bg-white z-50">
         <div className="container-brutal py-3 md:py-4 flex items-center justify-between">
@@ -244,9 +196,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           <div className="flex gap-2 md:gap-4 items-center">
             <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
               Barbers
-            </Link>
-            <Link href="/blog" className="text-sm md:text-base uppercase tracking-wider text-la-orange font-bold">
-              Blog
             </Link>
             <Link href="/need-cut-now">
               <button className="inline-flex items-center justify-center gap-2 uppercase tracking-wider font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-black text-white hover:bg-la-orange px-4 py-2 text-xs md:text-sm whitespace-nowrap">
@@ -298,21 +247,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               <div className="text-sm text-gray-600">
                 By <span className="font-bold text-black">{post.author}</span>
               </div>
-              <button className="inline-flex items-center gap-2 text-sm uppercase tracking-wider font-bold hover:text-la-orange transition-colors">
-                <Share2 className="w-4 h-4" />
-                Share Article
-              </button>
+              <ShareButton title={post.title} description={post.description} />
             </div>
 
-            {/* Content */}
-            <div className="prose prose-lg max-w-none">
-              {/* This would render the markdown content */}
-              <div 
-                className="article-content"
-                dangerouslySetInnerHTML={{ 
-                  __html: post.content.replace(/\n/g, '<br/>').replace(/#{1,6}\s/g, '') 
-                }}
-              />
+            {/* Content - LA Brutal Style */}
+            <div className="blog-brutal prose prose-lg max-w-none">
+              <div className="article-content space-y-6">
+                <LinkedBlogContent content={post.content} barberMap={barberMap} />
+              </div>
             </div>
 
             {/* CTA Section */}
@@ -356,11 +298,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     </p>
                   </article>
                 </Link>
-                
+
                 <Link href="/blog/best-4c-barbers-los-angeles" className="group">
                   <article className="border-2 border-black hover:border-la-orange transition-colors p-6">
                     <Badge variant="outline" className="mb-3">
-                      HAIR TYPE GUIDES  
+                      HAIR TYPE GUIDES
                     </Badge>
                     <h4 className="text-lg font-bold mb-2 group-hover:text-la-orange transition-colors">
                       Best 4C Hair Barbers in LA: Expert Picks & Reviews
@@ -393,7 +335,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               </a>
             </div>
           </div>
-          
+
           <div className="pt-6 md:pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs md:text-sm text-gray-500">
             <p>© 2025 LA Barber Guide. All rights reserved.</p>
             <div className="flex gap-4 md:gap-6">
