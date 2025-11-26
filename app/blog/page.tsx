@@ -34,10 +34,17 @@ async function getBlogPosts() {
   }
 }
 
-export default async function BlogPage() {
+export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
   const allPosts = await getBlogPosts();
-  const featuredPosts = allPosts.filter((post: any) => post.featured).slice(0, 6);
-  const recentPosts = allPosts.slice(0, 12);
+  const selectedCategory = searchParams?.category;
+
+  // Filter posts by category if specified
+  const filteredPosts = selectedCategory
+    ? allPosts.filter((post: any) => post.category === selectedCategory)
+    : allPosts;
+
+  const featuredPosts = filteredPosts.filter((post: any) => post.featured).slice(0, 6);
+  const recentPosts = filteredPosts.slice(0, 12);
   const categoryStats = allPosts.reduce((acc: any, post: any) => {
     acc[post.category] = (acc[post.category] || 0) + 1;
     return acc;
@@ -118,7 +125,7 @@ export default async function BlogPage() {
                 >
                   <article className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <Badge variant="default" className="uppercase text-xs">
+                      <Badge variant="default" className="uppercase text-xs group-hover:bg-black group-hover:text-white group-hover:border-black transition-colors">
                         {post.category.replace('-', ' ')}
                       </Badge>
                       <div className="flex items-center gap-1 text-xs text-gray-500">
@@ -166,7 +173,7 @@ export default async function BlogPage() {
                 <article className="p-4 md:p-6 flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-2">
-                      <Badge variant="outline" className="uppercase text-xs">
+                      <Badge variant="outline" className="uppercase text-xs group-hover:bg-black group-hover:text-white group-hover:border-black transition-colors">
                         {post.category.replace('-', ' ')}
                       </Badge>
                       <div className="flex items-center gap-1 text-xs text-gray-500">
