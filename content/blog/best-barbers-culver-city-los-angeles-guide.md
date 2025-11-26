@@ -19,25 +19,25 @@ Culver City boasts 4 highly-rated barber shops, ranging from budget-friendly loc
 ## Top 4 Barbers in Culver City
 
 
-### 1. House of AANUKO Barbershop 
+### 1. [House of AANUKO Barbershop](/barbers/0c28a48b-80f5-4fd8-8470-eeeaa05b0df8)
 **Rating:** 5/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Modern Style
 
 Known for curly hair and customer service. Reviews highlight the skilled technique and reasonable prices.
 
-**Book:** [Find availability](/barbers/house-of-aanuko-barbershop)
+**Book:** [Find availability](/barbers/0c28a48b-80f5-4fd8-8470-eeeaa05b0df8)
 
-### 2. Halftime Barbers 
+### 2. [Halftime Barbers](/barbers/40887a85-cbb0-4b41-bb05-86b82e463287)
 **Rating:** 4.9/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Beard Trim
 
 Known for beard trim and customer service. Customers praise the consistent quality and friendly atmosphere.
 
-**Book:** [Find availability](/barbers/halftime-barbers)
+**Book:** [Find availability](/barbers/40887a85-cbb0-4b41-bb05-86b82e463287)
 
-### 3. Gentlemen’s Barbershop 
+### 3. [Gentlemen’s Barbershop](/barbers/be559476-74c7-44de-83b5-be9ec7c96a7a)
 **Rating:** 4.7/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Curly Hair
@@ -46,14 +46,14 @@ Known for modern style and attention to detail. Regular clients appreciate the r
 
 **Book:** [Find availability](/barbers/gentlemens-barbershop)
 
-### 4. Blind Barber 
+### 4. [Blind Barber](/barbers/467df832-1387-4b00-a932-46b41947caac)
 **Rating:** 4.2/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Curly Hair
 
 Known for straight razor and attention to detail. Reviews highlight the skilled technique and reasonable prices.
 
-**Book:** [Find availability](/barbers/blind-barber)
+**Book:** [Find availability](/barbers/467df832-1387-4b00-a932-46b41947caac)
 
 ## Culver City Barber Quick Picks
 

@@ -28,7 +28,7 @@ The Presidential Parlour has built a reputation specifically for 4c hair experti
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/the-presidential-parlour)
+[Book appointment](/barbers/99637d4f-a35c-4f2d-9d24-f4312d39fdfa)
 
 ### 2. Pier 86 Barbershop - Santa Monica
 **4C Hair Expertise:** Advanced  
@@ -39,7 +39,7 @@ Pier 86 Barbershop has built a reputation specifically for 4c hair expertise. Th
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/pier-86-barbershop)
+[Book appointment](/barbers/c1260b39-8148-4979-9fb8-18902984971d)
 
 ### 3. Dapper at Daniels Barbershop - Santa Monica
 **4C Hair Expertise:** Specialized  
@@ -50,7 +50,7 @@ Dapper at Daniels Barbershop has built a reputation specifically for 4c hair exp
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/dapper-at-daniels-barbershop)
+[Book appointment](/barbers/fb6b714e-1f9e-4aa4-9326-e80570dfcdcd)
 
 ### 4. nando's cut - Santa Monica
 **4C Hair Expertise:** Expert  
@@ -72,7 +72,7 @@ Barber Shop Cuts has built a reputation specifically for 4c hair expertise. Thei
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/barber-shop-cuts)
+[Book appointment](/barbers/dc4d75b3-ca1a-456a-b53b-b27e9a6e82c7)
 
 ### 6. Ben The Barber - Los Angeles
 **4C Hair Expertise:** Highly Skilled  
@@ -83,7 +83,7 @@ Ben The Barber has built a reputation specifically for 4c hair expertise. Their 
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/ben-the-barber)
+[Book appointment](/barbers/7c1884c3-6746-424d-a4d9-44f874d646cd)
 
 ### 7. Barber Uniform - Los Angeles
 **4C Hair Expertise:** Expert  
@@ -94,7 +94,7 @@ Barber Uniform has built a reputation specifically for 4c hair expertise. Their 
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/barber-uniform)
+[Book appointment](/barbers/ed619bdd-9b3e-42d7-9b65-2886b3fea1a8)
 
 ### 8. Super star barber shop - Los Angeles
 **4C Hair Expertise:** Highly Skilled  
@@ -105,7 +105,7 @@ Super star barber shop has built a reputation specifically for 4c hair expertise
 
 **Why 4c clients love them:** Gentle handling, moisture-preserving techniques, understanding of shrinkage patterns
 
-[Book appointment](/barbers/super-star-barber-shop)
+[Book appointment](/barbers/2aeb8fe4-c1eb-44e4-842a-2fd9dbf58b81)
 
 ## 4C Hair Care Tips from LA Barbers
 

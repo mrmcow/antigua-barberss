@@ -19,7 +19,7 @@ Venice boasts 6 highly-rated barber shops, ranging from budget-friendly local fa
 ## Top 6 Barbers in Venice
 
 
-### 1. Omar's Barber Company 
+### 1. [Omar's Barber Company](/barbers/b2daa50f-3c9b-48c8-96f7-c71dfe0d9889)
 **Rating:** 4.8/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Straight Razor
@@ -28,34 +28,34 @@ Known for straight razor and modern techniques. Known for listening to customer 
 
 **Book:** [Find availability](/barbers/omars-barber-company)
 
-### 2. Xquisite Barber Lounge 
+### 2. [Xquisite Barber Lounge](/barbers/eef92401-8dd2-490e-8749-1dafdaaf7cbf)
 **Rating:** 4.8/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Modern Style
 
 Known for modern style and customer service. Customers praise the consistent quality and friendly atmosphere.
 
-**Book:** [Find availability](/barbers/xquisite-barber-lounge)
+**Book:** [Find availability](/barbers/eef92401-8dd2-490e-8749-1dafdaaf7cbf)
 
-### 3. The Barbershop 
+### 3. [The Barbershop](/barbers/b8e13535-c7c2-4b99-933f-509753a9eda1)
 **Rating:** 4.8/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Classic Cut
 
 Known for fade and attention to detail. Known for listening to customer preferences and delivering exactly what was requested.
 
-**Book:** [Find availability](/barbers/the-barbershop)
+**Book:** [Find availability](/barbers/b8e13535-c7c2-4b99-933f-509753a9eda1)
 
-### 4. The World Famous Venice Barber Shop 
+### 4. [The World Famous Venice Barber Shop](/barbers/eb8f2a64-aa79-4bed-a03d-f8dabd4f7c8b)
 **Rating:** 4.7/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Beard Trim
 
 Known for fade and customer service. Customers praise the consistent quality and friendly atmosphere.
 
-**Book:** [Find availability](/barbers/the-world-famous-venice-barber-shop)
+**Book:** [Find availability](/barbers/eb8f2a64-aa79-4bed-a03d-f8dabd4f7c8b)
 
-### 5. Manly and Sons Barber Co. 
+### 5. [Manly and Sons Barber Co.](/barbers/fb7de721-2f65-4c16-b67c-85a24073f7f5)
 **Rating:** 4.6/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Curly Hair
@@ -64,7 +64,7 @@ Known for classic cut and attention to detail. Known for listening to customer p
 
 **Book:** [Find availability](/barbers/manly-and-sons-barber-co)
 
-### 6. Floyd's 99 Barbershop 
+### 6. [Floyd's 99 Barbershop](/barbers/6eb0d245-add4-4f01-94ee-52d1ec6f60bd)
 **Rating:** 4.2/5 (5 reviews)  
 **Price:** $$  
 **Best For:** Classic Cut
