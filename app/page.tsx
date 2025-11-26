@@ -1,13 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
-import { Scissors, MapPin, Clock, Search, ArrowRight, Star } from "lucide-react";
+import { Scissors, MapPin, Clock, ArrowRight, Star } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { InteractiveCTAs } from "@/components/InteractiveCTAs";
 
 interface Barbershop {
   id: string;
@@ -19,46 +15,39 @@ interface Barbershop {
   images: string[];
 }
 
-export default function Home() {
-  const [barberCount, setBarberCount] = useState<number>(500);
-  const [reviewCount, setReviewCount] = useState<number>(100000);
-  const [featuredBarbers, setFeaturedBarbers] = useState<Barbershop[]>([]);
+// Fetch data server-side for SEO
+async function getHomeData() {
+  // Get barber count
+  const { count: barberCount } = await supabase
+    .from('barbershops')
+    .select('*', { count: 'exact', head: true });
 
-  useEffect(() => {
-    async function fetchCounts() {
-      // Get barber count
-      const { count: barbers } = await supabase
-        .from('barbershops')
-        .select('*', { count: 'exact', head: true });
+  // Get review count
+  const { count: reviewCount } = await supabase
+    .from('reviews')
+    .select('*', { count: 'exact', head: true });
 
-      // Get review count
-      const { count: reviews } = await supabase
-        .from('reviews')
-        .select('*', { count: 'exact', head: true });
+  // Get featured barbers
+  const { data: allBarbers } = await supabase
+    .from('barbershops')
+    .select('id, name, neighborhood, rating, review_count, price_range, images')
+    .not('images', 'is', null)
+    .gte('rating', 4.5)
+    .order('rating', { ascending: false })
+    .limit(6);
 
-      if (barbers) setBarberCount(barbers);
-      if (reviews) setReviewCount(reviews);
-    }
+  // Filter to only show barbers with images
+  const featuredBarbers = (allBarbers || []).filter(b => b.images && b.images.length > 0);
 
-    async function fetchFeaturedBarbers() {
-      const { data } = await supabase
-        .from('barbershops')
-        .select('id, name, neighborhood, rating, review_count, price_range, images')
-        .not('images', 'is', null)
-        .gte('rating', 4.5)
-        .order('rating', { ascending: false })
-        .limit(6);
+  return {
+    barberCount: barberCount || 500,
+    reviewCount: reviewCount || 100000,
+    featuredBarbers
+  };
+}
 
-      if (data) {
-        // Filter to only show barbers with images
-        const withImages = data.filter(b => b.images && b.images.length > 0);
-        setFeaturedBarbers(withImages);
-      }
-    }
-
-    fetchCounts();
-    fetchFeaturedBarbers();
-  }, []);
+export default async function Home() {
+  const { barberCount, reviewCount, featuredBarbers } = await getHomeData();
 
   return (
     <main className="min-h-screen">
@@ -95,33 +84,8 @@ export default function Home() {
               IN 30 SEC
             </h1>
 
-
             {/* BRUTAL CTA BUTTONS - DESKTOP OPTIMIZED HOVERS */}
-            <div className="space-y-4 mb-8">
-              <Link href="/match" className="block group">
-                <div className="border-4 border-black bg-black text-white p-6 md:p-8 active:scale-[0.98] transition-all duration-200 min-h-[100px] flex items-center justify-between relative overflow-hidden hover:shadow-2xl hover:shadow-la-orange/20">
-                  <div className="absolute inset-0 bg-la-orange translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out"></div>
-                  <div className="absolute inset-0 border-4 border-la-orange opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
-                  <div className="flex-1 relative z-10">
-                    <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1 group-hover:text-black transition-colors duration-400">FIND MY BARBER</div>
-                    <div className="text-sm md:text-base opacity-90 group-hover:text-black/80 transition-colors duration-400">3 questions · Smart matching · LA's best</div>
-                  </div>
-                  <ArrowRight className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 ml-4 relative z-10 group-hover:translate-x-2 group-hover:text-black transition-all duration-400" />
-                </div>
-              </Link>
-
-              <Link href="/browse?urgency=now" className="block group">
-                <div className="border-4 border-la-orange bg-la-orange text-white p-6 md:p-8 active:scale-[0.98] transition-all duration-200 min-h-[100px] flex items-center justify-between relative overflow-hidden hover:shadow-2xl hover:shadow-black/20">
-                  <div className="absolute inset-0 bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out"></div>
-                  <div className="absolute inset-0 border-4 border-black opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
-                  <div className="flex-1 relative z-10">
-                    <div className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1 group-hover:text-white transition-colors duration-400">CUT TODAY</div>
-                    <div className="text-sm md:text-base opacity-90 group-hover:text-white/90 transition-colors duration-400">Open right now · Walk-ins welcome · Drive time</div>
-                  </div>
-                  <Clock className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 ml-4 relative z-10 group-hover:rotate-12 group-hover:text-white transition-all duration-400" />
-                </div>
-              </Link>
-            </div>
+            <InteractiveCTAs />
 
             {/* LA PROOF - NUMBERS DON'T LIE */}
             <div className="flex flex-wrap items-center gap-4 md:gap-6 text-xs md:text-sm font-bold text-black">
@@ -366,7 +330,7 @@ export default function Home() {
             <p className="text-base md:text-lg">
               Or{" "}
               <Link href="/browse" className="underline font-bold active:no-underline">
-                browse all 500+ barbers
+                browse all {barberCount.toLocaleString()}+ barbers
               </Link>
             </p>
           </div>
@@ -407,4 +371,3 @@ export default function Home() {
     </main>
   );
 }
-
