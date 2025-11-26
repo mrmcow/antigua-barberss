@@ -10,8 +10,8 @@ const nextConfig = {
   // Force Vercel to recognize all app directory routes
   trailingSlash: false,
   generateBuildId: async () => {
-    // Force new build ID to trigger complete rebuild
-    return 'force-rebuild-' + Date.now()
+    // Force new build ID to trigger complete rebuild - including blog posts
+    return 'rebuild-blog-links-' + Date.now()
   }
 }
 
