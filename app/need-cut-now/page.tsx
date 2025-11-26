@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Badge } from "@/components/ui/Badge";
-import { 
-  MapPin, 
-  Star, 
-  Phone, 
-  Navigation, 
+import {
+  MapPin,
+  Star,
+  Phone,
+  Navigation,
   ArrowLeft,
   Locate,
   Search,
@@ -40,11 +40,11 @@ function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): nu
   const R = 3959; // Earth's radius in miles
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
 
@@ -54,36 +54,112 @@ function getDriveTime(distanceMiles: number): number {
   return Math.round((distanceMiles / avgSpeed) * 60); // Convert to minutes
 }
 
-// Common LA area zip codes with approximate coordinates
+// Comprehensive LA area zip codes with approximate coordinates
 const LA_ZIP_CODES: Record<string, { lat: number; lng: number; area: string }> = {
+  // Beverly Hills / West LA
   '90210': { lat: 34.0901, lng: -118.4065, area: 'Beverly Hills' },
+  '90211': { lat: 34.0667, lng: -118.3917, area: 'Beverly Hills' },
+  '90212': { lat: 34.0667, lng: -118.3917, area: 'Beverly Hills' },
+
+  // Santa Monica
   '90401': { lat: 34.0195, lng: -118.4912, area: 'Santa Monica' },
+  '90402': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' },
+  '90403': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' },
   '90404': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' },
   '90405': { lat: 34.0195, lng: -118.4912, area: 'Santa Monica' },
-  '90028': { lat: 34.1016, lng: -118.3432, area: 'Hollywood' },
-  '90027': { lat: 34.1067, lng: -118.2870, area: 'Los Feliz/Silver Lake' },
-  '90026': { lat: 34.0780, lng: -118.2608, area: 'Echo Park' },
-  '90013': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
-  '90014': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
-  '90015': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+
+  // Venice / Marina del Rey
   '90291': { lat: 33.9425, lng: -118.4329, area: 'Venice' },
   '90292': { lat: 33.9930, lng: -118.4673, area: 'Marina del Rey' },
-  '90025': { lat: 34.0522, lng: -118.4437, area: 'West LA' },
-  '90024': { lat: 34.0631, lng: -118.4454, area: 'Westwood' },
+  '90293': { lat: 33.9590, lng: -118.4500, area: 'Playa del Rey' },
+
+  // Hollywood
+  '90028': { lat: 34.1016, lng: -118.3432, area: 'Hollywood' },
+  '90038': { lat: 34.0896, lng: -118.3280, area: 'Hollywood' },
+  '90068': { lat: 34.1349, lng: -118.3267, area: 'Hollywood Hills' },
+
+  // West Hollywood
   '90069': { lat: 34.0901, lng: -118.3850, area: 'West Hollywood' },
   '90046': { lat: 34.1030, lng: -118.3521, area: 'West Hollywood' },
   '90048': { lat: 34.0730, lng: -118.3618, area: 'West Hollywood' },
-  '90036': { lat: 34.0757, lng: -118.3531, area: 'Mid-City' },
+
+  // Downtown LA
+  '90012': { lat: 34.0631, lng: -118.2378, area: 'Downtown LA' },
+  '90013': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+  '90014': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+  '90015': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
+  '90017': { lat: 34.0522, lng: -118.2614, area: 'Downtown LA' },
+  '90021': { lat: 34.0395, lng: -118.2348, area: 'Arts District' },
+
+  // Mid-City / Koreatown
   '90004': { lat: 34.0827, lng: -118.3089, area: 'Koreatown' },
   '90005': { lat: 34.0589, lng: -118.3147, area: 'Koreatown' },
   '90006': { lat: 34.0489, lng: -118.3075, area: 'Koreatown' },
+  '90010': { lat: 34.0619, lng: -118.3089, area: 'Koreatown' },
+  '90019': { lat: 34.0489, lng: -118.3437, area: 'Mid-City' },
+  '90016': { lat: 34.0194, lng: -118.3503, area: 'Leimert Park' },
+  '90018': { lat: 34.0285, lng: -118.3089, area: 'Adams-Normandie' },
+  '90020': { lat: 34.0669, lng: -118.3089, area: 'Mid-Wilshire' },
+  '90036': { lat: 34.0757, lng: -118.3531, area: 'Mid-City' },
+  '90035': { lat: 34.0522, lng: -118.3872, area: 'Beverlywood' },
+
+  // Silver Lake / Echo Park / Los Feliz
+  '90026': { lat: 34.0780, lng: -118.2608, area: 'Echo Park' },
+  '90027': { lat: 34.1067, lng: -118.2870, area: 'Los Feliz' },
+  '90029': { lat: 34.0889, lng: -118.2912, area: 'Los Feliz' },
+  '90039': { lat: 34.1161, lng: -118.2358, area: 'Atwater Village' },
+
+  // Westwood / West LA / Sawtelle
+  '90024': { lat: 34.0631, lng: -118.4454, area: 'Westwood' },
+  '90025': { lat: 34.0522, lng: -118.4437, area: 'West LA' },
+  '90064': { lat: 34.0345, lng: -118.4309, area: 'West LA' },
+  '90034': { lat: 34.0194, lng: -118.4012, area: 'Palms' },
+  '90066': { lat: 33.9930, lng: -118.4290, area: 'Mar Vista' },
+  '90230': { lat: 34.0089, lng: -118.3965, area: 'Culver City' },
+  '90232': { lat: 34.0089, lng: -118.3965, area: 'Culver City' },
+
+  // Studio City / NoHo / Valley
   '91604': { lat: 34.1478, lng: -118.3897, area: 'Studio City' },
   '91602': { lat: 34.1392, lng: -118.3870, area: 'Studio City' },
+  '91606': { lat: 34.1644, lng: -118.3897, area: 'Studio City' },
+  '91601': { lat: 34.1644, lng: -118.3681, area: 'North Hollywood' },
+  '91605': { lat: 34.1800, lng: -118.3897, area: 'North Hollywood' },
+  '91607': { lat: 34.1800, lng: -118.4123, area: 'Valley Village' },
+
+  // Sherman Oaks / Encino
+  '91423': { lat: 34.1589, lng: -118.4790, area: 'Sherman Oaks' },
+  '91403': { lat: 34.1589, lng: -118.4790, area: 'Sherman Oaks' },
+  '91436': { lat: 34.1511, lng: -118.5089, area: 'Encino' },
+  '91316': { lat: 34.1511, lng: -118.5089, area: 'Encino' },
+
+  // Highland Park / Eagle Rock / Glassell Park
+  '90041': { lat: 34.1161, lng: -118.1887, area: 'Eagle Rock' },
+  '90042': { lat: 34.1286, lng: -118.1959, area: 'Highland Park' },
   '90065': { lat: 34.1081, lng: -118.2137, area: 'Glassell Park' },
-  '90039': { lat: 34.1161, lng: -118.2358, area: 'Atwater Village' },
-  '90029': { lat: 34.0889, lng: -118.2912, area: 'Los Feliz' },
-  '90068': { lat: 34.1349, lng: -118.3267, area: 'Hollywood Hills' },
+
+  // South LA
+  '90003': { lat: 33.9778, lng: -118.2729, area: 'South LA' },
+  '90007': { lat: 34.0256, lng: -118.2850, area: 'South LA' },
+  '90011': { lat: 34.0075, lng: -118.2581, area: 'South LA' },
+  '90037': { lat: 34.0075, lng: -118.2900, area: 'South LA' },
+
+  // Pasadena (adjacent)
+  '91101': { lat: 34.1478, lng: -118.1445, area: 'Pasadena' },
+  '91103': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' },
+  '91104': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' },
+  '91105': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' },
+  '91106': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' },
 };
+
+// Quick-select neighborhoods for better UX
+const QUICK_SELECT_NEIGHBORHOODS = [
+  { zip: '90291', label: 'Venice' },
+  { zip: '90401', label: 'Santa Monica' },
+  { zip: '90069', label: 'WeHo' },
+  { zip: '90028', label: 'Hollywood' },
+  { zip: '90013', label: 'DTLA' },
+  { zip: '90004', label: 'Koreatown' },
+];
 
 function getLocationFromZip(zipCode: string): { lat: number; lng: number; area: string } | null {
   // Remove any spaces and ensure 5 digits
@@ -136,7 +212,7 @@ export default function NeedCutNowPage() {
 
   async function fetchNearbyBarbers(lat: number, lng: number) {
     setLoading(true);
-    
+
     const { data, error } = await supabase
       .from('barbershops')
       .select('*')
@@ -149,7 +225,7 @@ export default function NeedCutNowPage() {
     } else if (data) {
       // Filter out empty image arrays and calculate distances
       const validBarbers = data.filter(b => b.images && b.images.length > 0);
-      
+
       const barbersWithDistance = validBarbers
         .map(barber => ({
           ...barber,
@@ -167,13 +243,13 @@ export default function NeedCutNowPage() {
 
       setBarbers(barbersWithDistance);
     }
-    
+
     setLoading(false);
   }
 
   async function handleZipSearch() {
     if (!zipInput.trim()) return;
-    
+
     const location = getLocationFromZip(zipInput.trim());
     if (location) {
       setUserLat(location.lat);
@@ -182,8 +258,8 @@ export default function NeedCutNowPage() {
       setUseZipMode(true);
       await fetchNearbyBarbers(location.lat, location.lng);
     } else {
-      // Invalid zip code
-      alert('Please enter a valid LA area zip code (e.g., 90210, 90401, 90028)');
+      // Still show a message, but don't use alert
+      console.log('Zip code not recognized:', zipInput);
     }
   }
 
@@ -195,7 +271,7 @@ export default function NeedCutNowPage() {
           <Link href="/" className="hover:opacity-80 transition-opacity">
             <Logo size="sm" />
           </Link>
-          <Link 
+          <Link
             href="/"
             className="inline-flex items-center gap-1 font-bold uppercase text-xs hover:text-la-orange transition-colors"
           >
@@ -229,12 +305,12 @@ export default function NeedCutNowPage() {
       <div className="border-b-2 border-black bg-gray-50 py-4">
         <div className="container-brutal">
           {locationError && (
-            <div className="bg-yellow-100 border-2 border-yellow-400 p-3 mb-4 rounded">
-              <p className="text-sm font-medium text-yellow-800 mb-2">
-                ⚠️ LOCATION ACCESS DENIED. SHOWING RESULTS FOR DOWNTOWN LA.
+            <div className="bg-yellow-50 border-4 border-black p-4 mb-4">
+              <p className="text-base font-bold uppercase mb-1">
+                📍 WHERE YOU AT?
               </p>
-              <p className="text-xs text-yellow-700">
-                Enter your zip code below for more accurate results.
+              <p className="text-sm text-gray-700">
+                Drop your zip code for accurate distances and times
               </p>
             </div>
           )}
@@ -269,6 +345,32 @@ export default function NeedCutNowPage() {
             </button>
           </div>
 
+          {/* Quick Select Neighborhoods */}
+          <div className="mt-3">
+            <p className="text-xs font-bold uppercase mb-2 text-gray-600">Quick Select:</p>
+            <div className="flex gap-2 flex-wrap">
+              {QUICK_SELECT_NEIGHBORHOODS.map((hood) => (
+                <button
+                  key={hood.zip}
+                  onClick={() => {
+                    setZipInput(hood.zip);
+                    const location = getLocationFromZip(hood.zip);
+                    if (location) {
+                      setUserLat(location.lat);
+                      setUserLng(location.lng);
+                      setLocationError(false);
+                      setUseZipMode(true);
+                      fetchNearbyBarbers(location.lat, location.lng);
+                    }
+                  }}
+                  className="border-2 border-black px-3 py-1.5 text-xs font-bold uppercase hover:bg-la-orange hover:text-white hover:border-la-orange transition-all active:scale-95"
+                >
+                  {hood.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -300,11 +402,10 @@ export default function NeedCutNowPage() {
                 {barbers.map((barber, index) => (
                   <div
                     key={barber.id}
-                    className={`border-2 bg-white ${
-                      index === 0 
-                        ? 'border-la-orange border-4' 
-                        : 'border-black'
-                    }`}
+                    className={`border-2 bg-white ${index === 0
+                      ? 'border-la-orange border-4'
+                      : 'border-black'
+                      }`}
                   >
                     <div className="p-3 md:p-4">
                       {/* Top Row: Name & Drive Time */}
@@ -328,7 +429,7 @@ export default function NeedCutNowPage() {
                       {barber.images && barber.images.length > 0 && (
                         <div className="flex gap-2 mb-3">
                           {barber.images.slice(0, 3).map((image, imgIndex) => (
-                            <Link 
+                            <Link
                               key={imgIndex}
                               href={`/barbers/${barber.id}`}
                               className="w-12 h-12 md:w-14 md:h-14 bg-gray-200 rounded-sm overflow-hidden border border-black/20 hover:border-la-orange transition-colors cursor-pointer group"
@@ -353,7 +454,7 @@ export default function NeedCutNowPage() {
                             <span className="text-gray-600">({barber.review_count})</span>
                           </div>
                         )}
-                        
+
                         <div className="flex items-center gap-1 font-bold">
                           <DollarSign className="w-4 h-4" />
                           {barber.price_range || '$$'}
@@ -378,9 +479,9 @@ export default function NeedCutNowPage() {
                         )}
                         {barber.booking_platform && (
                           <Badge variant="outline" className="text-xs">
-                            {barber.booking_platform === 'booksy' ? 'BOOKSY' : 
-                             barber.booking_platform === 'vagaro' ? 'VAGARO' : 
-                             'BOOK ONLINE'}
+                            {barber.booking_platform === 'booksy' ? 'BOOKSY' :
+                              barber.booking_platform === 'vagaro' ? 'VAGARO' :
+                                'BOOK ONLINE'}
                           </Badge>
                         )}
                         <Badge variant="outline" className="text-xs">FADE</Badge>
@@ -390,7 +491,7 @@ export default function NeedCutNowPage() {
                       {/* Action Buttons */}
                       <div className="grid grid-cols-3 gap-2">
                         {barber.phone ? (
-                          <a 
+                          <a
                             href={`tel:${barber.phone}`}
                             className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                           >
@@ -403,7 +504,7 @@ export default function NeedCutNowPage() {
                             N/A
                           </div>
                         )}
-                        
+
                         <a
                           href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
                           target="_blank"
@@ -413,7 +514,7 @@ export default function NeedCutNowPage() {
                           <Navigation className="w-4 h-4" />
                           {barber.distance ? `${getDriveTime(barber.distance)}min` : 'Go'}
                         </a>
-                        
+
                         {barber.booking_url ? (
                           <a
                             href={barber.booking_url}
