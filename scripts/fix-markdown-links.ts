@@ -103,7 +103,20 @@ async function fixMarkdownLinks() {
                 lookupName = displayName.toLowerCase();
             }
 
-            const barberId = barberMap.get(lookupName);
+            // Try exact match first
+            let barberId = barberMap.get(lookupName);
+
+            // If not found, try removing " - Neighborhood" part
+            if (!barberId && lookupName.includes(' - ')) {
+                const namePart = lookupName.split(' - ')[0].trim();
+                barberId = barberMap.get(namePart);
+            }
+
+            // If still not found, try replacing " - " with " " (space) to match specificName map entry
+            if (!barberId && lookupName.includes(' - ')) {
+                const spaceName = lookupName.replace(' - ', ' ').trim();
+                barberId = barberMap.get(spaceName);
+            }
 
             if (barberId) {
                 fileUpdated = true;

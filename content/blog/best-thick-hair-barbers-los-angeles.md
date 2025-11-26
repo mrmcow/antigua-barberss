@@ -19,7 +19,7 @@ This hair type requires specialized knowledge and techniques for optimal results
 ## Top THICK Hair Specialists in LA
 
 
-### 1. The Presidential Parlour - Marina Del Rey
+### 1. [The Presidential Parlour - Marina Del Rey](/barbers/99637d4f-a35c-4f2d-9d24-f4312d39fdfa)
 **THICK Hair Expertise:** Highly Skilled  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -30,7 +30,7 @@ The Presidential Parlour has built a reputation specifically for thick hair expe
 
 [Book appointment](/barbers/99637d4f-a35c-4f2d-9d24-f4312d39fdfa)
 
-### 2. Pier 86 Barbershop - Santa Monica
+### 2. [Pier 86 Barbershop - Santa Monica](/barbers/c1260b39-8148-4979-9fb8-18902984971d)
 **THICK Hair Expertise:** Highly Skilled  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -41,7 +41,7 @@ Pier 86 Barbershop has built a reputation specifically for thick hair expertise.
 
 [Book appointment](/barbers/c1260b39-8148-4979-9fb8-18902984971d)
 
-### 3. Dapper at Daniels Barbershop - Santa Monica
+### 3. [Dapper at Daniels Barbershop - Santa Monica](/barbers/fb6b714e-1f9e-4aa4-9326-e80570dfcdcd)
 **THICK Hair Expertise:** Highly Skilled  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -52,7 +52,7 @@ Dapper at Daniels Barbershop has built a reputation specifically for thick hair 
 
 [Book appointment](/barbers/fb6b714e-1f9e-4aa4-9326-e80570dfcdcd)
 
-### 4. nando's cut - Santa Monica
+### 4. [nando's cut - Santa Monica](/barbers/81665c95-97e3-47a6-b496-9e088075ed4f)
 **THICK Hair Expertise:** Specialized  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -63,7 +63,7 @@ nando's cut has built a reputation specifically for thick hair expertise. Their 
 
 [Book appointment](/barbers/nandos-cut)
 
-### 5. Barber Shop Cuts - Santa Monica
+### 5. [Barber Shop Cuts - Santa Monica](/barbers/dc4d75b3-ca1a-456a-b53b-b27e9a6e82c7)
 **THICK Hair Expertise:** Advanced  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -74,7 +74,7 @@ Barber Shop Cuts has built a reputation specifically for thick hair expertise. T
 
 [Book appointment](/barbers/dc4d75b3-ca1a-456a-b53b-b27e9a6e82c7)
 
-### 6. Ben The Barber - Los Angeles
+### 6. [Ben The Barber - Los Angeles](/barbers/7c1884c3-6746-424d-a4d9-44f874d646cd)
 **THICK Hair Expertise:** Advanced  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -85,7 +85,7 @@ Ben The Barber has built a reputation specifically for thick hair expertise. The
 
 [Book appointment](/barbers/7c1884c3-6746-424d-a4d9-44f874d646cd)
 
-### 7. Barber Uniform - Los Angeles
+### 7. [Barber Uniform - Los Angeles](/barbers/ed619bdd-9b3e-42d7-9b65-2886b3fea1a8)
 **THICK Hair Expertise:** Specialized  
 **Rating:** 5/5 stars  
 **Price:** $$
@@ -96,7 +96,7 @@ Barber Uniform has built a reputation specifically for thick hair expertise. The
 
 [Book appointment](/barbers/ed619bdd-9b3e-42d7-9b65-2886b3fea1a8)
 
-### 8. Super star barber shop - Los Angeles
+### 8. [Super star barber shop - Los Angeles](/barbers/2aeb8fe4-c1eb-44e4-842a-2fd9dbf58b81)
 **THICK Hair Expertise:** Highly Skilled  
 **Rating:** 5/5 stars  
 **Price:** $$
