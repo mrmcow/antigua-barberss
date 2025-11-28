@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { MapPin, Star, Clock, Phone, Navigation, ArrowRight, Car } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -85,12 +86,30 @@ const LA_ZIP_CODES: Record<string, { lat: number; lng: number; area: string }> =
 };
 
 export function BrowseContent({ initialBarbers }: BrowseContentProps) {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Initialize state from URL params
     const [barbers, setBarbers] = useState<Barbershop[]>(initialBarbers);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || "");
     const [userLocation, setUserLocation] = useState<{ lat: number, lng: number } | null>(null);
-    const [activeFilters, setActiveFilters] = useState<string[]>([]);
+    const [activeFilters, setActiveFilters] = useState<string[]>(() => {
+        const filters = searchParams.get('filters');
+        return filters ? filters.split(',') : [];
+    });
     const [zipSearchActive, setZipSearchActive] = useState(false);
-    const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'price'>('distance');
+    const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'price'>((searchParams.get('sort') as any) || 'distance');
+
+    // Update URL when state changes (preserves state on back button)
+    useEffect(() => {
+        const params = new URLSearchParams();
+        if (searchTerm) params.set('search', searchTerm);
+        if (activeFilters.length > 0) params.set('filters', activeFilters.join(','));
+        if (sortBy !== 'distance') params.set('sort', sortBy);
+
+        const newUrl = params.toString() ? `/browse?${params.toString()}` : '/browse';
+        router.replace(newUrl, { scroll: false });
+    }, [searchTerm, activeFilters, sortBy, router]);
 
     useEffect(() => {
         // Request user location for distance calculation
