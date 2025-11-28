@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { supabase } from "@/lib/supabase";
@@ -62,7 +63,18 @@ export default async function BrowsePage() {
       </nav>
 
       {/* Browse Content (Client Component for Interactivity) */}
-      <BrowseContent initialBarbers={barbers} />
+      <Suspense fallback={
+        <div className="py-8">
+          <div className="container-brutal">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-black border-t-transparent"></div>
+              <p className="mt-4 font-bold uppercase tracking-wider">Loading barbers...</p>
+            </div>
+          </div>
+        </div>
+      }>
+        <BrowseContent initialBarbers={barbers} />
+      </Suspense>
 
       {/* Footer */}
       <footer className="border-t-4 border-black py-8 bg-black text-white">
