@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import {
   Calendar,
   Clock,
@@ -41,13 +43,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   if (!post) {
     return {
-      title: "Blog Post Not Found | LA Barber Guide",
-      description: "This blog post could not be found. Explore our other LA barber guides and reviews.",
+      title: "Blog Post Not Found | Antigua Barbers",
+      description: "This blog post could not be found. Explore our other Antigua barber guides and reviews.",
     };
   }
 
   return {
-    title: `${post.title} | LA Barber Guide`,
+    title: `${post.title} | Antigua Barbers`,
     description: post.description,
     keywords: post.keywords,
     authors: [{ name: post.author }],
@@ -56,8 +58,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: post.description,
       type: "article",
       publishedTime: post.publishedAt,
-      url: `https://labarberguide.xyz/blog/${post.slug}`,
-      siteName: "LA Barber Guide",
+      url: `https://antiguabarbers.com/blog/${post.slug}`,
+      siteName: "Antigua Barbers",
     },
     twitter: {
       card: "summary_large_image",
@@ -65,12 +67,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: post.description,
     },
     alternates: {
-      canonical: `https://labarberguide.xyz/blog/${post.slug}`,
+      canonical: `https://antiguabarbers.com/blog/${post.slug}`,
     },
   };
 }
 
-// This would come from your generated content
 interface BlogPost {
   title: string;
   slug: string;
@@ -84,7 +85,6 @@ interface BlogPost {
   featured: boolean;
 }
 
-// Get blog post from JSON file in public directory (Vercel compatible)
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
     const jsonPath = path.join(process.cwd(), 'public', 'data', 'blog-posts.json');
@@ -104,7 +104,7 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
       publishedAt: new Date(post.date).toISOString(),
       description: post.description,
       keywords: post.keywords,
-      author: "LA Barber Guide",
+      author: "Antigua Barbers",
       content: post.content,
       readTime: post.readTime,
       featured: post.featured
@@ -148,14 +148,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     "headline": post.title,
     "author": {
       "@type": "Organization",
-      "name": "LA Barber Guide"
+      "name": "Antigua Barbers"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "LA Barber Guide",
+      "name": "Antigua Barbers",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://labarberguide.xyz/logo.png"
+        "url": "https://antiguabarbers.com/icon.svg"
       }
     },
     "datePublished": post.publishedAt,
@@ -163,7 +163,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     "description": post.description,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://labarberguide.xyz/blog/${post.slug}`
+      "@id": `https://antiguabarbers.com/blog/${post.slug}`
     },
     "about": {
       "@type": "LocalBusiness",
@@ -171,180 +171,99 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Los Angeles",
-        "addressRegion": "CA",
-        "addressCountry": "US"
+        "addressLocality": "St. John's",
+        "addressCountry": "AG"
       }
     },
     "keywords": post.keywords
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#FAFAFA]">
       {/* Structured Data for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* Navigation */}
-      <nav className="border-b-2 border-black sticky top-0 bg-white z-50">
-        <div className="container-brutal py-3 md:py-4 flex items-center justify-between">
-          <Link href="/" className="hover:opacity-80 transition-opacity">
-            <Logo size="sm" />
-          </Link>
-          <div className="flex gap-2 md:gap-4 items-center">
-            <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-la-orange transition-colors font-bold">
-              Barbers
-            </Link>
-            <Link href="/need-cut-now">
-              <button className="inline-flex items-center justify-center gap-2 uppercase tracking-wider font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-black text-white hover:bg-la-orange px-4 py-2 text-xs md:text-sm whitespace-nowrap">
-                Need Cut Now
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* Back to Blog */}
-      <section className="border-b-2 border-black py-4 bg-gray-50">
-        <div className="container-brutal">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm uppercase tracking-wider font-bold hover:text-la-orange transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Blog
+      <section className="border-b border-black/5 py-4 bg-white">
+        <div className="max-w-[1000px] mx-auto px-6">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-[#CE1126] transition-colors">
+            <ArrowLeft className="w-3 h-3" />
+            Back to Island Standard
           </Link>
         </div>
       </section>
 
       {/* Article Header */}
-      <article className="py-8 md:py-12">
-        <div className="container-brutal">
-          <div className="max-w-4xl mx-auto">
+      <article className="py-12 md:py-16">
+        <div className="max-w-[1000px] mx-auto px-6">
+          <div className="max-w-3xl mx-auto">
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <Badge variant="default" className="uppercase">
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              <Badge variant="default" className="uppercase bg-[#FCD116] text-black hover:bg-[#e5c004]">
                 {post.category.replace('-', ' ')}
               </Badge>
-              <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-gray-500">
                 <div className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-3 h-3" />
                   <span>{publishDate}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
+                  <Clock className="w-3 h-3" />
                   <span>{post.readTime}</span>
                 </div>
               </div>
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none mb-8 text-[#1a1a1a]">
               {post.title}
             </h1>
 
             {/* Author & Share */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-8 border-b-2 border-gray-200">
-              <div className="text-sm text-gray-600">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 pb-8 border-b border-black/10">
+              <div className="text-sm text-gray-600 font-medium">
                 By <span className="font-bold text-black">{post.author}</span>
               </div>
               <ShareButton title={post.title} description={post.description} />
             </div>
 
-            {/* Content - LA Brutal Style */}
-            <div className="blog-brutal prose prose-lg max-w-none">
-              <div className="article-content space-y-6">
-                <LinkedBlogContent content={post.content} barberMap={barberMap} />
-              </div>
+            {/* Content */}
+            <div className="prose prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-a:text-[#0072C6] prose-a:no-underline hover:prose-a:underline prose-img:rounded-[2rem] prose-strong:text-black">
+              <LinkedBlogContent content={post.content} barberMap={barberMap} />
             </div>
 
             {/* CTA Section */}
-            <div className="border-4 border-black p-6 md:p-8 bg-la-orange text-white mt-12">
-              <h3 className="text-2xl font-bold uppercase mb-4">
-                Find Your Perfect LA Barber
+            <div className="bg-[#1a1a1a] text-white p-8 md:p-12 rounded-[2.5rem] mt-16 shadow-xl text-center">
+              <h3 className="text-3xl font-black uppercase mb-4">
+                Need a Cut in Antigua?
               </h3>
-              <p className="text-lg mb-6 opacity-90">
-                Ready to book? Use our smart matching system to find barbers perfect for your hair type and style.
+              <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+                Find the nearest barber to your location now. Verified shops, real reviews.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/match">
-                  <button className="inline-flex items-center justify-center gap-2 uppercase tracking-wider font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-black hover:bg-black hover:text-white border-2 border-white px-6 py-3 text-sm w-full sm:w-auto">
-                    Smart Match
-                  </button>
-                </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/browse">
-                  <button className="inline-flex items-center justify-center gap-2 uppercase tracking-wider font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed bg-transparent text-white border-2 border-white hover:bg-white hover:text-la-orange px-6 py-3 text-sm w-full sm:w-auto">
-                    Browse All
+                  <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 uppercase tracking-wider font-bold bg-[#CE1126] text-white hover:bg-red-700 transition-all px-8 py-4 rounded-full shadow-lg hover:shadow-red-900/30">
+                    Find A Barber
+                  </button>
+                </Link>
+                <Link href="/browse?sort=distance">
+                  <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 uppercase tracking-wider font-bold bg-white text-black hover:bg-gray-100 transition-all px-8 py-4 rounded-full">
+                    <MapPin className="w-4 h-4" /> Near Me
                   </button>
                 </Link>
               </div>
             </div>
 
-            {/* Related Posts */}
-            <div className="mt-16 pt-8 border-t-2 border-gray-200">
-              <h3 className="text-2xl font-bold uppercase mb-8">
-                Related <span className="text-la-orange">Guides</span>
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link href="/blog/best-barbers-downtown-la-2025" className="group">
-                  <article className="border-2 border-black hover:border-la-orange transition-colors p-6">
-                    <Badge variant="outline" className="mb-3">
-                      NEIGHBORHOOD GUIDES
-                    </Badge>
-                    <h4 className="text-lg font-bold mb-2 group-hover:text-la-orange transition-colors">
-                      Best Barbers in Downtown LA: Complete 2025 Guide
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      Comprehensive guide to Downtown LA's top barbershops based on customer data...
-                    </p>
-                  </article>
-                </Link>
-
-                <Link href="/blog/best-4c-barbers-los-angeles" className="group">
-                  <article className="border-2 border-black hover:border-la-orange transition-colors p-6">
-                    <Badge variant="outline" className="mb-3">
-                      HAIR TYPE GUIDES
-                    </Badge>
-                    <h4 className="text-lg font-bold mb-2 group-hover:text-la-orange transition-colors">
-                      Best 4C Hair Barbers in LA: Expert Picks & Reviews
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      The definitive guide to 4C hair specialists based on 1,200+ reviews...
-                    </p>
-                  </article>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </article>
 
-      {/* Footer */}
-      <footer className="border-t-4 border-black py-8 md:py-12 bg-black text-white">
-        <div className="container-brutal">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8 mb-8 md:mb-12">
-            <div>
-              <Logo size="md" className="mb-3 invert" />
-              <p className="text-sm md:text-base text-gray-400">The best barbers in LA. Period.</p>
-            </div>
-            <div className="flex flex-wrap gap-4 md:gap-8">
-              <Link href="/about" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
-                About
-              </Link>
-              <a href="mailto:support@pagestash.app?subject=LA Barber Guide - Contact" className="text-xs md:text-sm uppercase tracking-wider hover:text-la-orange transition-colors font-medium">
-                Contact
-              </a>
-            </div>
-          </div>
-
-          <div className="pt-6 md:pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs md:text-sm text-gray-500">
-            <p>© 2025 LA Barber Guide. All rights reserved.</p>
-            <div className="flex gap-4 md:gap-6">
-              <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
