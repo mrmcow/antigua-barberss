@@ -48,38 +48,20 @@ export default async function Home() {
          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Text Content */}
             <div className="order-1 lg:order-1 px-2 sm:px-6 text-center lg:text-left w-full">
-                <div className="inline-flex items-center gap-3 mb-8 sm:mb-10 group cursor-default">
-                    {/* Animated Flag Icon */}
-                    <div className="relative w-12 h-8 shadow-sm transform group-hover:scale-110 transition-transform duration-300">
-                        {/* Antigua Flag Geometry */}
-                        <div className="absolute inset-0 bg-[#CE1126]"></div> {/* Red Background */}
-                        <div className="absolute top-0 left-0 right-0 bottom-0" style={{ clipPath: 'polygon(50% 100%, 0 0, 100% 0)' }}>
-                            <div className="absolute inset-0 bg-black h-[40%]"></div> {/* Black Top */}
-                            <div className="absolute bottom-0 w-full h-[60%] bg-white"></div> {/* White Bottom */}
-                            <div className="absolute top-[40%] w-full h-[20%] bg-[#0072C6]"></div> {/* Blue Middle */}
-                            {/* Sun */}
-                            <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-4 h-4 bg-[#FCD116] rounded-full" 
-                                 style={{ 
-                                     clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
-                                     transform: 'translateX(-50%) scale(1.5)' 
-                                 }}>
-                            </div>
-                        </div>
+                <div className="flex items-center justify-center lg:justify-start gap-4 mb-8 sm:mb-10 group cursor-default">
+                    <div className="flex items-end gap-1.5 h-6 sm:h-8">
+                        <div className="w-1.5 h-full bg-black rounded-full group-hover:h-[120%] transition-all duration-300 ease-out"></div>
+                        <div className="w-1.5 h-[75%] bg-[#CE1126] rounded-full group-hover:h-[100%] transition-all duration-300 delay-75 ease-out"></div>
+                        <div className="w-1.5 h-[50%] bg-[#FCD116] rounded-full group-hover:h-[75%] transition-all duration-300 delay-150 ease-out"></div>
+                        <div className="w-1.5 h-[25%] bg-[#0072C6] rounded-full group-hover:h-[50%] transition-all duration-300 delay-200 ease-out"></div>
                     </div>
-                    
-                    {/* Text Badge */}
-                    <div className="flex flex-col items-start">
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#CE1126] leading-none mb-1">
-                            Antigua & Barbuda
-                        </span>
-                        <span className="text-xs font-bold uppercase tracking-wider text-gray-900 border-b-2 border-[#FCD116]">
-                            The Official Island Directory
-                        </span>
-                    </div>
+                    <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-gray-900 group-hover:tracking-[0.35em] transition-all duration-500">
+                        The Official Island Directory
+                    </span>
                 </div>
                 <h1 className="text-5xl sm:text-7xl xl:text-8xl font-black uppercase leading-[0.9] tracking-tight mb-6 sm:mb-8 text-[#1a1a1a]">
                     Respect <br/>The Chair.
-            </h1>
+                </h1>
                 <p className="text-base sm:text-xl text-gray-500 max-w-lg mx-auto lg:mx-0 mb-8 sm:mb-10 leading-relaxed font-medium">
                     The definitive guide to barbering in Antigua & Barbuda. 
                     From St. John's to English Harbour, find the sharpest cuts on the island.
