@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Header } from "@/components/Header";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import "./globals.css";
-
-// AUTO-DEPLOY TRIGGER #7 - Push to trigger GitHub auto-deployment!
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,14 +28,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Antigua Barbers" }],
   creator: "Antigua Barbers",
   publisher: "Antigua Barbers",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.svg',
   },
   openGraph: {
     type: "website",
@@ -45,26 +45,11 @@ export const metadata: Metadata = {
     description: "Perfect barber matching for Antigua. Cruise passengers, resort guests, and locals. Mobile service available.",
     siteName: "Antigua Barbers",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Antigua Barbers — The Island's Best Cuts",
-    description: "Perfect barber matching for Antigua. Cruise-safe, mobile service, resort-friendly.",
-    creator: "@antiguabarbers",
-  },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
-  verification: {
-    google: "PLACEHOLDER-ADD-REAL-GSC-CODE", // TODO: Register at search.google.com/search-console and add real verification code
-  },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -72,46 +57,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Antigua Barber Guide",
-    "url": "https://antiguabarberguide.com",
-    "description": "Find the perfect barber in Antigua & Barbuda. Perfect for cruise passengers, resort guests, and locals.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://antiguabarberguide.com/browse?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Antigua and Barbuda",
-      "sameAs": "https://en.wikipedia.org/wiki/Antigua_and_Barbuda"
-    },
-    "serviceArea": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": 17.0608,
-        "longitude": -61.7964
-      },
-      "geoRadius": "25000"
-    }
-  };
-
   return (
-    <html lang="en" className={`${inter.variable} ${bebas.variable}`}>
+    <html lang="en" className={`${inter.variable} ${bebas.variable}`} suppressHydrationWarning>
       <GoogleAnalytics gaId="G-2DKFFV7DQS" />
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </head>
-      <body className="font-sans antialiased bg-white text-black">
-        {children}
+      <body className="font-sans antialiased bg-[#FAFAFA] text-black min-h-screen flex flex-col" suppressHydrationWarning>
+        <ScrollToTop />
+        <Header />
+        <div className="flex-1">
+           {children}
+        </div>
       </body>
     </html>
   );
 }
-

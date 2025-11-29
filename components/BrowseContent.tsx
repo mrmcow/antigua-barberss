@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { MapPin, Star, Clock, Phone, Navigation, ArrowRight, Car } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
+import { MapPin, Star, Phone, Navigation, ArrowRight, Car, MessageCircle, Search } from "lucide-react";
 import { trackClickEvent } from "@/lib/analytics";
+import { calculateDistance } from "@/lib/utils";
 
 interface Barbershop {
     id: string;
@@ -21,452 +21,253 @@ interface Barbershop {
     price_range: string | null;
     images: string[];
     distance?: number;
-    driveTime?: string;
 }
 
 interface BrowseContentProps {
     initialBarbers: Barbershop[];
 }
 
-// Calculate distance between two points using Haversine formula
-function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
-    const R = 3959; // Earth's radius in miles
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLng = (lng2 - lng1) * Math.PI / 180;
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLng / 2) * Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-}
-
-// Estimate drive time based on distance
-function estimateDriveTime(miles: number): string {
-    if (miles < 2) return `${Math.round(miles * 8)}min`;
-    if (miles < 10) return `${Math.round(miles * 6)}min`;
-    return `${Math.round(miles * 4)}min`;
-}
-
-// Comprehensive LA zip codes (same as need-cut-now page)
-const LA_ZIP_CODES: Record<string, { lat: number; lng: number; area: string }> = {
-    '90210': { lat: 34.0901, lng: -118.4065, area: 'Beverly Hills' }, '90211': { lat: 34.0667, lng: -118.3917, area: 'Beverly Hills' },
-    '90212': { lat: 34.0667, lng: -118.3917, area: 'Beverly Hills' }, '90401': { lat: 34.0195, lng: -118.4912, area: 'Santa Monica' },
-    '90402': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' }, '90403': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' },
-    '90404': { lat: 34.0276, lng: -118.4965, area: 'Santa Monica' }, '90405': { lat: 34.0195, lng: -118.4912, area: 'Santa Monica' },
-    '90291': { lat: 33.9425, lng: -118.4329, area: 'Venice' }, '90292': { lat: 33.9930, lng: -118.4673, area: 'Marina del Rey' },
-    '90293': { lat: 33.9590, lng: -118.4500, area: 'Playa del Rey' }, '90028': { lat: 34.1016, lng: -118.3432, area: 'Hollywood' },
-    '90038': { lat: 34.0896, lng: -118.3280, area: 'Hollywood' }, '90068': { lat: 34.1349, lng: -118.3267, area: 'Hollywood Hills' },
-    '90069': { lat: 34.0901, lng: -118.3850, area: 'West Hollywood' }, '90046': { lat: 34.1030, lng: -118.3521, area: 'West Hollywood' },
-    '90048': { lat: 34.0730, lng: -118.3618, area: 'West Hollywood' }, '90012': { lat: 34.0631, lng: -118.2378, area: 'Downtown LA' },
-    '90013': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' }, '90014': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' },
-    '90015': { lat: 34.0407, lng: -118.2468, area: 'Downtown LA' }, '90017': { lat: 34.0522, lng: -118.2614, area: 'Downtown LA' },
-    '90021': { lat: 34.0395, lng: -118.2348, area: 'Arts District' }, '90004': { lat: 34.0827, lng: -118.3089, area: 'Koreatown' },
-    '90005': { lat: 34.0589, lng: -118.3147, area: 'Koreatown' }, '90006': { lat: 34.0489, lng: -118.3075, area: 'Koreatown' },
-    '90010': { lat: 34.0619, lng: -118.3089, area: 'Koreatown' }, '90019': { lat: 34.0489, lng: -118.3437, area: 'Mid-City' },
-    '90016': { lat: 34.0194, lng: -118.3503, area: 'Leimert Park' }, '90018': { lat: 34.0285, lng: -118.3089, area: 'Adams-Normandie' },
-    '90020': { lat: 34.0669, lng: -118.3089, area: 'Mid-Wilshire' }, '90036': { lat: 34.0757, lng: -118.3531, area: 'Mid-City' },
-    '90035': { lat: 34.0522, lng: -118.3872, area: 'Beverlywood' }, '90026': { lat: 34.0780, lng: -118.2608, area: 'Echo Park' },
-    '90027': { lat: 34.1067, lng: -118.2870, area: 'Los Feliz' }, '90029': { lat: 34.0889, lng: -118.2912, area: 'Los Feliz' },
-    '90039': { lat: 34.1161, lng: -118.2358, area: 'Atwater Village' }, '90024': { lat: 34.0631, lng: -118.4454, area: 'Westwood' },
-    '90025': { lat: 34.0522, lng: -118.4437, area: 'West LA' }, '90064': { lat: 34.0345, lng: -118.4309, area: 'West LA' },
-    '90034': { lat: 34.0194, lng: -118.4012, area: 'Palms' }, '90066': { lat: 33.9930, lng: -118.4290, area: 'Mar Vista' },
-    '90230': { lat: 34.0089, lng: -118.3965, area: 'Culver City' }, '90232': { lat: 34.0089, lng: -118.3965, area: 'Culver City' },
-    '91604': { lat: 34.1478, lng: -118.3897, area: 'Studio City' }, '91602': { lat: 34.1392, lng: -118.3870, area: 'Studio City' },
-    '91606': { lat: 34.1644, lng: -118.3897, area: 'Studio City' }, '91601': { lat: 34.1644, lng: -118.3681, area: 'North Hollywood' },
-    '91605': { lat: 34.1800, lng: -118.3897, area: 'North Hollywood' }, '91607': { lat: 34.1800, lng: -118.4123, area: 'Valley Village' },
-    '91423': { lat: 34.1589, lng: -118.4790, area: 'Sherman Oaks' }, '91403': { lat: 34.1589, lng: -118.4790, area: 'Sherman Oaks' },
-    '91436': { lat: 34.1511, lng: -118.5089, area: 'Encino' }, '91316': { lat: 34.1511, lng: -118.5089, area: 'Encino' },
-    '90041': { lat: 34.1161, lng: -118.1887, area: 'Eagle Rock' }, '90042': { lat: 34.1286, lng: -118.1959, area: 'Highland Park' },
-    '90065': { lat: 34.1081, lng: -118.2137, area: 'Glassell Park' }, '90003': { lat: 33.9778, lng: -118.2729, area: 'South LA' },
-    '90007': { lat: 34.0256, lng: -118.2850, area: 'South LA' }, '90011': { lat: 34.0075, lng: -118.2581, area: 'South LA' },
-    '90037': { lat: 34.0075, lng: -118.2900, area: 'South LA' }, '91101': { lat: 34.1478, lng: -118.1445, area: 'Pasadena' },
-    '91103': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' }, '91104': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' },
-    '91105': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' }, '91106': { lat: 34.1611, lng: -118.1311, area: 'Pasadena' },
-};
+const ANTIGUA_NEIGHBORHOODS = [
+    "St. John's",
+    "English Harbour",
+    "Jolly Harbour",
+    "All Saints",
+    "Dickenson Bay",
+    "Liberta",
+    "Old Road",
+    "Crosbies",
+    "Falmouth",
+    "Bolans"
+];
 
 export function BrowseContent({ initialBarbers }: BrowseContentProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    // Initialize state from URL params
     const [barbers, setBarbers] = useState<Barbershop[]>(initialBarbers);
     const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || "");
-    const [userLocation, setUserLocation] = useState<{ lat: number, lng: number } | null>(null);
-    const [activeFilters, setActiveFilters] = useState<string[]>(() => {
-        const filters = searchParams.get('filters');
+    const [activeNeighborhoods, setActiveNeighborhoods] = useState<string[]>(() => {
+        const filters = searchParams.get('neighborhoods');
         return filters ? filters.split(',') : [];
     });
-    const [zipSearchActive, setZipSearchActive] = useState(false);
-    const [sortBy, setSortBy] = useState<'distance' | 'rating' | 'price'>((searchParams.get('sort') as any) || 'distance');
 
-    // Update URL when state changes (preserves state on back button)
+    const userLat = searchParams.get('lat') ? parseFloat(searchParams.get('lat')!) : null;
+    const userLng = searchParams.get('lng') ? parseFloat(searchParams.get('lng')!) : null;
+    const sortBy = searchParams.get('sort');
+
+    // Sync URL with state
     useEffect(() => {
-        const params = new URLSearchParams();
-        if (searchTerm) params.set('search', searchTerm);
-        if (activeFilters.length > 0) params.set('filters', activeFilters.join(','));
-        if (sortBy !== 'distance') params.set('sort', sortBy);
+        const params = new URLSearchParams(searchParams.toString());
+        if (searchTerm) {
+            params.set('search', searchTerm);
+        } else {
+            params.delete('search');
+        }
+        
+        if (activeNeighborhoods.length > 0) {
+            params.set('neighborhoods', activeNeighborhoods.join(','));
+        } else {
+            params.delete('neighborhoods');
+        }
 
         const newUrl = params.toString() ? `/browse?${params.toString()}` : '/browse';
         router.replace(newUrl, { scroll: false });
-    }, [searchTerm, activeFilters, sortBy, router]);
+    }, [searchTerm, activeNeighborhoods, router, searchParams]);
 
-    useEffect(() => {
-        // Request user location for distance calculation
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setUserLocation({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    });
-                },
-                () => {
-                    // Default to Downtown LA
-                    setUserLocation({ lat: 34.0522, lng: -118.2437 });
-                },
-                { timeout: 10000, enableHighAccuracy: false }
-            );
-        }
-    }, []);
+    const toggleNeighborhood = (hood: string) => {
+        setActiveNeighborhoods(prev => 
+            prev.includes(hood) ? prev.filter(h => h !== hood) : [...prev, hood]
+        );
+    };
 
-    // Detect zip code in search and update location
-    useEffect(() => {
-        const trimmed = searchTerm.trim();
-        if (/^\d{5}$/.test(trimmed) && LA_ZIP_CODES[trimmed]) {
-            // It's a valid LA zip code!
-            const zipData = LA_ZIP_CODES[trimmed];
-            setUserLocation({ lat: zipData.lat, lng: zipData.lng });
-            setZipSearchActive(true);
-            setSortBy('distance'); // Auto-switch to distance sort when zip entered
-        } else {
-            setZipSearchActive(false);
-        }
-    }, [searchTerm]);
+    const filteredAndSortedBarbers = useMemo(() => {
+        let processed = [...barbers];
 
-    useEffect(() => {
-        // Recalculate distances when user location is available
-        if (userLocation && barbers.length > 0) {
-            const barbersWithDistance = barbers.map(barber => ({
+        // Calculate distances if user location is available
+        if (userLat && userLng) {
+            processed = processed.map(barber => ({
                 ...barber,
-                distance: calculateDistance(userLocation.lat, userLocation.lng, barber.lat, barber.lng),
-                driveTime: estimateDriveTime(calculateDistance(userLocation.lat, userLocation.lng, barber.lat, barber.lng))
+                distance: calculateDistance(userLat, userLng, barber.lat, barber.lng)
             }));
-            setBarbers(barbersWithDistance);
-        }
-    }, [userLocation]);
-
-    function toggleFilter(filter: string) {
-        const neighborhoodFilters = ['venice', 'hollywood'];
-
-        if (neighborhoodFilters.includes(filter)) {
-            // Neighborhood filters are mutually exclusive
-            if (activeFilters.includes(filter)) {
-                // Clicking same neighborhood again = deselect it
-                setActiveFilters(prev => prev.filter(f => f !== filter));
-            } else {
-                // Remove all other neighborhoods and add this one
-                setActiveFilters(prev => prev.filter(f => !neighborhoodFilters.includes(f)).concat(filter));
-            }
-        } else {
-            // Regular toggle for non-neighborhood filters (like price)
-            setActiveFilters(prev =>
-                prev.includes(filter)
-                    ? prev.filter(f => f !== filter)
-                    : [...prev, filter]
-            );
-        }
-    }
-
-    // Filter barbers
-    const filteredBarbers = barbers.filter(barber => {
-        // If zip code search is active, don't filter by search term (show all barbers sorted by distance)
-        if (!zipSearchActive && searchTerm && !barber.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            !barber.neighborhood?.toLowerCase().includes(searchTerm.toLowerCase())) {
-            return false;
         }
 
-        if (activeFilters.includes('under-40') && barber.price_range === '$$$') {
-            return false;
-        }
-        if (activeFilters.includes('venice') && !barber.neighborhood?.toLowerCase().includes('venice')) {
-            return false;
-        }
-        if (activeFilters.includes('hollywood') && !barber.neighborhood?.toLowerCase().includes('hollywood')) {
-            return false;
+        // Filter
+        processed = processed.filter(barber => {
+            const matchesSearch = !searchTerm || 
+                barber.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                barber.neighborhood?.toLowerCase().includes(searchTerm.toLowerCase());
+                
+            const matchesHood = activeNeighborhoods.length === 0 || 
+                (barber.neighborhood && activeNeighborhoods.includes(barber.neighborhood));
+
+            return matchesSearch && matchesHood;
+        });
+
+        // Sort
+        if (sortBy === 'distance' && userLat && userLng) {
+            processed.sort((a, b) => (a.distance || Infinity) - (b.distance || Infinity));
         }
 
-        return true;
-    });
-
-    // Sort barbers based on selected sort option
-    const sortedBarbers = [...filteredBarbers].sort((a, b) => {
-        switch (sortBy) {
-            case 'distance':
-                return (a.distance || 999) - (b.distance || 999);
-            case 'rating':
-                return (b.rating || 0) - (a.rating || 0);
-            case 'price':
-                const priceOrder = { '$': 1, '$$': 2, '$$$': 3 };
-                return (priceOrder[a.price_range as keyof typeof priceOrder] || 2) - (priceOrder[b.price_range as keyof typeof priceOrder] || 2);
-            default:
-                return 0;
-        }
-    });
-
-    const featuredBarbers = sortedBarbers
-        .filter(b => b.rating && b.rating >= 4.5 && b.images && b.images.length > 0 && b.review_count >= 10)
-        .slice(0, 2);
-
-    const regularBarbers = sortedBarbers.filter(b => !featuredBarbers.includes(b));
+        return processed;
+    }, [barbers, searchTerm, activeNeighborhoods, userLat, userLng, sortBy]);
 
     return (
-        <>
-            {/* Search and Filters */}
-            <div className="border-b-4 border-black py-6 md:py-8 bg-white">
-                <div className="container-brutal">
-                    <h1 className="text-brutal-h1 mb-4">
-                        LA <span className="text-la-orange">BARBERS</span>
-                    </h1>
-
-                    {/* Search Bar */}
-                    <div className="relative mb-4">
+        <div>
+            {/* Search & Filters */}
+            <div className="mb-8 space-y-6">
+                {/* Rounded Search Bar */}
+                <div className="relative max-w-2xl">
+                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                         <input
                             type="text"
+                            placeholder="Search barbers, shops, areas..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            placeholder="Search by name, neighborhood, or zip code..."
-                            className="w-full pl-12 pr-4 py-4 border-4 border-black focus:border-la-orange outline-none text-base font-medium uppercase tracking-wide placeholder:normal-case placeholder:text-gray-400"
+                            className="w-full pl-12 pr-6 py-4 rounded-full border border-black/10 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CE1126]/20 focus:border-[#CE1126] transition-all text-base placeholder:text-gray-400"
                         />
                     </div>
 
-                    {/* Quick Filters */}
-                    <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
+                {/* Neighborhood Pills */}
+                <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide mask-fade-right">
+                    {ANTIGUA_NEIGHBORHOODS.map(hood => (
                         <button
-                            onClick={() => toggleFilter('under-40')}
-                            className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('under-40')
-                                ? 'bg-la-orange border-la-orange text-white'
-                                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-                                }`}
+                            key={hood}
+                            onClick={() => toggleNeighborhood(hood)}
+                            className={`flex-shrink-0 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all border ${
+                                activeNeighborhoods.includes(hood)
+                                    ? "bg-[#1a1a1a] text-white border-[#1a1a1a] shadow-md"
+                                    : "bg-white text-gray-600 border-black/5 hover:border-black/20 hover:text-black"
+                            }`}
                         >
-                            UNDER $40
+                            {hood}
                         </button>
+                    ))}
+                </div>
 
-                        <button
-                            onClick={() => toggleFilter('venice')}
-                            className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('venice')
-                                ? 'bg-la-orange border-la-orange text-white'
-                                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-                                }`}
+                {/* Active Filter Display */}
+                {sortBy === 'distance' && userLat && (
+                    <div className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 w-fit px-4 py-2 rounded-full border border-gray-200">
+                        <Navigation className="w-4 h-4 text-[#0072C6]" />
+                        <span>Sorting by distance near you</span>
+                        <button 
+                            onClick={() => {
+                                const params = new URLSearchParams(searchParams.toString());
+                                params.delete('lat');
+                                params.delete('lng');
+                                params.delete('sort');
+                                router.push(`/browse?${params.toString()}`);
+                            }}
+                            className="ml-2 text-xs font-bold uppercase text-[#CE1126] hover:underline"
                         >
-                            VENICE
-                        </button>
-
-                        <button
-                            onClick={() => toggleFilter('hollywood')}
-                            className={`inline-flex items-center px-3 py-1.5 border-2 text-sm font-medium uppercase tracking-wider transition-all duration-200 whitespace-nowrap flex-shrink-0 hover:scale-105 active:scale-95 ${activeFilters.includes('hollywood')
-                                ? 'bg-la-orange border-la-orange text-white'
-                                : 'bg-white border-black text-black hover:border-la-orange hover:text-la-orange'
-                                }`}
-                        >
-                            HOLLYWOOD
+                            Clear
                         </button>
                     </div>
-                </div>
+                )}
             </div>
 
-            {/* Results */}
-            <section className="py-6 md:py-8">
-                <div className="container-brutal">
-                    <div className="mb-4 flex justify-between items-center text-sm md:text-base">
-                        <p className="font-medium">
-                            <span className="font-bold text-lg">{sortedBarbers.length}</span> barbers found
-                            {activeFilters.length > 0 && (
-                                <span className="ml-2 text-la-orange">({activeFilters.length} filters)</span>
-                            )}
-                        </p>
-                        <select
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value as 'distance' | 'rating' | 'price')}
-                            className="border-2 border-black px-3 py-2 font-medium uppercase text-xs cursor-pointer hover:border-la-orange transition-colors"
-                        >
-                            <option value="distance">📍 Nearest</option>
-                            <option value="rating">⭐ Top Rated</option>
-                            <option value="price">💰 Price: Low</option>
-                        </select>
-                    </div>
-                    {/* Barber List */}
-                    <div className="space-y-4">
-                        {/* Featured Barbers */}
-                        {featuredBarbers.map((barber) => (
-                            <div
-                                key={barber.id}
-                                className="border-4 border-la-orange bg-white"
-                            >
-                                <div className="relative">
-                                    <div className="absolute top-0 left-0 bg-la-orange text-white px-3 py-1 text-xs font-bold uppercase z-10">
-                                        FEATURED
-                                    </div>
-
-                                    {barber.images && barber.images.length > 0 && (
+            {/* Results Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredAndSortedBarbers.map(barber => (
+                    <div key={barber.id} className="group bg-white rounded-[2rem] border border-black/5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col">
+                        {/* Card Image */}
+                        <Link href={`/barbers/${barber.id}`} className="block relative aspect-[4/3] bg-gray-100 overflow-hidden">
+                            {barber.images?.[0] ? (
                                         <img
                                             src={barber.images[0]}
                                             alt={barber.name}
-                                            className="aspect-[3/1] md:aspect-[4/1] w-full object-cover"
-                                        />
-                                    )}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center text-gray-300 font-black text-4xl">AB</div>
+                            )}
+                            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+                                <Star className="w-3.5 h-3.5 fill-[#FCD116] text-[#FCD116]" />
+                                <span className="text-xs font-bold">{barber.rating?.toFixed(1)}</span>
+                            </div>
+                            
+                            {/* Distance Badge */}
+                            {barber.distance !== undefined && (
+                                <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur text-white px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 text-xs font-bold">
+                                    <Navigation className="w-3 h-3 text-[#FCD116]" />
+                                    <span>{barber.distance} km</span>
                                 </div>
+                            )}
+                        </Link>
 
-                                <div className="p-4 md:p-6">
-                                    <Link href={`/barbers/${barber.id}`} className="block mb-3">
-                                        <div className="flex items-start justify-between">
-                                            <div className="flex-1">
-                                                <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-1 hover:text-la-orange transition-colors">
-                                                    {barber.name}
-                                                </h2>
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <p className="text-sm text-gray-600 flex items-center gap-1">
-                                                        <MapPin className="w-4 h-4" />
-                                                        {barber.neighborhood || 'Los Angeles'}
-                                                    </p>
-                                                    {barber.distance && barber.driveTime && (
-                                                        <div className="text-sm font-bold text-la-orange flex items-center gap-1">
-                                                            {barber.distance < 1
-                                                                ? `${(barber.distance * 5280).toFixed(0)}ft`
-                                                                : `${barber.distance.toFixed(1)}mi`
-                                                            }
-                                                            <Car className="w-4 h-4" />
-                                                            {barber.driveTime}
-                                                        </div>
-                                                    )}
-                                                </div>
+                        {/* Card Content */}
+                        <div className="p-6 flex flex-col flex-1">
+                            <div className="mb-4">
+                                <Link href={`/barbers/${barber.id}`}>
+                                    <h3 className="text-lg font-black uppercase tracking-tight mb-1 group-hover:text-[#CE1126] transition-colors line-clamp-1">
+                                        {barber.name}
+                                    </h3>
+                                </Link>
+                                <div className="flex items-center justify-between text-sm text-gray-500 font-medium">
+                                    <span className="flex items-center gap-1">
+                                        <MapPin className="w-3.5 h-3.5" />
+                                        {barber.neighborhood || "Antigua"}
+                                    </span>
+                                    <span>{barber.price_range || "$$"}</span>
                                             </div>
                                         </div>
 
-                                        {barber.rating && (
-                                            <div className="flex items-center gap-3">
-                                                <div className="flex items-center gap-1">
-                                                    <Star className="w-5 h-5 fill-black" />
-                                                    <span className="font-bold text-lg">{barber.rating.toFixed(1)}</span>
-                                                </div>
-                                                <span className="text-sm text-gray-600">({barber.review_count} reviews)</span>
-                                                <span className="text-sm font-bold">{barber.price_range || '$$'}</span>
-                                            </div>
-                                        )}
-                                    </Link>
-
-                                    <div className="grid grid-cols-3 gap-2">
+                            <div className="mt-auto flex gap-2">
                                         {barber.phone && (
                                             <a
                                                 href={`tel:${barber.phone}`}
-                                                onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name, barber.neighborhood || undefined)}
-                                                className="border-2 border-black p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
+                                        onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name)}
+                                        className="flex-1 py-3 rounded-full border border-black/10 bg-gray-50 text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors"
                                             >
-                                                <Phone className="w-4 h-4" />
-                                                Call
+                                        <Phone className="w-3.5 h-3.5" /> Call
                                             </a>
                                         )}
+                                
+                                {barber.website ? (
                                         <a
-                                            href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
-                                            onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`, barber.name, barber.neighborhood || undefined)}
+                                        href={barber.website}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="border-2 border-black p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
-                                        >
-                                            <Navigation className="w-4 h-4" />
-                                            Go
-                                        </a>
-                                        <Link
-                                            href={`/barbers/${barber.id}`}
-                                            className="border-2 border-la-orange bg-la-orange text-white p-3 text-center font-bold uppercase text-xs md:text-sm flex flex-col items-center justify-center gap-1 active:bg-black transition-colors"
-                                        >
-                                            <ArrowRight className="w-4 h-4" />
-                                            View
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-
-                        {/* Regular Barbers */}
-                        {regularBarbers.map((barber) => (
-                            <div
-                                key={barber.id}
-                                className="border-2 border-black bg-white"
-                            >
-                                <div className="flex gap-3 md:gap-4 p-3 md:p-4">
-                                    {barber.images && barber.images.length > 0 ? (
-                                        <img
-                                            src={barber.images[0]}
-                                            alt={barber.name}
-                                            className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 object-cover border-2 border-black"
-                                        />
-                                    ) : (
-                                        <div className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 bg-gray-300 flex items-center justify-center text-gray-600 text-sm font-bold border-2 border-black">
-                                            {barber.name.substring(0, 2).toUpperCase()}
-                                        </div>
-                                    )}
-
-                                    <div className="flex-1 min-w-0 flex flex-col justify-between">
-                                        <Link href={`/barbers/${barber.id}`}>
-                                            <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-1 hover:text-la-orange transition-colors">
-                                                {barber.name}
-                                            </h3>
-                                            <div className="flex items-center justify-between mb-2">
-                                                <p className="text-xs md:text-sm text-gray-600 flex items-center gap-1">
-                                                    <MapPin className="w-3 h-3" />
-                                                    {barber.neighborhood || 'LA'}
-                                                </p>
-                                                {barber.distance && barber.driveTime && (
-                                                    <div className="text-xs font-bold text-la-orange flex items-center gap-1">
-                                                        {barber.distance < 1
-                                                            ? `${(barber.distance * 5280).toFixed(0)}ft`
-                                                            : `${barber.distance.toFixed(1)}mi`
-                                                        }
-                                                        <Car className="w-3 h-3" />
-                                                        {barber.driveTime}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </Link>
-
-                                        <Link href={`/barbers/${barber.id}`}>
-                                            {barber.rating && (
-                                                <div className="flex items-center gap-2 mb-2">
-                                                    <div className="flex items-center gap-1">
-                                                        <Star className="w-4 h-4 fill-black" />
-                                                        <span className="font-bold">{barber.rating.toFixed(1)}</span>
-                                                    </div>
-                                                    <span className="text-xs text-gray-600">({barber.review_count})</span>
-                                                    <span className="text-xs font-bold">{barber.price_range || '$$'}</span>
-                                                </div>
-                                            )}
-                                        </Link>
-
-                                        <div className="flex gap-2">
-                                            {barber.phone && (
-                                                <a
-                                                    href={`tel:${barber.phone}`}
-                                                    onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name, barber.neighborhood || undefined)}
-                                                    className="flex-1 border-2 border-black py-2 text-center font-bold uppercase text-xs active:bg-black active:text-white transition-colors"
-                                                >
-                                                    Call
+                                        onClick={() => trackClickEvent(barber.id, 'website_click', barber.website!, barber.name)}
+                                        className="flex-1 py-3 rounded-full bg-[#1a1a1a] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#CE1126] transition-colors"
+                                    >
+                                        Book Now
+                                    </a>
+                                ) : (
+                                    <a 
+                                        href={`https://wa.me/12680000000`} // Placeholder number - would be dynamic if we had it
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => trackClickEvent(barber.id, 'whatsapp_click', 'wa.me', barber.name)}
+                                        className="flex-1 py-3 rounded-full bg-[#25D366] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#1ebc57] transition-colors shadow-sm"
+                                    >
+                                        <MessageCircle className="w-4 h-4" /> WhatsApp
                                                 </a>
                                             )}
-                                            <Link
-                                                href={`/barbers/${barber.id}`}
-                                                className="flex-1 border-2 border-la-orange bg-la-orange text-white py-2 text-center font-bold uppercase text-xs active:bg-black active:border-black transition-colors"
-                                            >
-                                                View
-                                            </Link>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
+
+            {filteredAndSortedBarbers.length === 0 && (
+                <div className="text-center py-20">
+                    <p className="text-gray-400 font-medium text-lg">No barbers found matching your criteria.</p>
+                    <button 
+                        onClick={() => {
+                            setSearchTerm(""); 
+                            setActiveNeighborhoods([]);
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.delete('lat');
+                            params.delete('lng');
+                            params.delete('sort');
+                            router.push(`/browse?${params.toString()}`);
+                        }}
+                        className="mt-4 text-[#CE1126] font-bold uppercase tracking-widest text-xs hover:underline"
+                    >
+                        Clear Filters
+                    </button>
                 </div>
-            </section>
-        </>
+            )}
+        </div>
     );
 }

@@ -9,26 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Antigua Cool brand colors - Caribbean meets brutal
+        // LA Cool brand colors - brutal and bold
         black: "#000000",
         white: "#FFFFFF",
         concrete: "#E5E5E5",
-        "antigua-coral": "#FF6B47", // Caribbean coral sunset
-        "antigua-blue": "#0077BE", // Deep Caribbean blue
-        "antigua-turquoise": "#40E0D0", // Crystal waters
-        "antigua-gold": "#FFD700", // Island gold/sand
-        "antigua-navy": "#001F3F", // Deep sea navy
-        "antigua-sand": "#FDE7C8", // Warm sand tone
-        "antigua-seafoam": "#CFF5E7", // Gentle lagoon hue
-        // Official Flag Colors
-        "flag-red": "#CE1126",
-        "flag-blue": "#0072C6",
-        "flag-gold": "#FCD116",
+        "la-orange": "#FF6B35", // sunset orange
+        "la-yellow": "#F7B801", // electric yellow
         "hot-pink": "#FF006E",
         "lime": "#CCFF00",
-        // Keep LA colors for backwards compatibility during transition
-        "la-orange": "#FF6B47", // Map to coral for now
-        "la-yellow": "#FFD700", // Map to gold
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],

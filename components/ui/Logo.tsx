@@ -1,60 +1,51 @@
 import React from 'react';
 
-export function Logo({ className = "", size = "md" }: { className?: string; size?: "sm" | "md" | "lg" }) {
+export function Logo({
+  className = "",
+  size = "md",
+  theme = "light",
+}: {
+  className?: string;
+  size?: "sm" | "md" | "lg";
+  theme?: "light" | "dark";
+}) {
   const heightClass = {
     sm: "h-8",
     md: "h-12",
-    lg: "h-16"
+    lg: "h-16",
   }[size];
 
-  const textSizeClass = {
+  const textSize = {
     sm: "text-lg",
     md: "text-2xl",
-    lg: "text-4xl"
+    lg: "text-4xl",
   }[size];
 
-  const subTextSizeClass = {
-    sm: "text-[0.5rem]",
-    md: "text-[0.65rem]",
-    lg: "text-xs"
-  }[size];
+  const textColor = theme === "dark" ? "text-white" : "text-black";
+  const subTextColor = theme === "dark" ? "text-white/60" : "text-black/60";
 
   return (
-    <div className={`flex items-center gap-3 ${className} group select-none`}>
-      {/* The Island Icon - Geometric Flag Abstraction */}
-      <div className={`${heightClass} aspect-[1/1] relative bg-flag-red border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:-translate-y-0.5 transition-all duration-200 overflow-hidden`}>
-        {/* The V-Shape Container */}
-        <div 
-          className="absolute inset-0 bg-transparent"
-          style={{ 
-            clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-            backgroundColor: "black"
-          }}
-        >
-          {/* Top Black Section (Background for Sun) is implicit from container bg */}
-          
-          {/* Rising Sun - 7 Points */}
-          <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[50%] h-[35%] bg-flag-gold"
-               style={{ 
-                 clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)" 
-               }}>
-          </div>
-
-          {/* Blue Band */}
-          <div className="absolute top-[50%] left-0 w-full h-[25%] bg-flag-blue"></div>
-          
-          {/* White Band */}
-          <div className="absolute top-[75%] left-0 w-full h-[25%] bg-white"></div>
+    <div className={`flex items-center gap-3 ${className} select-none`}>
+      {/* Official Flag Graphic */}
+      <div className={`${heightClass} aspect-[3/2] relative shadow-sm`}>
+        <div className="absolute inset-0 bg-white">
+           <svg viewBox="0 0 30 20" className="w-full h-full">
+             <rect width="30" height="20" fill="#CE1126"/>
+             <path d="M0 0 L15 20 L30 0 Z" fill="#000000"/>
+             <path d="M6 8 L15 20 L24 8 Z" fill="#0072C6"/>
+             <path d="M9 12 L15 20 L21 12 Z" fill="#FFFFFF"/>
+             {/* Sun */}
+             <path d="M10.5 8 L12 5 L13.5 8 L15 4 L16.5 8 L18 5 L19.5 8 Z" fill="#FCD116"/>
+           </svg>
         </div>
       </div>
-      
-      {/* Wordmark */}
-      <div className="flex flex-col leading-[0.85] justify-center">
-        <span className={`${textSizeClass} font-black text-black uppercase tracking-tighter`}>
-          ANTIGUA
-        </span>
-        <span className={`${subTextSizeClass} font-bold text-flag-red uppercase tracking-[0.3em]`}>
-          BARBERS
+
+      <div className="flex flex-col justify-center leading-none">
+        <h1 className={`${textSize} font-black uppercase tracking-tighter ${textColor}`}>
+          Antigua<span className="text-[#CE1126]">Barbers</span>
+        </h1>
+        <span className="text-[0.6em] font-bold uppercase tracking-[0.35em] ${subTextColor}">
+          Official Directory
         </span>
       </div>
     </div>

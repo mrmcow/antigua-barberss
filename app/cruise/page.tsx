@@ -1,147 +1,132 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { Logo } from "@/components/ui/Logo";
-import { Anchor, Clock, MapPin, ArrowRight, Ship, AlertTriangle } from "lucide-react";
+import { MapPin, Ship, Clock, Star } from "lucide-react";
+import { WaveBackground } from "@/components/WaveBackground";
 
 export default function CruisePage() {
   return (
-    <main className="min-h-screen">
-      {/* Navigation */}
-      <nav className="border-b-2 border-black sticky top-0 bg-white z-50">
-        <div className="container-brutal py-3 md:py-4 flex items-center justify-between">
-          <Link href="/" className="hover:opacity-80 transition-opacity">
-            <Logo size="sm" />
-          </Link>
-          <div className="flex gap-2 md:gap-4 items-center">
-            <Link href="/browse" className="text-sm md:text-base uppercase tracking-wider hover:text-antigua-coral transition-colors font-bold">
-              ALL BARBERS
-            </Link>
-            <Link href="/browse?mobile=true">
-              <Button variant="primary" size="sm" className="text-xs md:text-sm whitespace-nowrap">
-                Mobile Service
-              </Button>
-            </Link>
+    <main className="min-h-screen bg-[#0ea5e9]">
+      {/* Hero Section - Compact Mobile Design */}
+      <section className="relative min-h-[100dvh] flex flex-col items-center justify-center gap-8 pt-20 pb-24 px-6 overflow-hidden supports-[min-height:100dvh]:min-h-[100dvh]">
+        {/* Clean Caribbean Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0284c7] to-[#0ea5e9]"></div>
+        
+        {/* Animated Waves */}
+        <WaveBackground />
+        
+        {/* Subtle Patterns */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+          <div className="absolute -top-20 -right-20 w-64 h-64 border-[3px] border-white/20 rounded-full"></div>
+          <div className="absolute top-40 -left-10 w-32 h-32 border-[2px] border-white/10 rounded-full"></div>
+        </div>
+
+        {/* Top: Location Badge */}
+        <div className="relative z-10 pt-4">
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2 rounded-full flex items-center gap-2 shadow-xl">
+            <div className="w-2 h-2 bg-[#FCD116] rounded-full animate-pulse"></div>
+            <span className="text-white font-black uppercase tracking-widest text-[10px]">
+              St. John's • Heritage Quay
+            </span>
           </div>
         </div>
-      </nav>
 
-      {/* Hero Section - Cruise Focused */}
-      <section className="border-b-4 border-black py-12 md:py-20 lg:py-32 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-antigua-navy opacity-5 -skew-x-12 transform translate-x-1/4"></div>
-        
-        <div className="container-brutal relative">
-          <div className="max-w-5xl">
-            <h1 className="text-brutal-display mb-6 md:mb-8 leading-none">
-              CRUISE SHIP<br />
-              <span className="text-antigua-coral">PASSENGERS</span><br />
-              WELCOME
-            </h1>
+        {/* Center: Main Content */}
+        <div className="relative z-10 text-center space-y-6">
+          <h1 className="text-[5.5rem] leading-[0.85] font-black uppercase tracking-tighter text-white drop-shadow-xl">
+            Island<br />
+            <span className="text-[#FCD116]">Fresh</span>
+          </h1>
+          
+          <p className="text-white/90 font-medium text-lg max-w-[280px] mx-auto leading-snug">
+            Professional cuts. Cruise schedule verified.
+            <br/>
+            <span className="text-white/60 text-sm mt-2 block font-normal">We embrace Island Time, but we keep it real with your schedule.</span>
+          </p>
 
-            <p className="text-xl md:text-2xl mb-8 text-gray-700 font-medium max-w-3xl">
-              Get a fresh cut and get back to your ship on time. 
-              We know exactly how long everything takes.
-            </p>
-
-            {/* Time Input */}
-            <div className="bg-antigua-navy text-white p-6 md:p-8 border-4 border-black mb-8 max-w-2xl">
-              <div className="flex items-center gap-3 mb-4">
-                <Ship className="w-6 h-6 text-antigua-coral" />
-                <h3 className="text-xl font-bold uppercase tracking-tight">WHAT TIME DOES YOUR SHIP LEAVE?</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-bold mb-2">DEPARTURE TIME</label>
-                  <select className="w-full p-3 bg-white text-black border-2 border-black font-bold">
-                    <option>5:00 PM</option>
-                    <option>6:00 PM</option>
-                    <option>7:00 PM</option>
-                    <option>8:00 PM</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-2">SHIP NAME (OPTIONAL)</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. Royal Caribbean"
-                    className="w-full p-3 bg-white text-black border-2 border-black"
-                  />
-                </div>
-              </div>
-              <div className="mt-6">
-                <Button variant="secondary" size="lg" className="w-full">
-                  <Clock className="w-5 h-5 mr-2" />
-                  FIND CRUISE-SAFE BARBERS
-                </Button>
-              </div>
+          {/* Stats Row */}
+          <div className="flex justify-center gap-4 pt-2">
+            <div className="flex flex-col items-center px-3 py-2 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
+              <Clock className="w-5 h-5 text-[#FCD116] mb-1" />
+              <span className="text-[10px] font-bold text-white uppercase">2hr Buffer</span>
             </div>
-
-            {/* Safety Promise */}
-            <div className="flex items-start gap-4 p-6 bg-antigua-coral text-white border-4 border-black max-w-2xl">
-              <AlertTriangle className="w-6 h-6 flex-shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-lg mb-2">OUR CRUISE-SAFE GUARANTEE</h4>
-                <p className="text-sm leading-relaxed">
-                  We'll get you back to port <strong>2 hours before departure</strong>. 
-                  All our recommended barbers know the cruise schedule and timing.
-                </p>
-              </div>
+            <div className="flex flex-col items-center px-3 py-2 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
+              <MapPin className="w-5 h-5 text-[#FCD116] mb-1" />
+              <span className="text-[10px] font-bold text-white uppercase">Near Port</span>
+            </div>
+            <div className="flex flex-col items-center px-3 py-2 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
+              <Star className="w-5 h-5 text-[#FCD116] mb-1" />
+              <span className="text-[10px] font-bold text-white uppercase">Verified</span>
             </div>
           </div>
+        </div>
+
+        {/* Bottom: CTA */}
+        <div className="relative z-10 w-full max-w-xs pb-8">
+          <Link 
+            href="/browse?cruise=true" 
+            className="group relative block w-full"
+          >
+            <div className="absolute inset-0 bg-[#FCD116] rounded-full translate-y-1 transition-transform group-active:translate-y-0"></div>
+            <div className="relative bg-white border-2 border-[#FCD116] text-black py-4 rounded-full font-black uppercase tracking-wider text-sm flex items-center justify-center gap-3 active:translate-y-1 transition-transform shadow-lg">
+              <MapPin className="w-4 h-4" />
+              Find Your Barber
+            </div>
+          </Link>
         </div>
       </section>
 
-      {/* Walking Distance From Port */}
-      <section className="border-b-4 border-black py-12 md:py-20 bg-antigua-turquoise text-black">
-        <div className="container-brutal">
-          <h2 className="text-brutal-hero mb-8 text-center">
-            BARBERS <span className="text-white">NEAR THE PORT</span>
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {/* Distance-Based Options */}
+      <section className="py-32 px-6 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-black uppercase text-[#1e3a8a] mb-6 tracking-tight">
+              How Far From Port?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose your adventure level based on time and distance from Heritage Quay
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {/* Walking Distance */}
-            <div className="bg-white p-6 border-4 border-black text-center">
-              <div className="w-16 h-16 bg-black text-white flex items-center justify-center mx-auto mb-4">
-                <span className="font-bold text-2xl">5</span>
-              </div>
-              <h3 className="text-xl font-bold uppercase mb-2">MINUTE WALK</h3>
-              <p className="text-gray-700">
-                Closest barbers to Heritage Quay cruise port
-              </p>
-              <div className="mt-4">
-                <Link href="/browse?walk_time=5">
-                  <Button variant="outline" size="sm">VIEW BARBERS</Button>
+            <div className="group relative bg-white p-12 rounded-[3rem] border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-[#25D366] to-[#1ebc57] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-black text-3xl">5-15</span>
+                </div>
+                <h3 className="text-3xl font-black uppercase mb-6 text-[#1e3a8a] group-hover:text-[#25D366] transition-colors">
+                  Minute Walk
+                </h3>
+                <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                  Easy stroll from Heritage Quay. Perfect for a quick trim before exploring downtown St. John's.
+                </p>
+                <Link 
+                  href="/browse?distance=walking" 
+                  className="inline-block w-full py-5 bg-[#1e3a8a] text-white rounded-full font-bold uppercase tracking-wider hover:bg-[#25D366] transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  View Walking Distance
                 </Link>
               </div>
             </div>
 
             {/* Short Taxi */}
-            <div className="bg-white p-6 border-4 border-black text-center">
-              <div className="w-16 h-16 bg-antigua-coral text-white flex items-center justify-center mx-auto mb-4">
-                <span className="font-bold text-2xl">10</span>
-              </div>
-              <h3 className="text-xl font-bold uppercase mb-2">MINUTE TAXI</h3>
-              <p className="text-gray-700">
-                Best barbers in St. John's downtown area
-              </p>
-              <div className="mt-4">
-                <Link href="/browse?walk_time=15">
-                  <Button variant="outline" size="sm">VIEW BARBERS</Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Mobile Service */}
-            <div className="bg-white p-6 border-4 border-black text-center">
-              <div className="w-16 h-16 bg-antigua-gold text-white flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold uppercase mb-2">MEETS YOU</h3>
-              <p className="text-gray-700">
-                Mobile barbers come to you at the port area
-              </p>
-              <div className="mt-4">
-                <Link href="/browse?mobile=true">
-                  <Button variant="outline" size="sm">VIEW MOBILE</Button>
+            <div className="group relative bg-white p-12 rounded-[3rem] border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FCD116]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 text-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-[#FCD116] to-[#f59e0b] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <MapPin className="w-12 h-12 text-[#1e3a8a]" />
+                </div>
+                <h3 className="text-3xl font-black uppercase mb-6 text-[#1e3a8a] group-hover:text-[#f59e0b] transition-colors">
+                  Quick Ride
+                </h3>
+                <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                  Short taxi to downtown St. John's. More shop options, same cruise-safe timing guarantee.
+                </p>
+                <Link 
+                  href="/browse?distance=taxi" 
+                  className="inline-block w-full py-5 bg-[#1e3a8a] text-white rounded-full font-bold uppercase tracking-wider hover:bg-[#FCD116] hover:text-[#1e3a8a] transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  View Downtown Shops
                 </Link>
               </div>
             </div>
@@ -149,82 +134,37 @@ export default function CruisePage() {
         </div>
       </section>
 
-      {/* How It Works for Cruise Passengers */}
-      <section className="border-b-4 border-black py-12 md:py-20 bg-white">
-        <div className="container-brutal">
-          <h2 className="text-brutal-hero mb-12 text-center">
-            HOW IT <span className="text-antigua-coral">WORKS</span>
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {/* Step 1 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-antigua-navy text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-black">
-                1
-              </div>
-              <h3 className="text-lg font-bold uppercase mb-2">TELL US YOUR DEPARTURE TIME</h3>
-              <p className="text-gray-600 text-sm">
-                We filter barbers who can safely get you back in time
-              </p>
+      {/* Cruise Guarantee */}
+      <section className="py-32 px-6 bg-[#1e3a8a] text-white">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-block p-12 bg-white/10 backdrop-blur border border-white/20 rounded-[3rem] mb-12">
+            <Ship className="w-16 h-16 text-[#FCD116] mx-auto mb-8" />
+            <h3 className="text-4xl font-black uppercase mb-8 text-white">
+              Island Time Reality
+            </h3>
+            <p className="text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
+              Our barbers know cruise schedules and will do their best to get you back to Heritage Quay on time. 
+              <strong className="text-[#FCD116]">Island time is real</strong> — plan accordingly!
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
+            <div className="p-6">
+              <Clock className="w-8 h-8 text-[#FCD116] mx-auto mb-4" />
+              <h4 className="font-bold text-lg mb-2">2-Hour Buffer</h4>
+              <p className="text-white/70 text-sm">Recommended minimum time between cut and departure</p>
             </div>
-
-            {/* Step 2 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-antigua-coral text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-black">
-                2
-              </div>
-              <h3 className="text-lg font-bold uppercase mb-2">CHOOSE YOUR DISTANCE</h3>
-              <p className="text-gray-600 text-sm">
-                Walking distance, short taxi, or mobile service to port
-              </p>
+            <div className="p-6">
+              <MapPin className="w-8 h-8 text-[#FCD116] mx-auto mb-4" />
+              <h4 className="font-bold text-lg mb-2">Port Proximity</h4>
+              <p className="text-white/70 text-sm">All locations verified for cruise passenger convenience</p>
             </div>
-
-            {/* Step 3 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-antigua-turquoise text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-black">
-                3
-              </div>
-              <h3 className="text-lg font-bold uppercase mb-2">GET YOUR CUT</h3>
-              <p className="text-gray-600 text-sm">
-                Professional barbers who know cruise passenger needs
-              </p>
-            </div>
-
-            {/* Step 4 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-antigua-gold text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-black">
-                4
-              </div>
-              <h3 className="text-lg font-bold uppercase mb-2">BACK TO SHIP</h3>
-              <p className="text-gray-600 text-sm">
-                Plenty of time to get back, grab lunch, and board
-              </p>
+            <div className="p-6">
+              <Star className="w-8 h-8 text-[#FCD116] mx-auto mb-4" />
+              <h4 className="font-bold text-lg mb-2">Ship Schedule Aware</h4>
+              <p className="text-white/70 text-sm">Barbers trained on cruise timing and logistics</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-antigua-coral text-white">
-        <div className="container-brutal text-center">
-          <h2 className="text-brutal-display mb-8">
-            READY FOR A<br />FRESH CUT?
-          </h2>
-          
-          <Link href="/browse?cruise=true">
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              className="bg-white text-black hover:bg-black hover:text-white border-white text-2xl py-8 px-12"
-              icon={<ArrowRight className="w-6 h-6" />}
-            >
-              FIND CRUISE-SAFE BARBERS
-            </Button>
-          </Link>
-          
-          <p className="mt-6 text-lg">
-            Or <Link href="tel:+1268000000" className="underline font-bold">call us at +1 (268) 000-0000</Link> for help
-          </p>
         </div>
       </section>
     </main>

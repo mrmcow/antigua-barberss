@@ -1,131 +1,65 @@
 import type { Metadata } from "next";
-import { Logo } from "@/components/ui/Logo";
-import Link from "next/link";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "About LA Barber Guide — Find Your Perfect Barber in Los Angeles",
-  description: "LA Barber Guide helps you find the right barber in Los Angeles based on your hair type, style preferences, and neighborhood. Real reviews, verified locations.",
-  keywords: "about LA barber guide, Los Angeles barbershops, find barbers LA, hair styling LA",
+  title: "About Antigua Barbers — The Island's Official Directory",
+  description: "Connecting locals and visitors with the best barbers in Antigua. From St. John's to English Harbour, we verify every shop.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="border-b border-zinc-800 bg-black/90 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <Logo size="md" />
-              <span className="font-bebas text-xl text-white">BARBER GUIDE</span>
-            </Link>
-            <nav className="flex space-x-6">
-              <Link href="/browse" className="text-zinc-400 hover:text-white transition-colors">
-                BARBERS
-              </Link>
-              <Link href="/about" className="text-white font-medium">
-                ABOUT
-              </Link>
-              <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors">
-                CONTACT
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="font-bebas text-6xl sm:text-7xl lg:text-8xl text-white mb-6">
-            ABOUT
-            <span className="block text-orange-500">LA BARBER GUIDE</span>
+    <div className="min-h-screen bg-[#FAFAFA]">
+      <main className="pt-32 pb-24 px-4 sm:px-6 max-w-[1000px] mx-auto">
+        {/* Hero */}
+        <div className="text-center mb-20">
+          <span className="text-[#CE1126] font-bold text-xs uppercase tracking-[0.25em] block mb-6">Our Mission</span>
+          <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tight text-[#1a1a1a] mb-8">
+            Respect The <br className="hidden sm:block" /> <span className="text-[#0072C6]">Craft.</span>
           </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            The fastest, smartest way to find your perfect barber in Los Angeles. 
-            No more bad cuts, no more wasted time.
+          <p className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed font-medium">
+            We built Antigua Barbers to solve a simple problem: finding a reliable cut on the island shouldn't be a gamble. 
+            Whether you're a local, an expat, or just off the cruise ship, we connect you with the masters of the trade.
           </p>
         </div>
 
-        {/* Story */}
-        <div className="space-y-12 text-lg text-zinc-300 leading-relaxed">
-          <section>
-            <h2 className="font-bebas text-3xl text-white mb-6">THE PROBLEM</h2>
-            <p>
-              Finding a good barber in LA is fucking hard. You've got thousands of shops, 
-              but which one actually knows how to cut your hair type? Which one matches your vibe? 
-              Most directories just list shops alphabetically with fake reviews.
+        {/* Values Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+          <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
+            <div className="w-12 h-12 bg-[#FCD116]/20 rounded-full flex items-center justify-center mb-6 text-2xl">🇦🇬</div>
+            <h3 className="text-xl font-black uppercase mb-3">100% Antiguan</h3>
+            <p className="text-gray-500 text-sm font-medium leading-relaxed">
+              Built in St. John's, for the island. We know the difference between a tourist trap and a proper local shop.
             </p>
-            <p className="mt-4">
-              We built LA Barber Guide because we were tired of rolling the dice on haircuts.
+          </div>
+          <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
+            <div className="w-12 h-12 bg-[#0072C6]/10 rounded-full flex items-center justify-center mb-6 text-2xl">✨</div>
+            <h3 className="text-xl font-black uppercase mb-3">Verified Quality</h3>
+            <p className="text-gray-500 text-sm font-medium leading-relaxed">
+              We don't just list anyone. We verify shops, check reviews, and ensure they meet the standard.
             </p>
-          </section>
-
-          <section>
-            <h2 className="font-bebas text-3xl text-white mb-6">THE SOLUTION</h2>
-            <p>
-              Smart matching based on what actually matters: your hair type, the style you want, 
-              and the vibe you're going for. We analyze thousands of real Google reviews using AI 
-              to understand what each barber actually specializes in.
+          </div>
+          <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
+            <div className="w-12 h-12 bg-[#CE1126]/10 rounded-full flex items-center justify-center mb-6 text-2xl">🚢</div>
+            <h3 className="text-xl font-black uppercase mb-3">Visitor Friendly</h3>
+            <p className="text-gray-500 text-sm font-medium leading-relaxed">
+              Clear pricing, map locations, and transport info helps visitors navigate the local scene with confidence.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              <div className="bg-zinc-900 p-6 rounded-lg">
-                <h3 className="font-bebas text-xl text-orange-500 mb-3">HAIR TYPE MATCHING</h3>
-                <p className="text-sm text-zinc-400">Curly, straight, thick, fine — we match you with barbers who know your hair.</p>
-              </div>
-              <div className="bg-zinc-900 p-6 rounded-lg">
-                <h3 className="font-bebas text-xl text-orange-500 mb-3">STYLE EXPERTISE</h3>
-                <p className="text-sm text-zinc-400">Fades, beard work, classic cuts — find barbers who excel at what you want.</p>
-              </div>
-              <div className="bg-zinc-900 p-6 rounded-lg">
-                <h3 className="font-bebas text-xl text-orange-500 mb-3">VIBE MATCHING</h3>
-                <p className="text-sm text-zinc-400">Trendy, classic, no-BS — get matched with shops that fit your energy.</p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="font-bebas text-3xl text-white mb-6">HOW IT WORKS</h2>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-4">
-                <span className="bg-orange-500 text-black font-bebas text-lg w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</span>
-                <p><strong>Tell us about your hair</strong> — type, texture, what you're looking for.</p>
-              </div>
-              <div className="flex items-start space-x-4">
-                <span className="bg-orange-500 text-black font-bebas text-lg w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</span>
-                <p><strong>Our AI analyzes thousands of reviews</strong> to find barbers who specialize in your needs.</p>
-              </div>
-              <div className="flex items-start space-x-4">
-                <span className="bg-orange-500 text-black font-bebas text-lg w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</span>
-                <p><strong>Get ranked results</strong> with real photos, verified info, and direct booking links.</p>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="font-bebas text-3xl text-white mb-6">FOR LA, BY LA</h2>
-            <p>
-              We're not some generic directory. LA Barber Guide is built specifically for Los Angeles — 
-              from Venice Beach to Downtown, WeHo to Silver Lake. We understand the city's diverse 
-              neighborhoods and the barbers who serve them.
-            </p>
-            <p className="mt-4">
-              Every barber in our database is verified, every review is real, and every match is 
-              designed to save you time and get you the cut you actually want.
-            </p>
-          </section>
+          </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-16 pt-16 border-t border-zinc-800">
-          <Link 
-            href="/"
-            className="inline-block bg-orange-500 text-black font-bebas text-xl px-8 py-4 rounded-lg hover:bg-orange-400 transition-colors"
-          >
-            FIND YOUR BARBER
-          </Link>
+        {/* Story Section */}
+        <div className="prose prose-lg max-w-none">
+          <h2 className="text-3xl font-black uppercase tracking-tight mb-8">The Story</h2>
+          <p className="text-gray-600 font-medium leading-loose mb-8">
+            Antigua has a rich culture of grooming and style. The barbershop isn't just a place for a haircut; it's a community hub, a debating society, and a cornerstone of island life. But for years, finding these gems online was nearly impossible. outdated Facebook pages, broken numbers, and zero pricing info.
+          </p>
+          <p className="text-gray-600 font-medium leading-loose">
+            We changed that. We mapped the island, verified the shops, and built a platform that respects the culture while bringing it into the digital age.
+          </p>
         </div>
       </main>
+      
+      <Footer />
     </div>
   );
 }

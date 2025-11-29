@@ -1,0 +1,17 @@
+{
+  "name": "Antigua Barbers - Official Directory",
+  "short_name": "Antigua Barbers",
+  "description": "Find the perfect barber in Antigua & Barbuda. Perfect for cruise passengers, resort guests, and locals.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAFA",
+  "theme_color": "#CE1126",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

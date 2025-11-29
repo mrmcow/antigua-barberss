@@ -32,6 +32,109 @@ const ANTIGUA_AREAS = [
   { name: "Cedar Grove / Crosbies", lat: 17.1560, lng: -61.8160 }, // North residential
 ];
 
+interface PlaceResult {
+  place_id: string;
+  name: string;
+  formatted_address: string;
+  geometry: {
+    location: {
+      lat: number;
+      lng: number;
+    };
+  };
+  rating?: number;
+  user_ratings_total?: number;
+  price_level?: number;
+  formatted_phone_number?: string;
+  website?: string;
+  opening_hours?: {
+    weekday_text: string[];
+  };
+  photos?: Array<{ photo_reference: string }>;
+}
+
+// Google Places search
+async function searchBarbers(location: string, lat: number, lng: number) {
+  try {
+    const params = {
+      location: `${lat},${lng}`,
+      radius: 7000,
+      type: 'hair_care',
+      keyword: 'barber shop',
+      key: GOOGLE_API_KEY,
+    };
+
+    const response = await axios.get(
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+      { params }
+    );
+
+    if (response.data.status === 'OK') {
+      return response.data.results || [];
+    }
+
+    console.warn(
+      `⚠️ Nearby search for ${location} returned status ${response.data.status}: ${response.data.error_message || 'no error message'}`
+    );
+
+    // Fallback to text search across area name
+    const fallback = await axios.get(
+      'https://maps.googleapis.com/maps/api/place/textsearch/json',
+      {
+        params: {
+          query: `barber shop in ${location}`,
+          key: GOOGLE_API_KEY,
+        },
+      }
+    );
+
+    if (fallback.data.status === 'OK') {
+      return fallback.data.results || [];
+    }
+
+    console.warn(
+      `⚠️ Text search for ${location} returned status ${fallback.data.status}: ${fallback.data.error_message || 'no error message'}`
+    );
+
+    return [];
+  } catch (error) {
+    console.error(`❌ Error searching ${location}:`, error);
+    return [];
+  }
+}
+
+async function getPlaceDetails(placeId: string): Promise<PlaceResult | null> {
+  try {
+    const response = await axios.get(
+      'https://maps.googleapis.com/maps/api/place/details/json',
+      {
+        params: {
+          place_id: placeId,
+          fields: 'place_id,name,formatted_address,geometry,rating,user_ratings_total,price_level,formatted_phone_number,website,opening_hours,photos',
+          key: GOOGLE_API_KEY,
+        },
+      }
+    );
+
+    const result = response.data.result;
+    if (result && !result.place_id) {
+      result.place_id = placeId;
+    }
+    return result;
+  } catch (error) {
+    console.error(`❌ Error getting details for ${placeId}:`, error);
+    return null;
+  }
+}
+
+function getPriceRange(priceLevel?: number): string {
+  if (priceLevel === undefined || priceLevel === null) return '$$';
+  if (priceLevel <= 1) return '$';
+  if (priceLevel === 2) return '$$';
+  if (priceLevel === 3) return '$$$';
+  return '$$$$';
+}
+
 // Helper to determine "Area" from address or coords
 function determineArea(address: string, lat: number, lng: number): string {
   if (address.includes("St John") || address.includes("Saint John")) return "St. John's";
