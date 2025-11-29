@@ -87,12 +87,12 @@ export default async function Home() {
 
             {/* Headline */}
             <h1 className="text-6xl sm:text-8xl xl:text-[10rem] font-black uppercase leading-[0.8] tracking-tighter mb-8 text-white animate-fade-in-up delay-100">
-                Respect<br/>The Chair.
+                Your Chair<br/>Awaits.
             </h1>
             
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed font-medium tracking-wide animate-fade-in-up delay-200">
-                The definitive guide to barbering in Antigua & Barbuda. 
-                <span className="hidden sm:inline"> From St. John's to English Harbour, find the sharpest cuts on the island.</span>
+                Antigua's official guide to professional grooming. 
+                <span className="hidden sm:inline"> Find trusted barbers, check cruise schedules, and book your next cut.</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up delay-300">
