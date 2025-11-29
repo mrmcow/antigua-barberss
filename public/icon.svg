@@ -1,19 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Black background -->
-  <rect width="512" height="512" fill="#000000"/>
-  
-  <!-- LA text in white -->
-  <text 
-    x="256" 
-    y="320" 
-    font-family="Arial Black, sans-serif" 
-    font-size="280" 
-    font-weight="900" 
-    text-anchor="middle" 
-    fill="#FFFFFF"
-    letter-spacing="-10">LA</text>
-  
-  <!-- Orange corner accent -->
-  <polygon points="400,400 512,400 512,512 400,512" fill="#FF6B35"/>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#CE1126"/>
+  <path d="M0 0L512 0L256 512L0 0Z" fill="black"/>
+  <rect x="0" y="256" width="512" height="128" fill="#0072C6"/>
+  <rect x="0" y="384" width="512" height="128" fill="white"/>
+  <path d="M256 60L286 150H380L304 206L332 296L256 240L180 296L208 206L132 150H226L256 60Z" fill="#FCD116"/>
 </svg>
-

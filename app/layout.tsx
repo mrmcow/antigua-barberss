@@ -19,15 +19,15 @@ const bebas = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.labarberguide.xyz'),
+  metadataBase: new URL('https://www.antiguabarbers.com'),
   title: {
-    default: "LA Barber Guide — Find Your Perfect Barber in Los Angeles",
-    template: "%s | LA Barber Guide"
+    default: "Antigua Barbers — The Island's Best Cuts",
+    template: "%s | Antigua Barbers"
   },
-  description: "Find the perfect barber in Los Angeles in 30 seconds. Smart matching by hair type, style & neighborhood. 500+ verified barbers across LA. Perfect for tourists and locals.",
-  authors: [{ name: "LA Barber Guide" }],
-  creator: "LA Barber Guide",
-  publisher: "LA Barber Guide",
+  description: "Find the perfect barber in Antigua in minutes. Perfect for cruise passengers, resort guests, and locals. Mobile service available. Cruise-safe guarantee.",
+  authors: [{ name: "Antigua Barbers" }],
+  creator: "Antigua Barbers",
+  publisher: "Antigua Barbers",
   formatDetection: {
     email: false,
     address: false,
@@ -40,16 +40,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://labarberguide.xyz",
-    title: "LA Barber Guide — Find Your Perfect Barber in Los Angeles",
-    description: "Smart barber matching for Los Angeles. Find barbers by hair type, style & neighborhood. 500+ verified shops.",
-    siteName: "LA Barber Guide",
+    url: "https://antiguabarbers.com",
+    title: "Antigua Barbers — The Island's Best Cuts",
+    description: "Perfect barber matching for Antigua. Cruise passengers, resort guests, and locals. Mobile service available.",
+    siteName: "Antigua Barbers",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LA Barber Guide — Find Your Perfect Barber in LA",
-    description: "Smart barber matching for Los Angeles. 500+ verified barbershops.",
-    creator: "@labarberguide",
+    title: "Antigua Barbers — The Island's Best Cuts",
+    description: "Perfect barber matching for Antigua. Cruise-safe, mobile service, resort-friendly.",
+    creator: "@antiguabarbers",
   },
   robots: {
     index: true,
@@ -75,27 +75,27 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "LA Barber Guide",
-    "url": "https://labarberguide.xyz",
-    "description": "Find the perfect barber in Los Angeles. Smart matching by hair type, style & neighborhood.",
+    "name": "Antigua Barber Guide",
+    "url": "https://antiguabarberguide.com",
+    "description": "Find the perfect barber in Antigua & Barbuda. Perfect for cruise passengers, resort guests, and locals.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://labarberguide.xyz/browse?q={search_term_string}",
+      "target": "https://antiguabarberguide.com/browse?q={search_term_string}",
       "query-input": "required name=search_term_string"
     },
     "areaServed": {
-      "@type": "City",
-      "name": "Los Angeles",
-      "sameAs": "https://en.wikipedia.org/wiki/Los_Angeles"
+      "@type": "Country",
+      "name": "Antigua and Barbuda",
+      "sameAs": "https://en.wikipedia.org/wiki/Antigua_and_Barbuda"
     },
     "serviceArea": {
       "@type": "GeoCircle",
       "geoMidpoint": {
         "@type": "GeoCoordinates",
-        "latitude": 34.0522,
-        "longitude": -118.2437
+        "latitude": 17.0608,
+        "longitude": -61.7964
       },
-      "geoRadius": "50000"
+      "geoRadius": "25000"
     }
   };
 

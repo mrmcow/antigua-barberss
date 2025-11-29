@@ -20,7 +20,7 @@
 
   /* Aggressive selection color */
   ::selection {
-    @apply bg-la-orange text-white;
+    @apply bg-antigua-coral text-white;
   }
 
   /* Remove default button styles */
@@ -66,7 +66,7 @@
 
   /* BRUTAL BLOG STYLING */
   .blog-brutal h1 {
-    @apply text-4xl font-black uppercase tracking-tight mt-12 mb-6 border-4 border-black bg-la-orange text-white p-6;
+    @apply text-4xl font-black uppercase tracking-tight mt-12 mb-6 border-4 border-black bg-antigua-coral text-white p-6;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
@@ -75,7 +75,7 @@
   }
 
   .blog-brutal h3 {
-    @apply text-2xl font-black uppercase tracking-tight mt-8 mb-4 text-black border-l-4 border-la-orange pl-4;
+    @apply text-2xl font-black uppercase tracking-tight mt-8 mb-4 text-black border-l-4 border-antigua-coral pl-4;
   }
 
   .blog-brutal p {
@@ -87,12 +87,12 @@
   }
 
   .blog-brutal a {
-    @apply text-la-orange font-bold no-underline border-b-2 border-la-orange transition-all;
+    @apply text-antigua-coral font-bold no-underline border-b-2 border-antigua-coral transition-all;
     cursor: pointer;
   }
 
   .blog-brutal a:hover {
-    @apply bg-la-orange text-white;
+    @apply bg-antigua-coral text-white;
     cursor: pointer;
     transform: translateY(-1px);
   }
@@ -102,7 +102,7 @@
   }
 
   .blog-brutal ol {
-    @apply my-6 space-y-3 border-l-4 border-la-orange pl-8 py-4;
+    @apply my-6 space-y-3 border-l-4 border-antigua-coral pl-8 py-4;
   }
 
   .blog-brutal li {
@@ -110,7 +110,7 @@
   }
 
   .blog-brutal blockquote {
-    @apply border-l-8 border-la-orange bg-black text-white p-6 my-8 italic font-medium;
+    @apply border-l-8 border-antigua-coral bg-black text-white p-6 my-8 italic font-medium;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
@@ -139,12 +139,35 @@
   }
 
   .blog-brutal code {
-    @apply bg-gray-900 text-la-orange px-2 py-1 font-mono text-sm;
+    @apply bg-gray-900 text-antigua-coral px-2 py-1 font-mono text-sm;
   }
 
   /* Animation for page transitions */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Island-specific flourishes */
+  .island-sunrise {
+    background: radial-gradient(circle at 15% 20%, rgba(64, 224, 208, 0.35), transparent 55%),
+                radial-gradient(circle at 85% 10%, rgba(255, 107, 71, 0.4), transparent 60%),
+                radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.25), transparent 65%),
+                linear-gradient(135deg, #FDE7C8 0%, #FFFFFF 45%, #CFF5E7 100%);
+  }
+
+  .island-grid {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                      linear-gradient(180deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .shadow-island {
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  /* Custom text effects */
+  .text-shadow-sm {
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
   }
 
   @keyframes fadeIn {
