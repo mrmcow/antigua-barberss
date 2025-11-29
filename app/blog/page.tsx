@@ -57,10 +57,10 @@ const BLOG_IMAGES: Record<string, string> = {
   'best-barbers-cassada-gardens-antigua': 'https://images.unsplash.com/photo-1582037928769-181f2422677e?q=80&w=2070&auto=format&fit=crop', // Tropical Garden/Street
   'best-barbers-cobbs-cross-antigua': 'https://images.unsplash.com/photo-1518182170546-0766bcbf2e8d?q=80&w=2070&auto=format&fit=crop', // Vibrant Street
   'best-barbers-liberta-antigua': 'https://images.unsplash.com/photo-1605557626697-2e87166d88f9?q=80&w=2070&auto=format&fit=crop', // Village Vibe
-  'best-barbers-piggotts-antigua': 'https://images.unsplash.com/photo-1589705296590-5c4c0e51c4f0?q=80&w=2070&auto=format&fit=crop', // Colorful Housing
-  'best-barbers-winthorpes-antigua': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop', // Near Airport/Ocean
+  'best-barbers-piggotts-antigua': 'https://images.unsplash.com/photo-1624397741918-19d0a95fa902?q=80&w=2070&auto=format&fit=crop', // Colorful Housing
+  'best-barbers-winthorpes-antigua': 'https://images.unsplash.com/photo-1590884984873-19b3e78b8d34?q=80&w=2070&auto=format&fit=crop', // Authentic Street Scene
   'best-barbers-willikies-antigua': 'https://images.unsplash.com/photo-1596436954828-a44264c4ae4a?q=80&w=2070&auto=format&fit=crop', // Village Street
-  'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1570654621852-9dd23b79e37e?q=80&w=2070&auto=format&fit=crop', // Road/Street
+  'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1602120015893-ec715ec24be7?q=80&w=2070&auto=format&fit=crop', // Vibrant Street
   'barbers-near-vc-bird-airport': 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop', // Airplane/Sky
 
   // Specific Topics (Verified working images)
