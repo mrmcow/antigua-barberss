@@ -67,7 +67,7 @@ export default function JoinPage() {
                         </a>
 
                         <div className="p-6 rounded-[2rem] border border-white/10 flex flex-col justify-center bg-white/5">
-                            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-2">Why Join?</span>
+                            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-2">Perks</span>
                             <span className="text-white text-sm font-bold uppercase tracking-wide leading-relaxed">
                                 Cruise Traffic<br/>
                                 Google SEO<br/>
