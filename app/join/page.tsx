@@ -40,40 +40,41 @@ export default function JoinPage() {
                 </div>
 
                 {/* Right: Action Cards */}
-                <div className="space-y-6 pt-4">
-                    {/* Primary WhatsApp Action */}
+                <div className="space-y-4 pt-4">
+                    {/* Primary WhatsApp Action - Compact */}
                     <a 
                         href="https://wa.me/12687797231?text=Hi%20Antigua%20Barbers,%20I%20want%20to%20list%20my%20shop" 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group block bg-[#25D366] text-white p-10 rounded-[2.5rem] hover:scale-[1.02] transition-all duration-500 shadow-2xl shadow-[#25D366]/20"
+                        className="group flex items-center justify-between bg-[#25D366] text-white px-8 py-6 rounded-[2rem] hover:scale-[1.02] transition-all duration-300 shadow-xl shadow-[#25D366]/20"
                     >
-                        <div className="flex justify-between items-start mb-8">
+                        <div className="flex items-center gap-4">
                             <MessageCircle className="w-8 h-8" />
-                            <ArrowRight className="w-8 h-8 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                            <div>
+                                <h2 className="text-2xl font-black uppercase tracking-tight leading-none">WhatsApp Us</h2>
+                                <p className="text-white/80 font-medium text-xs uppercase tracking-wider">Instant Response</p>
+                            </div>
                         </div>
-                        <h2 className="text-4xl font-black uppercase tracking-tight mb-2">WhatsApp Us</h2>
-                        <p className="text-white/90 font-bold text-lg mb-8">Fastest way to get listed.</p>
-                        <span className="inline-block px-4 py-2 bg-black/20 backdrop-blur text-white rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-black/40 transition-colors">
-                            Start Chat
-                        </span>
+                        <ArrowRight className="w-6 h-6 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                     </a>
 
-                    {/* Secondary Actions Grid */}
-                    <div className="grid sm:grid-cols-2 gap-6">
+                    {/* Secondary Actions Grid - Compact */}
+                    <div className="grid sm:grid-cols-2 gap-4">
                         <a 
                             href="mailto:antiguabarbers@gmail.com?subject=List%20My%20Shop"
-                            className="group block bg-white text-black p-8 rounded-[2rem] hover:bg-gray-100 transition-all duration-300"
+                            className="group flex flex-col bg-white text-black p-6 rounded-[2rem] hover:bg-gray-100 transition-all duration-300 h-full"
                         >
-                            <Mail className="w-6 h-6 mb-4" />
-                            <h3 className="text-2xl font-black uppercase tracking-tight mb-1">Email</h3>
-                            <p className="text-sm font-medium text-gray-500 mb-2">antiguabarbers@gmail.com</p>
-                            <span className="text-black text-xs font-bold uppercase tracking-widest border-b-2 border-black">Send Details</span>
+                            <div className="flex justify-between items-start mb-2">
+                                <Mail className="w-6 h-6" />
+                                <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                            </div>
+                            <h3 className="text-xl font-black uppercase tracking-tight mb-1">Email</h3>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">antiguabarbers@gmail.com</p>
                         </a>
 
-                        <div className="p-8 rounded-[2rem] border border-white/10 flex flex-col justify-center bg-white/5">
-                            <span className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Why Join?</span>
-                            <span className="text-white text-lg font-black uppercase tracking-wide">
+                        <div className="p-6 rounded-[2rem] border border-white/10 flex flex-col justify-center bg-white/5">
+                            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-2">Why Join?</span>
+                            <span className="text-white text-sm font-bold uppercase tracking-wide leading-relaxed">
                                 Cruise Traffic<br/>
                                 Google SEO<br/>
                                 Verified Badge
