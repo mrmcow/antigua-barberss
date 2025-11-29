@@ -37,7 +37,11 @@ const ANTIGUA_NEIGHBORHOODS = [
     "Old Road",
     "Crosbies",
     "Falmouth",
-    "Bolans"
+    "Bolans",
+    "Piggotts",
+    "Winthorpes",
+    "Cassada Gardens",
+    "Cobbs Cross"
 ];
 
 export function BrowseContent({ initialBarbers }: BrowseContentProps) {
@@ -76,7 +80,7 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
 
     const toggleNeighborhood = (hood: string) => {
         setActiveNeighborhoods(prev => 
-            prev.includes(hood) ? prev.filter(h => h !== hood) : [...prev, hood]
+            prev.includes(hood) ? [] : [hood]
         );
     };
 
@@ -98,7 +102,10 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                 barber.neighborhood?.toLowerCase().includes(searchTerm.toLowerCase());
                 
             const matchesHood = activeNeighborhoods.length === 0 || 
-                (barber.neighborhood && activeNeighborhoods.includes(barber.neighborhood));
+                (barber.neighborhood && activeNeighborhoods.some(hood => 
+                    (barber.neighborhood || "").toLowerCase().includes(hood.toLowerCase()) ||
+                    (barber.address || "").toLowerCase().includes(hood.toLowerCase())
+                ));
 
             return matchesSearch && matchesHood;
         });
