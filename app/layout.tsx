@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: '-BeFhmeu8cJhUjY_KQgjhIO405UhG302efO4nsuDDM4',
+  },
   manifest: '/manifest.json',
 };
 
