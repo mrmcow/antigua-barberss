@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Star, Phone, Globe, Instagram, ArrowLeft, MessageCircle } from "lucide-react";
+import { MapPin, Star, ArrowLeft } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { CommunityComments } from "@/components/CommunityComments";
 import { BarberGallery } from "@/components/BarberGallery";
+import { BarberContactActions, BarberLocationAction, BarberSocialActions } from "@/components/BarberActions";
 
 // Force dynamic rendering since we rely on DB data
 export const dynamic = 'force-dynamic';
@@ -89,6 +90,18 @@ export default async function BarberProfile({ params }: { params: { slug: string
     } : undefined
   };
 
+  // Prepare simple barber object for client components
+  const simpleBarber = {
+    id: barber.id,
+    name: barber.name,
+    phone: barber.phone,
+    website: barber.website,
+    instagram_handle: barber.instagram_handle,
+    google_maps_url: barber.google_maps_url,
+    lat: barber.lat,
+    lng: barber.lng
+  };
+
   return (
     <main className="min-h-screen bg-[#FAFAFA] pb-20">
       {/* Inject JSON-LD */}
@@ -131,16 +144,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
                 </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-                {barber.phone && (
-                    <a href={`tel:${barber.phone}`} className="flex-1 bg-[#1a1a1a] text-white px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-3 hover:scale-105 transition-transform shadow-lg">
-                        <Phone className="w-4 h-4" /> Call Shop
-                    </a>
-                )}
-                <a href={`https://wa.me/12680000000`} className="flex-1 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-3 hover:scale-105 transition-transform shadow-lg">
-                    <MessageCircle className="w-5 h-5" /> WhatsApp
-                </a>
-            </div>
+            <BarberContactActions barber={simpleBarber} />
 
             {/* About / Hours */}
             <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
@@ -173,29 +177,12 @@ export default async function BarberProfile({ params }: { params: { slug: string
                 <p className="text-sm font-medium text-gray-600 mb-6 leading-relaxed">
                     {barber.address}
                 </p>
-                <a 
-                    href={barber.google_maps_url || `https://maps.google.com/?q=${barber.lat},${barber.lng}`} 
-                    target="_blank"
-                    className="block w-full py-3 border border-black/10 rounded-full text-center text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
-                >
-                    Get Directions
-                </a>
+                <BarberLocationAction barber={simpleBarber} />
             </div>
 
             <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-black/5">
                 <h3 className="text-sm font-black uppercase tracking-widest mb-4 text-gray-400">Contact</h3>
-                <div className="space-y-4">
-                    {barber.website && (
-                        <a href={barber.website} target="_blank" className="flex items-center gap-3 text-sm font-bold hover:text-[#0072C6] transition-colors">
-                            <Globe className="w-4 h-4" /> Visit Website
-                        </a>
-                    )}
-                    {barber.instagram_handle && (
-                        <a href={`https://instagram.com/${barber.instagram_handle}`} target="_blank" className="flex items-center gap-3 text-sm font-bold hover:text-[#E1306C] transition-colors">
-                            <Instagram className="w-4 h-4" /> @{barber.instagram_handle}
-                        </a>
-                    )}
-                </div>
+                <BarberSocialActions barber={simpleBarber} />
             </div>
         </div>
 
