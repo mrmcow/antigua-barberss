@@ -6,7 +6,7 @@ import { sendGAEvent } from '@next/third-parties/google';
 // Track click event
 export async function trackClickEvent(
   barbershopId: string,
-  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click' | 'google_view_click',
+  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click' | 'google_view_click' | 'whatsapp_click',
   destinationUrl?: string,
   barberName?: string,
   location?: string
@@ -53,7 +53,7 @@ export async function trackClickEvent(
 // Track and navigate - use this for external links
 export async function trackAndNavigate(
   barbershopId: string,
-  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click' | 'google_view_click',
+  eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click' | 'google_view_click' | 'whatsapp_click',
   url: string,
   barberName?: string,
   location?: string
