@@ -28,6 +28,16 @@ interface Barbershop {
   hours: any;
   images: string[];
   google_maps_url: string | null;
+  google_place_id: string | null;
+}
+
+interface GoogleReview {
+  author_name: string;
+  rating: number;
+  relative_time_description: string;
+  text: string;
+  time: number;
+  profile_photo_url?: string;
 }
 
 async function getBarber(id: string): Promise<Barbershop | null> {
@@ -64,6 +74,25 @@ async function getNextBarber(currentName: string): Promise<string | null> {
   return first?.id || null;
 }
 
+async function getGoogleReviews(placeId: string): Promise<GoogleReview[]> {
+  if (!placeId || !process.env.GOOGLE_PLACES_API_KEY) return [];
+
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${process.env.GOOGLE_PLACES_API_KEY}`,
+      { next: { revalidate: 3600 } } // Cache for 1 hour
+    );
+
+    if (!response.ok) return [];
+
+    const data = await response.json();
+    return data.result?.reviews || [];
+  } catch (error) {
+    console.error('Error fetching Google reviews:', error);
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const barber = await getBarber(params.slug);
   
@@ -89,7 +118,10 @@ export default async function BarberProfile({ params }: { params: { slug: string
     notFound();
   }
 
-  const nextBarberId = await getNextBarber(barber.name);
+  const [nextBarberId, googleReviews] = await Promise.all([
+    getNextBarber(barber.name),
+    barber.google_place_id ? getGoogleReviews(barber.google_place_id) : Promise.resolve([])
+  ]);
 
   // JSON-LD Schema for LocalBusiness
   const jsonLd = {
@@ -205,8 +237,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
                 barberName={barber.name} 
                 barbershopId={barber.id}
                 googleMapsUrl={barber.google_maps_url}
-                lat={barber.lat}
-                lng={barber.lng}
+                reviews={googleReviews}
             />
         </div>
 
