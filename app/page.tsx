@@ -81,7 +81,7 @@ export default async function Home() {
                     <div className="w-1 h-4 bg-[#0072C6]"></div>
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">
-                    Official Island Directory
+                    Official Antigua Barber Directory
                 </span>
              </div>
 
@@ -91,8 +91,8 @@ export default async function Home() {
             </h1>
             
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed font-medium tracking-wide animate-fade-in-up delay-200">
-                Antigua's official guide to professional grooming. 
-                <span className="hidden sm:inline"> Find trusted barbers, check cruise schedules, and book your next cut.</span>
+                The #1 trusted guide to grooming in Antigua & Barbuda. 
+                <span className="hidden sm:inline"> From St. John's to English Harbour, find the best cuts on the island.</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up delay-300">
