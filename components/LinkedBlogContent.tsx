@@ -36,7 +36,7 @@ export function LinkedBlogContent({ content, barberMap }: LinkedBlogContentProps
                         return (
                             <Link 
                                 href={href} 
-                                className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider text-xs hover:bg-[#CE1126] transition-all shadow-md hover:shadow-lg no-underline my-4"
+                                className="inline-flex items-center gap-2 bg-[#CE1126] text-white px-6 py-3 rounded-full font-bold uppercase tracking-wider text-xs hover:bg-[#b00e20] transition-all shadow-md hover:shadow-lg no-underline my-4"
                             >
                                 {children} <ExternalLink className="w-3 h-3" />
                             </Link>
