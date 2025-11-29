@@ -58,9 +58,9 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 px-2 sm:px-4 pt-2 sm:pt-4">
-        <div className="bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-full max-w-[1600px] mx-auto transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
-            <Link href="/" className="flex-shrink-0 relative z-50 pl-1">
+      <header className="sticky top-0 z-[100] px-2 sm:px-4 pt-2 sm:pt-4">
+        <div className="bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-full max-w-[1600px] mx-auto transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] relative z-[100]">
+            <Link href="/" className="flex-shrink-0 relative z-[100] pl-1">
             <Logo size="sm" />
             </Link>
             
@@ -91,10 +91,10 @@ export function Header() {
             {/* Mobile Menu Trigger */}
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className="sm:hidden p-2.5 bg-gray-100 hover:bg-gray-200 rounded-full transition-all active:scale-95 relative z-50"
+                className="sm:hidden p-3 bg-gray-100 hover:bg-gray-200 rounded-full transition-all active:scale-95 relative z-[100] cursor-pointer"
                 aria-label="Toggle menu"
             >
-                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
             </div>
         </div>
@@ -102,8 +102,8 @@ export function Header() {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed inset-0 z-40 bg-white flex flex-col justify-center px-8 transition-all duration-300 ease-in-out sm:hidden ${
-          isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
+        className={`fixed inset-0 z-[90] bg-white flex flex-col justify-center px-8 transition-all duration-300 ease-in-out sm:hidden ${
+          isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"
         }`}
       >
         <div className="space-y-6 text-center">
