@@ -39,21 +39,41 @@ async function getBlogPosts() {
 
 // Image mapping for blog categories/slugs
 const BLOG_IMAGES: Record<string, string> = {
-  'default': 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop',
-  'neighborhood-guides': 'https://images.unsplash.com/photo-1596436954828-a44264c4ae4a?q=80&w=2070&auto=format&fit=crop', // Street scene
-  'cruise-guides': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=2164&auto=format&fit=crop', // Cruise/Port
-  'travel-tips': 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?q=80&w=1974&auto=format&fit=crop', // Travel money/vibe
-  'culture': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop', // Barber culture
-  'how-to': 'https://images.unsplash.com/photo-1634480496840-d308799eb12d?q=80&w=2070&auto=format&fit=crop', // Mobile/tools
+  // Defaults & Categories
+  'default': 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop', // Caribbean Coast
+  'neighborhood-guides': 'https://images.unsplash.com/photo-1518182170546-0766bcbf2e8d?q=80&w=2070&auto=format&fit=crop', // Colorful Street
+  'cruise-guides': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=2164&auto=format&fit=crop', // Cruise Ship
+  'travel-tips': 'https://images.unsplash.com/photo-1589705296590-5c4c0e51c4f0?q=80&w=2070&auto=format&fit=crop', // Architecture
+  'culture': 'https://images.unsplash.com/photo-1590556409324-aa1d709f6286?q=80&w=2070&auto=format&fit=crop', // Authentic Barber
+  'how-to': 'https://images.unsplash.com/photo-1634480496840-d308799eb12d?q=80&w=2070&auto=format&fit=crop', // Tools
   
-  // Specific overrides for key articles
+  // Major Hubs & Neighborhoods
+  'barbers-english-harbour-falmouth': 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=2106&auto=format&fit=crop', // Yachts
+  'barbers-jolly-harbour-antigua': 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2070&auto=format&fit=crop', // Beach/Marina
+  'best-barbers-st-johns-antigua': 'https://images.unsplash.com/photo-1596436954828-a44264c4ae4a?q=80&w=2070&auto=format&fit=crop', // Busy Street
+  'how-to-find-barber-near-antigua-cruise-port': 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop', // Port View
+  
+  // Village Guides (Assigned distinct Caribbean vibes)
+  'best-barbers-cassada-gardens-antigua': 'https://images.unsplash.com/photo-1582037928769-181f2422677e?q=80&w=2070&auto=format&fit=crop',
+  'best-barbers-cobbs-cross-antigua': 'https://images.unsplash.com/photo-1518182170546-0766bcbf2e8d?q=80&w=2070&auto=format&fit=crop',
+  'best-barbers-liberta-antigua': 'https://images.unsplash.com/photo-1605557626697-2e87166d88f9?q=80&w=2070&auto=format&fit=crop',
+  'best-barbers-piggotts-antigua': 'https://images.unsplash.com/photo-1589705296590-5c4c0e51c4f0?q=80&w=2070&auto=format&fit=crop',
+  'best-barbers-winthorpes-antigua': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop',
+  'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1570654621852-9dd23b79e37e?q=80&w=2070&auto=format&fit=crop',
+  'barbers-near-vc-bird-airport': 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop',
+
+  // Specific Topics
   'tipping-barbers-antigua-guide': 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop',
   'antigua-barber-prices-2025': 'https://images.unsplash.com/photo-1634307289257-7826322c9763?q=80&w=2069&auto=format&fit=crop',
   'mobile-barbers-antigua-resort': 'https://images.unsplash.com/photo-1560066984-30414967e71b?q=80&w=2070&auto=format&fit=crop',
   'kids-haircuts-antigua-barbers': 'https://images.unsplash.com/photo-1599351431202-1e0f0137d9c8?q=80&w=2074&auto=format&fit=crop',
   'antigua-wedding-barber-packages': 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop',
-  'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1517832606299-7ae9b720a186?q=80&w=2068&auto=format&fit=crop',
-  'barbers-english-harbour-falmouth': 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=2106&auto=format&fit=crop',
+  'black-hair-barbers-antigua-tourist-guide': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop',
+  'barber-vocabulary-antigua-terms': 'https://images.unsplash.com/photo-1503951914290-9a61b84c9c35?q=80&w=2070&auto=format&fit=crop',
+  'best-beard-trims-antigua': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop',
+  'getting-haircut-sandals-antigua': 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=2074&auto=format&fit=crop',
+  'haircut-before-wedding-antigua': 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop',
+  'sunday-barbers-antigua': 'https://images.unsplash.com/photo-1532710093739-9470acff878f?q=80&w=2070&auto=format&fit=crop',
 };
 
 export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
