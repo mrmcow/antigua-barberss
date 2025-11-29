@@ -61,6 +61,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${bebas.variable}`} suppressHydrationWarning>
       <GoogleAnalytics gaId="G-2DKFFV7DQS" />
       <GoogleAnalytics gaId="GT-5MXH8HQ7" />
+      <GoogleAnalytics gaId="G-9N9MECZHKL" />
       <body className="font-sans antialiased bg-[#FAFAFA] text-black min-h-screen flex flex-col" suppressHydrationWarning>
         <ScrollToTop />
         <Header />
