@@ -356,6 +356,16 @@ function MatchResultsContent() {
                             </a>
                           )}
                           <a
+                            href={barber.phone ? `https://wa.me/${barber.phone.replace(/\D/g, '')}` : `https://wa.me/12680000000`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => trackClickEvent(barber.id, 'whatsapp_click', 'wa.me', barber.name, barber.neighborhood || undefined)}
+                            className="border-2 border-green-500 bg-green-50 text-green-700 p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-green-600 active:text-white transition-colors"
+                          >
+                            <Phone className="w-4 h-4" />
+                            WhatsApp
+                          </a>
+                          <a
                             href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
                             onClick={() => trackClickEvent(barber.id, 'directions_click', `https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`, barber.name, barber.neighborhood || undefined)}
                             target="_blank"

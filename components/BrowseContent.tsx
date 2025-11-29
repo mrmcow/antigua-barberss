@@ -193,7 +193,7 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                     <div className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 w-fit px-4 py-2 rounded-full border border-gray-200">
                         <Navigation className="w-4 h-4 text-[#0072C6]" />
                         <span>Sorting by distance near you</span>
-                        <button 
+                        <button
                             onClick={() => {
                                 const params = new URLSearchParams(searchParams.toString());
                                 params.delete('lat');
@@ -243,7 +243,7 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                             <div className="mb-4">
                                 <Link href={`/barbers/${barber.id}`}>
                                     <h3 className="text-lg font-black uppercase tracking-tight mb-1 group-hover:text-[#CE1126] transition-colors line-clamp-1">
-                                        {barber.name}
+                                                    {barber.name}
                                     </h3>
                                 </Link>
                                 <div className="flex items-center justify-between text-sm text-gray-500 font-medium">
@@ -278,7 +278,7 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                                     </a>
                                 ) : (
                                     <a 
-                                        href={`https://wa.me/12680000000`} // Placeholder number - would be dynamic if we had it
+                                        href={barber.phone ? `https://wa.me/${barber.phone.replace(/\D/g, '')}` : `https://wa.me/12680000000`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={() => trackClickEvent(barber.id, 'whatsapp_click', 'wa.me', barber.name)}

@@ -29,7 +29,7 @@ export function BarberContactActions({ barber }: BarberActionsProps) {
         </a>
       )}
       <a
-        href={`https://wa.me/12680000000`} // Placeholder
+        href={barber.phone ? `https://wa.me/${barber.phone.replace(/\D/g, '')}` : `https://wa.me/12680000000`}
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackClickEvent(barber.id, 'whatsapp_click', 'wa.me', barber.name)}
