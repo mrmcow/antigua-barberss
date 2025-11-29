@@ -58,43 +58,45 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-black/5 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-b-[1.5rem] sm:rounded-b-[2rem] shadow-sm transition-all">
-        <Link href="/" className="flex-shrink-0 relative z-50">
-          <Logo size="sm" />
-        </Link>
-        
-        <div className="flex items-center gap-3">
-          <Link 
-            href="/cruise" 
-            className="hidden md:flex items-center text-xs font-bold uppercase tracking-widest border border-black/10 px-5 py-2.5 rounded-full hover:bg-black hover:text-white transition-all hover:shadow-md"
-          >
-            Cruise Info
-          </Link>
-          
-          <button
-            onClick={handleNearMe}
-            className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-100 text-black font-bold uppercase tracking-widest text-xs hover:bg-[#0072C6] hover:text-white transition-all shadow-sm hover:shadow-md"
-            title="Find Barbers Near Me"
-          >
-            <Globe className="w-4 h-4" />
-            <span>Near Me</span>
-          </button>
+      <header className="sticky top-0 z-50 px-2 sm:px-4 pt-2 sm:pt-4">
+        <div className="bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-full max-w-[1600px] mx-auto transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+            <Link href="/" className="flex-shrink-0 relative z-50 pl-1">
+            <Logo size="sm" />
+            </Link>
+            
+            <div className="flex items-center gap-2 sm:gap-3">
+            <Link 
+                href="/cruise" 
+                className="hidden md:flex items-center text-[10px] font-bold uppercase tracking-widest border border-black/5 bg-gray-50/50 px-5 py-2.5 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+            >
+                Cruise Info
+            </Link>
+            
+            <button
+                onClick={handleNearMe}
+                className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-50/50 border border-black/5 text-black font-bold uppercase tracking-widest text-[10px] hover:bg-[#0072C6] hover:text-white hover:border-[#0072C6] transition-all duration-300"
+                title="Find Barbers Near Me"
+            >
+                <Globe className="w-3.5 h-3.5" />
+                <span>Near Me</span>
+            </button>
 
-          <Link 
-            href="/browse" 
-            className="hidden sm:flex items-center gap-2 bg-[#CE1126] text-white px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-red-700 transition-all shadow-md hover:shadow-red-500/30"
-          >
-            Find A Barber <ArrowRight className="w-3 h-3" />
-          </Link>
-          
-          {/* Mobile Menu Trigger */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className="sm:hidden p-2 text-black/80 hover:bg-gray-100 rounded-full transition-colors relative z-50"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            <Link 
+                href="/browse" 
+                className="hidden sm:flex items-center gap-2 bg-[#1a1a1a] text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#CE1126] hover:scale-105 transition-all duration-300 shadow-lg shadow-black/10"
+            >
+                Find A Barber
+            </Link>
+            
+            {/* Mobile Menu Trigger */}
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className="sm:hidden p-2.5 bg-gray-100 hover:bg-gray-200 rounded-full transition-all active:scale-95 relative z-50"
+                aria-label="Toggle menu"
+            >
+                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            </div>
         </div>
       </header>
 
