@@ -43,15 +43,15 @@ export function BarberContactActions({ barber }: BarberActionsProps) {
 
 export function BarberLocationAction({ barber }: BarberActionsProps) {
   return (
-    <a
-      href={barber.google_maps_url || `https://maps.google.com/?q=${barber.lat},${barber.lng}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={() => trackClickEvent(barber.id, 'directions_click', barber.google_maps_url || '', barber.name)}
-      className="block w-full py-3 border border-black/10 rounded-full text-center text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
-    >
-      Get Directions
-    </a>
+      <a 
+        href={`https://www.google.com/maps/dir/?api=1&destination=${barber.lat},${barber.lng}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackClickEvent(barber.id, 'directions_click', barber.google_maps_url || '', barber.name)}
+        className="block w-full py-3 border border-black/10 rounded-full text-center text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
+      >
+        Get Directions
+      </a>
   );
 }
 
