@@ -7,6 +7,7 @@ import { MapEmbed } from "@/components/ui/MapEmbed";
 import { CommunityComments } from "@/components/CommunityComments";
 import { BarberGallery } from "@/components/BarberGallery";
 import { BarberContactActions, BarberLocationAction, BarberSocialActions } from "@/components/BarberActions";
+import { GoogleReviews } from "@/components/GoogleReviews";
 
 // Force dynamic rendering since we rely on DB data
 export const dynamic = 'force-dynamic';
@@ -196,6 +197,17 @@ export default async function BarberProfile({ params }: { params: { slug: string
 
             {/* Community Comments */}
             <CommunityComments barbershopId={barber.id} barbershopName={barber.name} />
+
+            {/* Google Reviews Summary */}
+            <GoogleReviews 
+                rating={barber.rating} 
+                reviewCount={barber.review_count} 
+                barberName={barber.name} 
+                barbershopId={barber.id}
+                googleMapsUrl={barber.google_maps_url}
+                lat={barber.lat}
+                lng={barber.lng}
+            />
         </div>
 
         {/* Sidebar */}
