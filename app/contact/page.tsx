@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
-import { Mail } from "lucide-react";
+import { Mail, MessageCircle, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact - Antigua Barbers",
@@ -9,64 +9,79 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-[#FAFAFA]">
-      <main className="pt-32 pb-24 px-4 sm:px-6 max-w-[1000px] mx-auto">
+    <div className="min-h-screen bg-black selection:bg-[#CE1126] selection:text-white">
+      {/* Full Screen Hero with Grain */}
+      <main className="relative pt-32 pb-24 px-4 sm:px-6 min-h-screen flex flex-col justify-center">
         
-        <div className="text-center mb-16">
-            <span className="text-[#CE1126] font-bold text-xs uppercase tracking-[0.25em] block mb-6">Get In Touch</span>
-            <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tight text-[#1a1a1a] mb-8">
-                Let's <span className="text-[#FCD116] drop-shadow-sm text-shadow-black">Talk.</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed font-medium">
-                Barber shop owner? Found an incorrect listing? Looking to partner? 
-                We're here to help grow the community.
-            </p>
-        </div>
+        {/* Background Texture */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* For Barbers */}
-            <div className="bg-white p-8 rounded-[2.5rem] shadow-lg shadow-black/5 border border-black/5 flex flex-col">
-                <div className="mb-6">
-                    <span className="bg-black text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                        For Shop Owners
+        <div className="max-w-[1200px] mx-auto w-full relative z-10">
+            
+            {/* Header Badge */}
+            <div className="mb-12 flex justify-center md:justify-start">
+                <div className="inline-flex items-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md px-5 py-2.5 rounded-full">
+                    <div className="flex gap-1">
+                        <div className="w-1 h-4 bg-[#CE1126]"></div>
+                        <div className="w-1 h-4 bg-[#FCD116]"></div>
+                        <div className="w-1 h-4 bg-[#0072C6]"></div>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/80">
+                        Get In Touch
                     </span>
-                </div>
-                <h2 className="text-2xl font-black uppercase mb-4">Claim Your Shop</h2>
-                <p className="text-gray-500 font-medium mb-8 leading-relaxed">
-                    Want to update your photos, hours, or prices? We manage listings for free to help you get more clients.
-                </p>
-                <div className="mt-auto">
-                    <a 
-                        href="mailto:antiguabarbers@gmail.com?subject=Claiming My Shop" 
-                        className="w-full flex items-center justify-center gap-3 bg-[#1a1a1a] text-white py-4 rounded-full font-bold uppercase tracking-wider text-sm hover:scale-105 transition-transform shadow-xl"
-                    >
-                        <Mail className="w-4 h-4" /> Email Us
-                    </a>
                 </div>
             </div>
 
-            {/* General Contact */}
-            <div className="bg-white p-8 rounded-[2.5rem] shadow-lg shadow-black/5 border border-black/5 flex flex-col">
-                <div className="mb-6">
-                    <span className="bg-[#CE1126] text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                        General Inquiries
-                    </span>
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+                {/* Left: Impact Text */}
+                <div>
+                    <h1 className="text-7xl sm:text-9xl font-black uppercase tracking-tighter text-white leading-[0.8] mb-10 mix-blend-screen">
+                        Let's<br/>Talk.
+                    </h1>
+                    <p className="text-xl sm:text-2xl text-gray-400 max-w-md leading-relaxed font-medium tracking-wide">
+                        Barber shop owner? Found an incorrect listing? Looking to partner? 
+                        <span className="text-white block mt-2">We're here to help grow the culture.</span>
+                    </p>
                 </div>
-                <h2 className="text-2xl font-black uppercase mb-4">Everything Else</h2>
-                <p className="text-gray-500 font-medium mb-8 leading-relaxed">
-                    Found a bug? Have a suggestion? Just want to say big up? We respond to every message.
-                </p>
-                <div className="mt-auto">
+
+                {/* Right: Action Cards */}
+                <div className="space-y-6 pt-4">
+                    {/* Primary Email Action */}
                     <a 
-                        href="mailto:antiguabarbers@gmail.com?subject=General Inquiry" 
-                        className="w-full flex items-center justify-center gap-3 bg-white border-2 border-black/5 text-black py-4 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-gray-50 transition-colors"
+                        href="mailto:hello@antiguabarbers.com" 
+                        className="group block bg-white text-black p-10 rounded-[2.5rem] hover:scale-[1.02] transition-all duration-500 shadow-2xl shadow-white/5"
                     >
-                        <Mail className="w-4 h-4" /> Send a Message
+                        <div className="flex justify-between items-start mb-8">
+                            <Mail className="w-8 h-8" />
+                            <ArrowRight className="w-8 h-8 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                        </div>
+                        <h2 className="text-4xl font-black uppercase tracking-tight mb-2">Email Us</h2>
+                        <p className="text-gray-500 font-medium text-lg mb-8">hello@antiguabarbers.com</p>
+                        <span className="inline-block px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#CE1126] transition-colors">
+                            Send Message
+                        </span>
                     </a>
+
+                    {/* Secondary Actions Grid */}
+                    <div className="grid sm:grid-cols-2 gap-6">
+                        <a 
+                            href="https://wa.me/12680000000" 
+                            target="_blank"
+                            className="group block bg-[#1a1a1a] border border-white/10 p-8 rounded-[2rem] hover:bg-[#25D366] hover:border-[#25D366] transition-all duration-300"
+                        >
+                            <MessageCircle className="w-6 h-6 text-white mb-4" />
+                            <h3 className="text-white text-lg font-black uppercase tracking-wide mb-1">WhatsApp</h3>
+                            <span className="text-gray-500 text-xs font-bold uppercase tracking-widest group-hover:text-white/90">Chat Now</span>
+                        </a>
+
+                        <div className="p-8 rounded-[2rem] border border-white/10 flex flex-col justify-center">
+                            <span className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Based In</span>
+                            <span className="text-white text-xl font-black uppercase tracking-wide">St. John's,<br/>Antigua</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
       </main>
       <Footer />
     </div>
