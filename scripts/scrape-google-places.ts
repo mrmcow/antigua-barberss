@@ -30,6 +30,18 @@ const ANTIGUA_AREAS = [
   { name: "Dickenson Bay", lat: 17.1486, lng: -61.8463 }, // Resort strip
   { name: "Old Road / Morris Bay", lat: 17.0210, lng: -61.8590 }, // South coast
   { name: "Cedar Grove / Crosbies", lat: 17.1560, lng: -61.8160 }, // North residential
+  { name: "Bolans", lat: 17.0667, lng: -61.8667 },
+  { name: "Liberta", lat: 17.0417, lng: -61.7917 },
+  { name: "Parham", lat: 17.1167, lng: -61.7667 },
+  { name: "Willikies", lat: 17.1000, lng: -61.7167 },
+  { name: "Five Islands Village", lat: 17.1167, lng: -61.8667 },
+  { name: "Piggotts", lat: 17.1167, lng: -61.8000 },
+  { name: "Potters Village", lat: 17.1167, lng: -61.8167 },
+  { name: "Jennings", lat: 17.0833, lng: -61.8667 },
+  { name: "Urlings", lat: 17.0333, lng: -61.8667 },
+  { name: "Bethesda", lat: 17.0500, lng: -61.7500 },
+  { name: "Newfield", lat: 17.0500, lng: -61.7333 },
+  { name: "Freetown", lat: 17.0500, lng: -61.7000 },
 ];
 
 interface PlaceResult {
@@ -58,7 +70,7 @@ async function searchBarbers(location: string, lat: number, lng: number) {
   try {
     const params = {
       location: `${lat},${lng}`,
-      radius: 7000,
+      radius: 5000, // 5km radius
       type: 'hair_care',
       keyword: 'barber shop',
       key: GOOGLE_API_KEY,
@@ -82,7 +94,7 @@ async function searchBarbers(location: string, lat: number, lng: number) {
       'https://maps.googleapis.com/maps/api/place/textsearch/json',
       {
         params: {
-          query: `barber shop in ${location}`,
+          query: `barber shop in ${location} Antigua`,
           key: GOOGLE_API_KEY,
         },
       }
@@ -137,10 +149,22 @@ function getPriceRange(priceLevel?: number): string {
 
 // Helper to determine "Area" from address or coords
 function determineArea(address: string, lat: number, lng: number): string {
-  if (address.includes("St John") || address.includes("Saint John")) return "St. John's";
-  if (address.includes("Jolly Harbour")) return "Jolly Harbour";
-  if (address.includes("English Harbour") || address.includes("Falmouth")) return "English Harbour";
-  if (address.includes("All Saints")) return "All Saints";
+  const lowerAddress = address.toLowerCase();
+  
+  if (lowerAddress.includes("st john") || lowerAddress.includes("saint john")) return "St. John's";
+  if (lowerAddress.includes("jolly harbour")) return "Jolly Harbour";
+  if (lowerAddress.includes("english harbour") || lowerAddress.includes("falmouth")) return "English Harbour";
+  if (lowerAddress.includes("all saints")) return "All Saints";
+  if (lowerAddress.includes("liberta")) return "Liberta";
+  if (lowerAddress.includes("bolans")) return "Bolans";
+  if (lowerAddress.includes("piggotts")) return "Piggotts";
+  if (lowerAddress.includes("crosbies")) return "Crosbies";
+  if (lowerAddress.includes("dickenson bay")) return "Dickenson Bay";
+  if (lowerAddress.includes("old road")) return "Old Road";
+  if (lowerAddress.includes("winthorpes")) return "Winthorpes";
+  if (lowerAddress.includes("cassada")) return "Cassada Gardens";
+  if (lowerAddress.includes("cobbs cross")) return "Cobbs Cross";
+  
   return "Antigua";
 }
 
@@ -177,11 +201,13 @@ async function saveBarberToDatabase(place: PlaceResult) {
       ) || [];
 
     // Insert into database with Antigua-specific fields
+    const area = determineArea(place.formatted_address, place.geometry.location.lat, place.geometry.location.lng);
+    
     const { error } = await supabase.from('barbershops').insert({
       name: place.name,
       address: place.formatted_address,
-      neighborhood: determineArea(place.formatted_address, place.geometry.location.lat, place.geometry.location.lng),
-      area: determineArea(place.formatted_address, place.geometry.location.lat, place.geometry.location.lng),
+      neighborhood: area,
+      area: area,
       lat: place.geometry.location.lat,
       lng: place.geometry.location.lng,
       phone: place.formatted_phone_number || null,
@@ -203,7 +229,7 @@ async function saveBarberToDatabase(place: PlaceResult) {
     if (error) {
       console.error(`❌ Error saving ${place.name}:`, error.message);
     } else {
-      console.log(`✅ Saved: ${place.name} - ${place.formatted_address}`);
+      console.log(`✅ Saved: ${place.name} - ${place.formatted_address} (${area})`);
     }
   } catch (error) {
     console.error(`❌ Error processing ${place.name}:`, error);
@@ -219,6 +245,7 @@ async function scrapeAllAreas() {
 
   for (const area of ANTIGUA_AREAS) {
     // Search for barbers in this area
+    console.log(`\n🔍 Searching near ${area.name}...`);
     const places = await searchBarbers(area.name, area.lat, area.lng);
     totalFound += places.length;
 
@@ -242,7 +269,7 @@ async function scrapeAllAreas() {
 
   console.log('\n✨ Scraping complete!');
   console.log(`📊 Found ${totalFound} barbers total`);
-  console.log(`💾 Saved ${totalSaved} to database`);
+  console.log(`💾 Saved ${totalSaved} new records to database`);
   console.log('\n🔗 Check your Supabase dashboard to see the data');
 }
 
@@ -270,4 +297,3 @@ if (require.main === module) {
 }
 
 export { scrapeAllAreas };
-

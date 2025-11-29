@@ -59,6 +59,18 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
     const userLng = searchParams.get('lng') ? parseFloat(searchParams.get('lng')!) : null;
     const sortBy = searchParams.get('sort');
 
+    // Calculate counts for each neighborhood based on current barbers data
+    const neighborhoodCounts = useMemo(() => {
+        const counts: Record<string, number> = {};
+        ANTIGUA_NEIGHBORHOODS.forEach(hood => {
+            counts[hood] = barbers.filter(b => 
+                (b.neighborhood || "").toLowerCase().includes(hood.toLowerCase()) ||
+                (b.address || "").toLowerCase().includes(hood.toLowerCase())
+            ).length;
+        });
+        return counts;
+    }, [barbers]);
+
     // Sync URL with state
     useEffect(() => {
         const params = new URLSearchParams(searchParams.toString());
@@ -140,13 +152,20 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                         <button
                             key={hood}
                             onClick={() => toggleNeighborhood(hood)}
-                            className={`flex-shrink-0 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all border ${
+                            className={`flex-shrink-0 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all border flex items-center gap-2 ${
                                 activeNeighborhoods.includes(hood)
                                     ? "bg-[#1a1a1a] text-white border-[#1a1a1a] shadow-md"
                                     : "bg-white text-gray-600 border-black/5 hover:border-black/20 hover:text-black"
                             }`}
                         >
-                            {hood}
+                            <span>{hood}</span>
+                            <span className={`ml-1 text-[10px] px-1.5 py-0.5 rounded-full ${
+                                activeNeighborhoods.includes(hood) 
+                                    ? "bg-white/20 text-white" 
+                                    : "bg-black/5 text-black/60"
+                            }`}>
+                                {neighborhoodCounts[hood] || 0}
+                            </span>
                         </button>
                     ))}
                 </div>
