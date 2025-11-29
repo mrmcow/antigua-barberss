@@ -140,9 +140,6 @@ export function Header() {
                     <span>For Barbers</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <a href="mailto:hello@antiguabarbers.com" className="block text-center text-sm text-gray-400 font-medium">
-                    hello@antiguabarbers.com
-                </a>
             </div>
         </div>
       </div>
