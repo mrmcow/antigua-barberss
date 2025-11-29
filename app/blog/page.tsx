@@ -3,7 +3,7 @@ const BLOG_IMAGES: Record<string, string> = {
   // Defaults & Categories (Using Verified Free Unsplash Images)
   'default': 'https://images.unsplash.com/photo-1590884984873-19b3e78b8d34?q=80&w=2070&auto=format&fit=crop', // Authentic Antigua Street
   'neighborhood-guides': 'https://images.unsplash.com/photo-1624246095068-a8861d4e0ee1?q=80&w=2070&auto=format&fit=crop', // Caribbean House/Street
-  'cruise-guides': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop', // Sunny Tropical Vibe
+  'cruise-guides': 'https://images.unsplash.com/photo-1590884984926-e23e4cf95dd2?q=80&w=2070&auto=format&fit=crop', // Heritage Buildings (Replaces Sneaker)
   'travel-tips': 'https://images.unsplash.com/photo-1589705296590-5c4c0e51c4f0?q=80&w=2070&auto=format&fit=crop', // Architecture
   'culture': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop', // Authentic Barber
   'how-to': 'https://images.unsplash.com/photo-1634480496840-d308799eb12d?q=80&w=2070&auto=format&fit=crop', // Tools
@@ -12,7 +12,7 @@ const BLOG_IMAGES: Record<string, string> = {
   'barbers-english-harbour-falmouth': 'https://images.unsplash.com/photo-1590884984926-e23e4cf95dd2?q=80&w=2070&auto=format&fit=crop', // Heritage Buildings
   'barbers-jolly-harbour-antigua': 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2070&auto=format&fit=crop', // Jolly Harbour Vibe
   'best-barbers-st-johns-antigua': 'https://images.unsplash.com/photo-1590884984873-19b3e78b8d34?q=80&w=2070&auto=format&fit=crop', // St. John's Street
-  'how-to-find-barber-near-antigua-cruise-port': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop', // Cruise Port Vibe
+  'how-to-find-barber-near-antigua-cruise-port': 'https://images.unsplash.com/photo-1590884984926-e23e4cf95dd2?q=80&w=2070&auto=format&fit=crop', // Heritage Buildings (Replaces Sneaker)
   
   // Village Guides (Using Verified Caribbean/Tropical Images that work)
   'best-barbers-cassada-gardens-antigua': 'https://images.unsplash.com/photo-1624246095068-a8861d4e0ee1?q=80&w=2070&auto=format&fit=crop', // Tropical Garden/Street
@@ -21,14 +21,14 @@ const BLOG_IMAGES: Record<string, string> = {
   'best-barbers-piggotts-antigua': 'https://images.unsplash.com/photo-1624397741918-19d0a95fa902?q=80&w=2070&auto=format&fit=crop', // Colorful Housing
   'best-barbers-winthorpes-antigua': 'https://images.unsplash.com/photo-1590884984873-19b3e78b8d34?q=80&w=2070&auto=format&fit=crop', // Authentic Street Scene
   'best-barbers-willikies-antigua': 'https://images.unsplash.com/photo-1666705200490-2e3e616ae55a?q=80&w=2070&auto=format&fit=crop', // Village Street
-  'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1602120015893-ec715ec24be7?q=80&w=2070&auto=format&fit=crop', // Vibrant Street
-  'barbers-near-vc-bird-airport': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2074&auto=format&fit=crop', // Airplane/Sky
-
+  'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1590884984873-19b3e78b8d34?q=80&w=2070&auto=format&fit=crop', // Replaced dark alley with St Johns street
+  'barbers-near-vc-bird-airport': 'https://images.unsplash.com/photo-1589705296590-5c4c0e51c4f0?q=80&w=2074&auto=format&fit=crop', // Replaced Sneaker with Architecture/Palm
+  
   // Specific Topics (Verified working images)
   'tipping-barbers-antigua-guide': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop', // Authentic Barber
   'antigua-barber-prices-2025': 'https://images.unsplash.com/photo-1634307289257-7826322c9763?q=80&w=2069&auto=format&fit=crop',
   'mobile-barbers-antigua-resort': 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2070&auto=format&fit=crop', // Resort Vibe
-  'kids-haircuts-antigua-barbers': 'https://images.unsplash.com/photo-1599351431202-1e0f0137d9c8?q=80&w=2074&auto=format&fit=crop',
+  'kids-haircuts-antigua-barbers': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2074&auto=format&fit=crop', // Replaced broken image with authentic barber
   'antigua-wedding-barber-packages': 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop',
   'black-hair-barbers-antigua-tourist-guide': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop',
   'barber-vocabulary-antigua-terms': 'https://images.unsplash.com/photo-1503951914290-9a61b84c9c35?q=80&w=2070&auto=format&fit=crop',
@@ -142,7 +142,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
                   href={`/blog/${post.slug}`}
                   className="group flex flex-col bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-gray-300 hover:shadow-md transition-all duration-300 h-full"
                 >
-                  <div className="aspect-[2/1] bg-gray-100 relative overflow-hidden">
+                  <div className="aspect-[3/2] bg-gray-100 relative overflow-hidden">
                     {/* Blog Image */}
                     <img 
                       src={BLOG_IMAGES[post.slug] || BLOG_IMAGES[post.category] || BLOG_IMAGES['default']} 
