@@ -106,34 +106,40 @@ export function Header() {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed inset-0 z-[90] bg-white flex flex-col justify-center px-8 transition-all duration-300 ease-in-out sm:hidden ${
+        className={`fixed inset-0 z-[90] bg-white flex flex-col justify-center px-6 transition-all duration-300 ease-in-out sm:hidden ${
           isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"
         }`}
         aria-hidden={!isOpen}
       >
-        <div className="space-y-6 text-center">
+        <div className="space-y-2">
             <button 
                 onClick={handleNearMe}
-                className="w-full py-4 bg-gray-100 rounded-2xl flex items-center justify-center gap-2 text-lg font-black uppercase tracking-tight hover:bg-[#0072C6] hover:text-white transition-all"
+                className="w-full py-3 bg-gray-100 rounded-xl flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest hover:bg-[#0072C6] hover:text-white transition-all mb-6"
             >
-                <Globe className="w-5 h-5" /> Find Near Me
+                <Globe className="w-4 h-4" /> Find Near Me
             </button>
 
-            <Link href="/browse" className="block text-3xl font-black uppercase tracking-tight hover:text-[#CE1126] transition-colors">
-                Find A Barber
-            </Link>
-            <Link href="/cruise" className="block text-3xl font-black uppercase tracking-tight hover:text-[#0072C6] transition-colors">
-                Cruise Info
-            </Link>
-            <Link href="/about" className="block text-3xl font-black uppercase tracking-tight hover:text-[#FCD116] transition-colors">
-                About
-            </Link>
-            
-            <div className="pt-8 flex flex-col gap-4">
-                <Link href="/join" className="block w-full py-4 border border-black/10 rounded-full text-sm font-bold uppercase tracking-widest">
-                    For Barbers
+            <nav className="space-y-1">
+                <Link href="/browse" className="block py-3 text-2xl font-black uppercase tracking-tight hover:text-[#CE1126] transition-colors border-b border-gray-100">
+                    Find A Barber
                 </Link>
-                <a href="mailto:hello@antiguabarbers.com" className="block text-sm text-gray-500 font-medium">
+                <Link href="/cruise" className="block py-3 text-2xl font-black uppercase tracking-tight hover:text-[#0072C6] transition-colors border-b border-gray-100">
+                    Cruise Info
+                </Link>
+                <Link href="/blog" className="block py-3 text-2xl font-black uppercase tracking-tight hover:text-[#CE1126] transition-colors border-b border-gray-100">
+                    Blog
+                </Link>
+                <Link href="/about" className="block py-3 text-2xl font-black uppercase tracking-tight hover:text-[#FCD116] transition-colors border-b border-gray-100">
+                    About
+                </Link>
+            </nav>
+            
+            <div className="pt-6 flex flex-col gap-3">
+                <Link href="/join" className="flex items-center justify-between w-full py-3 px-4 border border-black/10 rounded-xl text-xs font-bold uppercase tracking-widest group">
+                    <span>For Barbers</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <a href="mailto:hello@antiguabarbers.com" className="block text-center text-xs text-gray-400 font-medium pt-2">
                     hello@antiguabarbers.com
                 </a>
             </div>

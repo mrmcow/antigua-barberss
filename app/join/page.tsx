@@ -67,7 +67,8 @@ export default function JoinPage() {
                         >
                             <Mail className="w-6 h-6 mb-4" />
                             <h3 className="text-2xl font-black uppercase tracking-tight mb-1">Email</h3>
-                            <span className="text-gray-500 text-xs font-bold uppercase tracking-widest group-hover:text-black">Send Details</span>
+                            <p className="text-sm font-medium text-gray-500 mb-2">antiguabarbers@gmail.com</p>
+                            <span className="text-black text-xs font-bold uppercase tracking-widest border-b-2 border-black">Send Details</span>
                         </a>
 
                         <div className="p-8 rounded-[2rem] border border-white/10 flex flex-col justify-center bg-white/5">
