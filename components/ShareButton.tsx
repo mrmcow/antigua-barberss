@@ -8,27 +8,39 @@ interface ShareButtonProps {
 }
 
 export function ShareButton({ title, description }: ShareButtonProps) {
-    const handleShare = () => {
-        if (navigator.share) {
-            navigator.share({
-                title,
-                text: description,
-                url: window.location.href,
-            }).catch((error) => console.log('Error sharing:', error));
+    const handleShare = async () => {
+        const shareData = {
+            title,
+            text: description,
+            url: window.location.href,
+        };
+
+        if (navigator.share && navigator.canShare(shareData)) {
+            try {
+                await navigator.share(shareData);
+            } catch (error) {
+                if ((error as Error).name !== 'AbortError') {
+                    console.log('Error sharing:', error);
+                }
+            }
         } else {
             // Fallback: copy to clipboard
-            navigator.clipboard.writeText(window.location.href);
-            alert('Link copied to clipboard!');
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            } catch (error) {
+                console.error('Failed to copy:', error);
+            }
         }
     };
 
     return (
         <button
             onClick={handleShare}
-            className="inline-flex items-center gap-2 text-sm uppercase tracking-wider font-bold hover:text-la-orange transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/10 hover:bg-black/5 transition-all text-xs uppercase tracking-widest font-bold text-gray-600 hover:text-black"
         >
-            <Share2 className="w-4 h-4" />
-            Share Article
+            <Share2 className="w-3 h-3" />
+            Share
         </button>
     );
 }
