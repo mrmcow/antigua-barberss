@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Star, ArrowLeft } from "lucide-react";
+import { MapPin, Star, ArrowLeft, ArrowRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { CommunityComments } from "@/components/CommunityComments";
@@ -40,6 +40,29 @@ async function getBarber(id: string): Promise<Barbershop | null> {
   return data;
 }
 
+async function getNextBarber(currentName: string): Promise<string | null> {
+  // Try to get next alphabetical
+  const { data } = await supabase
+    .from('barbershops')
+    .select('id')
+    .gt('name', currentName)
+    .order('name', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+
+  if (data) return data.id;
+
+  // Fallback to first (wrap around)
+  const { data: first } = await supabase
+    .from('barbershops')
+    .select('id')
+    .order('name', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+
+  return first?.id || null;
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const barber = await getBarber(params.slug);
   
@@ -64,6 +87,8 @@ export default async function BarberProfile({ params }: { params: { slug: string
   if (!barber) {
     notFound();
   }
+
+  const nextBarberId = await getNextBarber(barber.name);
 
   // JSON-LD Schema for LocalBusiness
   const jsonLd = {
@@ -112,10 +137,16 @@ export default async function BarberProfile({ params }: { params: { slug: string
 
       {/* Back Nav */}
       <div className="sticky top-[72px] z-40 bg-[#FAFAFA]/95 backdrop-blur py-4 px-4 sm:px-6 border-b border-black/5 mb-6">
-        <div className="max-w-[1600px] mx-auto">
+        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
             <Link href="/browse" className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 transition-all shadow-sm border border-black/5">
-                <ArrowLeft className="w-3 h-3" /> Back to Directory
+                <ArrowLeft className="w-3 h-3" /> <span className="hidden sm:inline">Back to Directory</span><span className="sm:hidden">Back</span>
             </Link>
+
+            {nextBarberId && (
+                <Link href={`/barbers/${nextBarberId}`} className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#CE1126] transition-all shadow-sm">
+                    Next <span className="hidden sm:inline">Shop</span> <ArrowRight className="w-3 h-3" />
+                </Link>
+            )}
         </div>
       </div>
 
