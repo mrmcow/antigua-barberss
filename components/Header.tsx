@@ -72,14 +72,14 @@ export function Header() {
                 Cruise Info
             </Link>
             
-            <button
-                onClick={handleNearMe}
+            <Link
+                href="/browse?sort=distance"
                 className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-50/50 border border-black/5 text-black font-bold uppercase tracking-widest text-[10px] hover:bg-[#0072C6] hover:text-white hover:border-[#0072C6] transition-all duration-300"
                 title="Find Barbers Near Me"
             >
                 <Globe className="w-3.5 h-3.5" />
                 <span>Near Me</span>
-            </button>
+            </Link>
 
             <Link 
                 href="/browse" 
@@ -113,12 +113,12 @@ export function Header() {
       >
         <div className="flex flex-col h-full">
             
-            <button 
-                onClick={handleNearMe}
+            <Link 
+                href="/browse?sort=distance"
                 className="w-full py-4 bg-gray-100 rounded-2xl flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest hover:bg-[#0072C6] hover:text-white transition-all mb-8"
             >
                 <Globe className="w-4 h-4" /> Find Near Me
-            </button>
+            </Link>
 
             <nav className="flex-1 space-y-6">
                 <Link href="/browse" className="block text-4xl font-black uppercase tracking-tighter hover:text-[#CE1126] transition-colors">
