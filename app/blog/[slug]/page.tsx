@@ -197,8 +197,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
       {/* Article Header */}
       <article className="py-12 md:py-16">
-        <div className="max-w-[1000px] mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto">
             {/* Meta Info */}
             <div className="flex flex-wrap items-center gap-4 mb-8">
               <Badge variant="default" className="uppercase bg-[#FCD116] text-black hover:bg-[#e5c004]">
