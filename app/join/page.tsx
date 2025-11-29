@@ -60,17 +60,13 @@ export default function JoinPage() {
 
                     {/* Secondary Actions Grid - Compact */}
                     <div className="grid sm:grid-cols-2 gap-4">
-                        <a 
-                            href="mailto:antiguabarbers@gmail.com?subject=List%20My%20Shop"
-                            className="group flex flex-col bg-white text-black p-6 rounded-[2rem] hover:bg-gray-100 transition-all duration-300 h-full"
-                        >
+                        <div className="group flex flex-col bg-white text-black p-6 rounded-[2rem] hover:bg-gray-100 transition-all duration-300 h-full cursor-not-allowed opacity-70">
                             <div className="flex justify-between items-start mb-2">
                                 <Mail className="w-6 h-6" />
-                                <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                             </div>
                             <h3 className="text-xl font-black uppercase tracking-tight mb-1">Email</h3>
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">antiguabarbers@gmail.com</p>
-                        </a>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Coming Soon</p>
+                        </div>
 
                         <div className="p-6 rounded-[2rem] border border-white/10 flex flex-col justify-center bg-white/5">
                             <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-2">Why Join?</span>
