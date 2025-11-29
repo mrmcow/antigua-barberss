@@ -78,9 +78,9 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
       setComments(prev => [data, ...prev]);
       
       // Store this comment ID as "mine"
-      const newMyCommentIds = new Set([...myCommentIds, data.id]);
+      const newMyCommentIds = new Set(Array.from(myCommentIds).concat([data.id]));
       setMyCommentIds(newMyCommentIds);
-      localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify([...newMyCommentIds]));
+      localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify(Array.from(newMyCommentIds)));
       
       setNewComment("");
       setDisplayName("");
@@ -106,7 +106,7 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
       const newMyCommentIds = new Set(myCommentIds);
       newMyCommentIds.delete(commentId);
       setMyCommentIds(newMyCommentIds);
-      localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify([...newMyCommentIds]));
+      localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify(Array.from(newMyCommentIds)));
     }
   };
 
@@ -249,9 +249,9 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
                 ) : (
                   <button
                     onClick={() => {
-                      const newMyCommentIds = new Set([...myCommentIds, comment.id]);
+                      const newMyCommentIds = new Set(Array.from(myCommentIds).concat([comment.id]));
                       setMyCommentIds(newMyCommentIds);
-                      localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify([...newMyCommentIds]));
+                      localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify(Array.from(newMyCommentIds)));
                     }}
                     className="bg-gray-400 text-white px-3 py-1 rounded-full text-xs font-bold hover:bg-gray-500 transition-colors"
                     title="Claim this comment as yours"
