@@ -87,7 +87,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
     : allPosts;
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA]">
+    <main className="min-h-screen bg-[#FAFAFA] pt-24 sm:pt-32">
       {/* Hero Section - Compact */}
       <section className="pt-4 pb-8 px-6 bg-white border-b border-gray-100">
         <div className="max-w-[1200px] mx-auto">
@@ -108,7 +108,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
       </section>
 
       {/* Category Filters - Compact */}
-      <section className="px-6 bg-white sticky top-[68px] z-20 border-b border-gray-100 shadow-sm">
+      <section className="px-6 bg-white sticky top-[88px] sm:top-[100px] z-40 border-b border-gray-100 shadow-sm transition-all duration-300">
         <div className="max-w-[1200px] mx-auto flex overflow-x-auto py-3 gap-2 no-scrollbar">
           <Link 
             href="/blog" 
