@@ -123,26 +123,25 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
 
   if (loading) {
     return (
-      <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
-        <div className="animate-pulse space-y-4">
+      <div className="bg-white p-6 rounded-2xl shadow-sm border border-black/5">
+        <div className="animate-pulse space-y-3">
           <div className="h-4 bg-gray-200 rounded w-1/3"></div>
           <div className="h-3 bg-gray-200 rounded w-full"></div>
-          <div className="h-3 bg-gray-200 rounded w-2/3"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-black uppercase tracking-wider flex items-center gap-2">
-          <MessageSquare className="w-5 h-5 text-[#0072C6]" />
+    <div className="bg-white p-6 rounded-2xl shadow-sm border border-black/5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-2 text-gray-900">
+          <MessageSquare className="w-4 h-4 text-[#0072C6]" />
           Community Says
         </h3>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="text-xs font-bold uppercase tracking-widest bg-[#CE1126] text-white px-4 py-2 rounded-full hover:bg-red-700 transition-colors"
+          className="text-[10px] font-bold uppercase tracking-widest bg-[#CE1126] text-white px-3 py-1.5 rounded-full hover:bg-red-700 transition-colors"
         >
           Add Comment
         </button>
@@ -150,49 +149,43 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
 
       {/* Add Comment Form */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="mb-8 p-6 bg-gray-50 rounded-2xl space-y-4">
+        <form onSubmit={handleSubmit} className="mb-6 p-4 bg-gray-50 rounded-xl space-y-3">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
-              Your Name (Optional)
-            </label>
             <input
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="Local Regular, Cruise Visitor, etc."
-              className="w-full px-4 py-3 rounded-full border border-gray-200 focus:border-[#CE1126] focus:outline-none text-sm"
+              placeholder="Your Name (Optional)"
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-[#CE1126] focus:outline-none text-xs font-medium"
               maxLength={50}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
-              Your Experience
-            </label>
             <textarea
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              placeholder="How was your cut? What should others know?"
-              className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:border-[#CE1126] focus:outline-none text-sm resize-none"
-              rows={3}
+              placeholder="Share your experience..."
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-[#CE1126] focus:outline-none text-xs resize-none"
+              rows={2}
               maxLength={500}
               required
             />
-            <div className="text-xs text-gray-400 mt-1">{newComment.length}/500</div>
+            <div className="text-[10px] text-gray-400 mt-1 text-right">{newComment.length}/500</div>
           </div>
 
           <div className="flex justify-end gap-2">
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="px-6 py-2 text-xs font-bold uppercase tracking-wider text-gray-600 hover:text-black transition-colors"
+              className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 hover:text-black transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting || !newComment.trim()}
-              className="px-6 py-2 bg-[#1a1a1a] text-white text-xs font-bold uppercase tracking-wider rounded-full hover:bg-black transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="px-4 py-1.5 bg-[#1a1a1a] text-white text-[10px] font-bold uppercase tracking-wider rounded-full hover:bg-black transition-colors disabled:opacity-50 flex items-center gap-1.5"
             >
               <Send className="w-3 h-3" />
               {submitting ? "Posting..." : "Post"}
@@ -202,37 +195,32 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
       )}
 
       {/* Comments List */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         {comments.length === 0 ? (
-          <div className="text-center py-8 text-gray-400">
-            <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-30" />
-            <p className="text-sm font-medium">No community comments yet.</p>
-            <p className="text-xs">Be the first to share your experience!</p>
+          <div className="text-center py-6 text-gray-400 bg-gray-50 rounded-xl border border-dashed border-gray-200">
+            <MessageSquare className="w-8 h-8 mx-auto mb-2 opacity-20" />
+            <p className="text-xs font-medium">No community comments yet.</p>
           </div>
         ) : (
           comments.map((comment) => (
-            <div key={comment.id} className="border-b border-gray-100 pb-6 last:border-0">
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-[#FCD116]/20 rounded-full flex items-center justify-center">
-                    <MessageSquare className="w-4 h-4 text-[#0072C6]" />
+            <div key={comment.id} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 bg-[#FCD116]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MessageSquare className="w-3 h-3 text-[#0072C6]" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold">
+                      <span className="text-xs font-bold text-gray-900">
                         {comment.display_name || "Anonymous"}
                       </span>
                       {myCommentIds.has(comment.id) && (
-                        <span className="text-xs bg-[#CE1126] text-white px-2 py-0.5 rounded-full font-bold">
+                        <span className="text-[10px] bg-[#CE1126] text-white px-1.5 py-px rounded-full font-bold leading-none">
                           YOU
                         </span>
                       )}
-                      {/* Debug info */}
-                      <span className="text-xs text-gray-300 ml-2">
-                        ID: {comment.id.slice(-4)}
-                      </span>
                     </div>
-                    <span className="text-xs text-gray-400">{formatDate(comment.created_at)}</span>
+                    <span className="text-[10px] text-gray-400 block leading-none mt-0.5">{formatDate(comment.created_at)}</span>
                   </div>
                 </div>
                 
@@ -240,11 +228,10 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
                 {myCommentIds.has(comment.id) ? (
                   <button
                     onClick={() => handleDelete(comment.id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold hover:bg-red-600 transition-colors flex items-center gap-1"
+                    className="text-gray-400 hover:text-red-500 transition-colors p-1"
                     title="Delete your comment"
                   >
                     <Trash2 className="w-3 h-3" />
-                    Delete
                   </button>
                 ) : (
                   <button
@@ -253,14 +240,14 @@ export function CommunityComments({ barbershopId, barbershopName }: CommunityCom
                       setMyCommentIds(newMyCommentIds);
                       localStorage.setItem(`my-comments-${barbershopId}`, JSON.stringify(Array.from(newMyCommentIds)));
                     }}
-                    className="bg-gray-400 text-white px-3 py-1 rounded-full text-xs font-bold hover:bg-gray-500 transition-colors"
+                    className="text-[10px] text-gray-300 hover:text-gray-400 font-medium transition-colors"
                     title="Claim this comment as yours"
                   >
-                    Mine
+                    Claim
                   </button>
                 )}
               </div>
-              <p className="text-sm text-gray-700 leading-relaxed pl-11">
+              <p className="text-xs text-gray-600 leading-relaxed pl-8">
                 {comment.comment}
               </p>
             </div>
