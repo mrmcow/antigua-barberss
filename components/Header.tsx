@@ -59,7 +59,7 @@ export function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[100] px-2 sm:px-4 pt-2 sm:pt-4 pointer-events-none">
-        <div className="bg-white/90 backdrop-blur-xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-full max-w-[1600px] mx-auto transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] pointer-events-auto">
+        <div className="bg-white/90 backdrop-blur-2xl border border-black/5 shadow-[0_4px_20px_rgb(0,0,0,0.08)] px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between rounded-full max-w-[1600px] mx-auto transition-all duration-300 pointer-events-auto">
             <Link href="/" className="flex-shrink-0 relative z-[100] pl-1">
             <Logo size="sm" />
             </Link>
