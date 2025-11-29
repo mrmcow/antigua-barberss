@@ -25,9 +25,9 @@ const BLOG_IMAGES: Record<string, string> = {
   'barbers-near-vc-bird-airport': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2074&auto=format&fit=crop', // Airplane/Sky
 
   // Specific Topics (Verified working images)
-  'tipping-barbers-antigua-guide': 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop',
+  'tipping-barbers-antigua-guide': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop', // Authentic Barber
   'antigua-barber-prices-2025': 'https://images.unsplash.com/photo-1634307289257-7826322c9763?q=80&w=2069&auto=format&fit=crop',
-  'mobile-barbers-antigua-resort': 'https://images.unsplash.com/photo-1732834277960-d0142bfe3fc7?q=80&w=2070&auto=format&fit=crop',
+  'mobile-barbers-antigua-resort': 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2070&auto=format&fit=crop', // Resort Vibe
   'kids-haircuts-antigua-barbers': 'https://images.unsplash.com/photo-1599351431202-1e0f0137d9c8?q=80&w=2074&auto=format&fit=crop',
   'antigua-wedding-barber-packages': 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop',
   'black-hair-barbers-antigua-tourist-guide': 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=2070&auto=format&fit=crop',
