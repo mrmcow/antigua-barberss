@@ -187,7 +187,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
       {/* Back to Blog */}
       <section className="border-b border-black/5 py-4 bg-white">
-        <div className="max-w-[1000px] mx-auto px-6">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
           <Link href="/blog" className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold hover:text-[#CE1126] transition-colors">
             <ArrowLeft className="w-3 h-3" />
             Back to Island Standard
