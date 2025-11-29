@@ -186,8 +186,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <Header />
-
       {/* Back to Blog */}
       <section className="border-b border-black/5 py-4 bg-white">
         <div className="max-w-[1000px] mx-auto px-6">
