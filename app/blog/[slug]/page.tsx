@@ -3,8 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { Logo } from "@/components/ui/Logo";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import {
   Calendar,
   Clock,
@@ -20,6 +18,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { supabase } from "@/lib/supabase";
 import fs from 'fs';
 import path from 'path';
+import { Footer } from "@/components/Footer";
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
