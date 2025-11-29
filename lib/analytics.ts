@@ -3,7 +3,6 @@
 import { sendGAEvent } from '@next/third-parties/google';
 
 // Track click event
-// Track click event
 export async function trackClickEvent(
   barbershopId: string,
   eventType: 'phone_call' | 'website_click' | 'booking_click' | 'website_booking_click' | 'directions_click' | 'google_reviews_click' | 'google_view_click' | 'whatsapp_click',
@@ -12,29 +11,36 @@ export async function trackClickEvent(
   location?: string
 ): Promise<void> {
   try {
-    // Standardize event names for GA4 where possible
+    // Standardize event names for GA4
+    // We map our internal events to standard GA4 events where it makes sense
     let gaEventName = 'select_content';
     let gaParams: any = {
       content_type: 'barber_listing',
       item_id: barbershopId,
       item_name: barberName || 'unknown',
-      item_location_id: location || 'unknown',
-      event_category: 'engagement'
+      location_id: location || 'unknown',
+      event_category: 'engagement',
+      destination_url: destinationUrl || 'undefined'
     };
 
-    if (eventType === 'booking_click' || eventType === 'website_booking_click') {
-      gaEventName = 'generate_lead';
-      gaParams = {
-        ...gaParams,
-        currency: 'USD',
-        value: 0 // We don't know the value yet
-      };
+    // Map specific actions to more meaningful GA4 events
+    if (eventType === 'phone_call') {
+      gaEventName = 'contact';
+      gaParams.method = 'phone';
+    } else if (eventType === 'whatsapp_click') {
+      gaEventName = 'contact';
+      gaParams.method = 'whatsapp';
+    } else if (eventType === 'booking_click' || eventType === 'website_booking_click') {
+      gaEventName = 'begin_checkout'; // Intent to purchase
+    } else if (eventType === 'directions_click') {
+      gaEventName = 'view_location';
     }
 
     // Send standard GA4 event
     sendGAEvent('event', gaEventName, gaParams);
 
-    // Send custom event for backward compatibility and specific tracking
+    // Send custom event for backward compatibility and granular tracking
+    // This ensures we see "whatsapp_click" explicitly in reports
     sendGAEvent('event', eventType, {
       barbershop_id: barbershopId,
       barber_name: barberName,
@@ -43,7 +49,9 @@ export async function trackClickEvent(
     });
 
     // Log for debugging (remove in production)
-    console.log(`📊 Tracked: ${eventType} for ${barbershopId} (${barberName})`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`📊 Tracked: ${eventType} (${gaEventName}) for ${barbershopId}`);
+    }
   } catch (error) {
     // Fail silently - don't block user action if analytics fails
     console.error('Analytics error:', error);
