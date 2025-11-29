@@ -225,19 +225,17 @@ If you are in **${hood}** and need a fresh cut, you don't have to guess. We've c
       // Generate a mini-description if missing
       const shopIntro = `Serving the ${hood} community, **${barber.name}** offers professional grooming services.`;
 
-      content += `### ${index + 1}. ${barber.name}
-**${ratingDisplay}** ${reviewCount} • ${price}
-
-📍 **Address:** ${barber.address || 'Contact for location'}
-
-${shopIntro}
-
-*   **Services:** Haircuts, Fades, Beard Trims
-*   **Walk-ins:** Generally Accepted
-
-[View Profile & Booking Info](/barbers/${barber.id})
-
----
+      content += `> ### ${index + 1}. ${barber.name}
+> **${ratingDisplay}** ${reviewCount} • ${price}
+>
+> 📍 **Address:** ${barber.address || 'Contact for location'}
+>
+> ${shopIntro}
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/${barber.id})
 
 `;
     });

@@ -20,19 +20,17 @@ If you are in **Cobbs Cross** and need a fresh cut, you don't have to guess. We'
 
 ## Top Rated Barbershops in Cobbs Cross
 
-### 1. Bundin's Barber Shop
-**⭐ 4.9/5** (41 verified reviews) • $$
-
-📍 **Address:** Cobbs Cross, Antigua and Barbuda
-
-Serving the Cobbs Cross community, **Bundin's Barber Shop** offers professional grooming services.
-
-*   **Services:** Haircuts, Fades, Beard Trims
-*   **Walk-ins:** Generally Accepted
-
-[View Profile & Booking Info](/barbers/36afcb18-e15e-438e-bb41-58cace3b54ef)
-
----
+> ### 1. Bundin's Barber Shop
+> **⭐ 4.9/5** (41 verified reviews) • $$
+>
+> 📍 **Address:** Cobbs Cross, Antigua and Barbuda
+>
+> Serving the Cobbs Cross community, **Bundin's Barber Shop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/36afcb18-e15e-438e-bb41-58cace3b54ef)
 
 
 ## Finding Your Barber in Cobbs Cross

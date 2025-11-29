@@ -20,19 +20,41 @@ If you are in **Piggotts** and need a fresh cut, you don't have to guess. We've 
 
 ## Top Rated Barbershops in Piggotts
 
-### 1. Micheal's Barbershop
-**⭐ 5.0/5** (6 verified reviews) • $$
+> ### 1. Micheal's Barbershop
+> **⭐ 5.0/5** (6 verified reviews) • $$
+>
+> 📍 **Address:** 45CG+73V, Piggotts, Antigua and Barbuda
+>
+> Serving the Piggotts community, **Micheal's Barbershop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/5b46ae96-322c-422e-9f22-6e4168cee1f8)
 
-📍 **Address:** 45CG+73V, Piggotts, Antigua and Barbuda
+> ### 2. Miguel Barbershop
+> **⭐ 5.0/5** (3 verified reviews) • $$
+>
+> 📍 **Address:** Independence Drive, Piggotts, Antigua and Barbuda
+>
+> Serving the Piggotts community, **Miguel Barbershop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/b8127802-ef23-44b0-bf9d-a3e41c759693)
 
-Serving the Piggotts community, **Micheal's Barbershop** offers professional grooming services.
-
-*   **Services:** Haircuts, Fades, Beard Trims
-*   **Walk-ins:** Generally Accepted
-
-[View Profile & Booking Info](/barbers/5b46ae96-322c-422e-9f22-6e4168cee1f8)
-
----
+> ### 3. Fine Line Cuts
+> **⭐ 4.8/5** (48 verified reviews) • $$
+>
+> 📍 **Address:** 45GC+CR8, Wireless Rd, Piggotts, Antigua and Barbuda
+>
+> Serving the Piggotts community, **Fine Line Cuts** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/3eb855f6-6a77-4c6a-ab38-6873fc677234)
 
 
 ## Finding Your Barber in Piggotts

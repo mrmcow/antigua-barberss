@@ -20,19 +20,17 @@ If you are in **Liberta** and need a fresh cut, you don't have to guess. We've c
 
 ## Top Rated Barbershops in Liberta
 
-### 1. Director's Cut Barbershop
-**⭐ 4.8/5** (13 verified reviews) • $$
-
-📍 **Address:** 26R4+PRF, All saints road, Liberta, Antigua and Barbuda
-
-Serving the Liberta community, **Director's Cut Barbershop** offers professional grooming services.
-
-*   **Services:** Haircuts, Fades, Beard Trims
-*   **Walk-ins:** Generally Accepted
-
-[View Profile & Booking Info](/barbers/a923bd94-676d-44b6-bd40-5f0b3e107003)
-
----
+> ### 1. Director's Cut Barbershop
+> **⭐ 4.8/5** (13 verified reviews) • $$
+>
+> 📍 **Address:** 26R4+PRF, All saints road, Liberta, Antigua and Barbuda
+>
+> Serving the Liberta community, **Director's Cut Barbershop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/a923bd94-676d-44b6-bd40-5f0b3e107003)
 
 
 ## Finding Your Barber in Liberta

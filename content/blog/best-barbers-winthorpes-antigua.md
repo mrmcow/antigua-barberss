@@ -20,19 +20,17 @@ If you are in **Winthorpes** and need a fresh cut, you don't have to guess. We'v
 
 ## Top Rated Barbershops in Winthorpes
 
-### 1. freshlook barbershop
-**⭐ 4.9/5** (23 verified reviews) • $$
-
-📍 **Address:** New, 45VQ+85C, Winthorpes, Osbourn, Antigua and Barbuda
-
-Serving the Winthorpes community, **freshlook barbershop** offers professional grooming services.
-
-*   **Services:** Haircuts, Fades, Beard Trims
-*   **Walk-ins:** Generally Accepted
-
-[View Profile & Booking Info](/barbers/ac5bbba2-0c44-49ad-9e8b-761c9a2e9e4a)
-
----
+> ### 1. freshlook barbershop
+> **⭐ 4.9/5** (23 verified reviews) • $$
+>
+> 📍 **Address:** New, 45VQ+85C, Winthorpes, Osbourn, Antigua and Barbuda
+>
+> Serving the Winthorpes community, **freshlook barbershop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/ac5bbba2-0c44-49ad-9e8b-761c9a2e9e4a)
 
 
 ## Finding Your Barber in Winthorpes

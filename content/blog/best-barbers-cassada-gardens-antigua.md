@@ -20,19 +20,29 @@ If you are in **Cassada Gardens** and need a fresh cut, you don't have to guess.
 
 ## Top Rated Barbershops in Cassada Gardens
 
-### 1. The Fade studio Barbershop
-**⭐ 4.9/5** (8 verified reviews) • $$
+> ### 1. The Fade studio Barbershop
+> **⭐ 4.9/5** (8 verified reviews) • $$
+>
+> 📍 **Address:** Cassada Gardens, Antigua and Barbuda
+>
+> Serving the Cassada Gardens community, **The Fade studio Barbershop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/e76aa176-abcf-4cc9-9238-29335ff1e80a)
 
-📍 **Address:** Cassada Gardens, Antigua and Barbuda
-
-Serving the Cassada Gardens community, **The Fade studio Barbershop** offers professional grooming services.
-
-*   **Services:** Haircuts, Fades, Beard Trims
-*   **Walk-ins:** Generally Accepted
-
-[View Profile & Booking Info](/barbers/e76aa176-abcf-4cc9-9238-29335ff1e80a)
-
----
+> ### 2. Top Shape Barbershop
+> **⭐ 4.8/5** (6 verified reviews) • $$
+>
+> 📍 **Address:** 45GH+64H, Cassada Gardens, Antigua and Barbuda
+>
+> Serving the Cassada Gardens community, **Top Shape Barbershop** offers professional grooming services.
+>
+> *   **Services:** Haircuts, Fades, Beard Trims
+> *   **Walk-ins:** Generally Accepted
+>
+> [View Profile & Booking Info](/barbers/a2fbe468-a135-4119-b958-b8974fe0fbfb)
 
 
 ## Finding Your Barber in Cassada Gardens

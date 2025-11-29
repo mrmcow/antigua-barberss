@@ -51,8 +51,26 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
     const [barbers, setBarbers] = useState<Barbershop[]>(initialBarbers);
     const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || "");
     const [activeNeighborhoods, setActiveNeighborhoods] = useState<string[]>(() => {
-        const filters = searchParams.get('neighborhoods');
-        return filters ? filters.split(',') : [];
+        // Handle both plural (standard) and singular (legacy/external link) params
+        const filters = searchParams.get('neighborhoods') || searchParams.get('neighborhood');
+        if (!filters) return [];
+        
+        const values = filters.split(',');
+        
+        // Intelligently map slugs/params back to official neighborhood names
+        return values.map(v => {
+            // Normalize input: remove hyphens, lowercase
+            const normalizedInput = v.toLowerCase().replace(/-/g, ' ').trim();
+            
+            // Find matching official neighborhood
+            const match = ANTIGUA_NEIGHBORHOODS.find(n => {
+                const normalizedOfficial = n.toLowerCase();
+                return normalizedOfficial === normalizedInput || 
+                       normalizedOfficial === v.toLowerCase();
+            });
+            
+            return match || v;
+        }).filter(Boolean);
     });
 
     const userLat = searchParams.get('lat') ? parseFloat(searchParams.get('lat')!) : null;
