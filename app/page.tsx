@@ -85,8 +85,8 @@ export default async function Home() {
             {/* Hero Image / Visual */}
             <div className="order-2 lg:order-2 relative w-full aspect-[16/9] sm:aspect-[4/5] lg:aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-xl sm:shadow-2xl shadow-black/5 group mx-auto max-w-2xl lg:max-w-none mt-4 lg:mt-0 bg-neutral-900">
                  <img 
-                    src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Professional Barber Crafting a Fade in Antigua" 
+                    src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Antiguan Barber Shop Culture" 
                     className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
                  />
                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
