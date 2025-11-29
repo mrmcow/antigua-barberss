@@ -90,9 +90,13 @@ export function Header() {
             
             {/* Mobile Menu Trigger */}
             <button 
-                onClick={() => setIsOpen(!isOpen)}
-                className="sm:hidden p-3 bg-gray-100 hover:bg-gray-200 rounded-full transition-all active:scale-95 relative z-[100] cursor-pointer"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpen(!isOpen);
+                }}
+                className="sm:hidden p-3 bg-gray-100 hover:bg-gray-200 rounded-full transition-all active:scale-95 relative z-[102] cursor-pointer touch-manipulation"
                 aria-label="Toggle menu"
+                type="button"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -105,6 +109,7 @@ export function Header() {
         className={`fixed inset-0 z-[90] bg-white flex flex-col justify-center px-8 transition-all duration-300 ease-in-out sm:hidden ${
           isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-full pointer-events-none"
         }`}
+        aria-hidden={!isOpen}
       >
         <div className="space-y-6 text-center">
             <button 
