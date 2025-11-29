@@ -73,7 +73,7 @@ export default async function BrowsePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="pt-8 px-4 sm:px-6 max-w-[1600px] mx-auto">
+      <div className="pt-24 sm:pt-32 px-4 sm:px-6 max-w-[1600px] mx-auto">
         
         <div className="mb-8 text-center sm:text-left">
             <h1 className="text-4xl font-black uppercase tracking-tight mb-2">Island Barbers</h1>
