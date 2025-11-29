@@ -67,9 +67,6 @@ export default async function Home() {
                     <Link href="/browse" className="flex items-center justify-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 sm:py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:scale-105 transition-transform shadow-xl shadow-black/20 w-full sm:w-auto">
                         Browse Directory
                     </Link>
-                    <Link href="/browse?mobile=true" className="flex items-center justify-center gap-3 bg-white border border-gray-200 text-black px-8 py-4 sm:py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-gray-50 transition-colors shadow-sm hover:shadow-md w-full sm:w-auto">
-                        Villa Call-Outs
-                    </Link>
                 </div>
 
                 <div className="mt-8 sm:mt-12 flex items-center justify-center lg:justify-start gap-8 sm:gap-10">
