@@ -40,8 +40,24 @@ async function getHomeData() {
 export default async function Home() {
   const { barberCount, featuredBarbers } = await getHomeData();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Antigua Barbers",
+    "url": "https://antiguabarbers.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://antiguabarbers.com/browse?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <main className="selection:bg-[#FCD116]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       {/* HERO */}
       <section className="relative pt-6 sm:pt-12 pb-16 sm:pb-24 px-4 sm:px-6 max-w-[1600px] mx-auto">

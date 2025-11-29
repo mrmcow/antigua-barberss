@@ -1,7 +1,19 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { supabase } from "@/lib/supabase";
 import { BrowseContent } from "@/components/BrowseContent";
+
+export const metadata: Metadata = {
+  title: "Browse Antigua Barbers - Find Shops Near You",
+  description: "Search the official directory of barbershops in Antigua. Filter by neighborhood (St. John's, English Harbour, etc.), view ratings, and book appointments.",
+  openGraph: {
+    title: "Browse Antigua Barbers - Official Directory",
+    description: "Find the best barbers in Antigua. Search by location, rating, and services.",
+    url: "https://antiguabarbers.com/browse",
+    type: "website",
+  },
+};
 
 interface Barbershop {
   id: string;
@@ -37,8 +49,30 @@ async function getBarbers(): Promise<Barbershop[]> {
 export default async function BrowsePage() {
   const barbers = await getBarbers();
 
+  // JSON-LD for CollectionPage
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Antigua Barber Directory",
+    "description": "A curated list of the best barbershops in Antigua and Barbuda.",
+    "url": "https://antiguabarbers.com/browse",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": barbers.slice(0, 20).map((barber, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://antiguabarbers.com/barbers/${barber.id}`,
+        "name": barber.name
+      }))
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#FAFAFA] pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="pt-8 px-4 sm:px-6 max-w-[1600px] mx-auto">
         
         <div className="mb-8 text-center sm:text-left">
