@@ -9,6 +9,9 @@ Allow: /blog/*
 Allow: /about
 Allow: /contact
 Allow: /feedback
+Allow: /cruise
+Allow: /join
+Allow: /barbers/*
 
 # Block admin/test areas
 Disallow: /admin
@@ -16,7 +19,7 @@ Disallow: /test
 Disallow: /api
 
 # Sitemap location
-Sitemap: https://labarberguide.xyz/sitemap.xml
+Sitemap: https://antiguabarbers.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

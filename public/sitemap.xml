@@ -1,1116 +1,315 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Homepage -->
   <url>
-    <loc>https://labarberguide.xyz</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Browse Page -->
   <url>
-    <loc>https://labarberguide.xyz/browse</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/browse</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- About Page -->
   <url>
-    <loc>https://labarberguide.xyz/about</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/cruise</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
   </url>
-  
-  <!-- Contact Page -->
   <url>
-    <loc>https://labarberguide.xyz/contact</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Feedback Page -->
-  <url>
-    <loc>https://labarberguide.xyz/feedback</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <!-- Match Results - High Priority for SEO -->
-  <url>
-    <loc>https://labarberguide.xyz/match/results</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- BLOG - HIGH SEO PRIORITY -->
-  <url>
-    <loc>https://labarberguide.xyz/blog</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/blog</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Blog Categories -->
   <url>
-    <loc>https://labarberguide.xyz/blog/barber-reviews</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://labarberguide.xyz/blog/neighborhood-guides</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://labarberguide.xyz/blog/hair-type-guides</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- TOURIST NEIGHBORHOOD PAGES - HIGH SEO PRIORITY -->
-  <url>
-    <loc>https://labarberguide.xyz/neighborhoods/hollywood</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://labarberguide.xyz/neighborhoods/santa-monica</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Sample Blog Posts - Add your generated posts here -->
-  <url>
-    <loc>https://labarberguide.xyz/blog/ez-the-barber-review-downtown-la-barber</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/about</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
-    <loc>https://labarberguide.xyz/blog/best-downtown-la-barbers-complete-guide</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/contact</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Privacy/Terms -->
   <url>
-    <loc>https://labarberguide.xyz/privacy</loc>
-    <lastmod>2025-11-28</lastmod>
+    <loc>https://antiguabarbers.com/join</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://antiguabarbers.com/privacy</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
-  <url>
-    <loc>https://labarberguide.xyz/terms</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-
-  <!-- BLOG POSTS - AUTO GENERATED -->
-  <url>
-    <loc>https://labarberguide.xyz/blog/active-barbers-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barber-shop-cuts-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barber-uniform-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbershop-classic-la-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbershop-friends-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/ben-the-barber-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-4c-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-culver-city-los-angeles-guide</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-los-angeles-los-angeles-guide</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-santa-monica-los-angeles-guide</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-venice-los-angeles-guide</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-west-hollywood-los-angeles-guide</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-coarse-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-curly-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-fine-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-straight-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-thick-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-thin-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-wavy-hair-barbers-los-angeles</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/blendz-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/blind-barber-review-culver-city-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/bolt-barbers-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/common-ground-dtla-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/cut-and-shave-barber-lounge-review-beverly-hills-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/dapper-at-daniels-barbershop-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/deans-barbershop-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/district-one-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/doble-filo-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/downtown-barber-co-review-downtown-la-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/downtown-barber-co-vs-hollywood-cuts-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/downtown-barber-co-vs-the-barber-shop-la-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/echo-park-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/elite-barber-lounge-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/elite-barber-studio-review-hollywood-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/empire-barbers-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/entourage-barbershop-review-west-hollywood-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/ez-the-barber-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/fade-kings-la-review-venice-beach-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/fade-kings-la-vs-downtown-barber-co-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/fade-kings-la-vs-hollywood-cuts-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/fade-kings-la-vs-silver-lake-cuts-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/fade-u-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/faded-fresh-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/floyds-99-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/floyds-99-barbershop-review-venice-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/garage-cutz-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/gentlemens-barbershop-review-culver-city-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/good-day-studio-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/gt-cutz-barbershop-llc-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/hairfreek-barbers-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/halftime-barbers-review-culver-city-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/handsome-devils-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/hector-the-barber-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/hollywood-cuts-review-hollywood-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/hollywood-cuts-vs-the-barber-shop-la-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/house-of-aanuko-barbershop-review-culver-city-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/iconic-barbershop-review-west-hollywood-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/ironically-fresh-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/jayblurrzz-247-barber-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/jess-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/lincoln-barbers-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/mandatory-barber-lounge-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/manly-and-sons-barber-co-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/manly-and-sons-barber-co-review-venice-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/manny-js-brentwood-barbers-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/midnight-fade-beverly-hills-barbershop-review-unit24-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/modern-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/modern-rebel-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/mr-brothers-cut-club-los-angeles-barbershop-dtla-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/mr-coneys-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/nandos-cut-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/neighborhood-barber-shop-review-playa-del-rey-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/neighborhood-cutz-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/no-filter-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/ocean-park-barbershop-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/omars-barber-company-review-venice-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/original-barbershop-llc-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/palms-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/park-plaza-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/picos-finest-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/pier-86-barbershop-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/plugged-la-cutz-3-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/rvm-cutz-review-5365-wilshire-blvd-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/saga-studios-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/saints-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/seaside-barbers-review-playa-del-rey-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/shortys-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/silver-lake-cuts-review-silver-lake-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/silver-lake-cuts-vs-downtown-barber-co-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/silver-lake-cuts-vs-hollywood-cuts-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/silver-lake-cuts-vs-the-barber-shop-la-comparison</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/silverlake-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/southpaw-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/st-vincent-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/styles-barber-lounge-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/super-star-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/browse?neighborhood=st-johns</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/sweeney-todds-barber-shop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/browse?neighborhood=english-harbour</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/tels-barber-shop-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/browse?neighborhood=jolly-harbour</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-art-of-blendz-barbers-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/antigua-barber-prices-2025</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-art-of-kevins-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/antigua-barbershop-culture-explained</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-barber-den-la-review-west-hollywood-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/antigua-wedding-barber-packages</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-barber-shop-la-review-beverly-hills-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/barbers-all-saints-road-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-barbers-lounge-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/barbers-english-harbour-falmouth</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-barbershop-review-venice-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/barbers-jolly-harbour-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-cream-shop-2-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/barbers-near-vc-bird-airport</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-cut-by-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/best-barbers-cassada-gardens-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-fade-inn-barber-shop-review-2-hollywood-blvd-5633-1-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/best-barbers-cobbs-cross-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-hidden-barber-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/best-barbers-liberta-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-presidential-parlour-review-marina-del-rey-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/best-barbers-piggotts-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/the-world-famous-venice-barber-shop-review-venice-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/best-barbers-st-johns-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/timur-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/best-barbers-winthorpes-antigua</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/treasured-blades-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/black-hair-barbers-antigua-tourist-guide</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/ur-barbershop-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/how-to-find-barber-near-antigua-cruise-port</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/valentina-on-broadway-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/kids-haircuts-antigua-barbers</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/west-side-barber-co-review-santa-monica-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/mobile-barbers-antigua-resort</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/westwood-cuts-review-garden-level-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://antiguabarbers.com/blog/tipping-barbers-antigua-guide</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/wolfs-mens-grooming-review-los-angeles-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/xquisite-barber-lounge-review-venice-barber</loc>
-    <lastmod>2025-11-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- BLOG POSTS - AUTO GENERATED -->
-  <url>
-    <loc>https://labarberguide.xyz/blog/antigua-barber-prices-2025</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/antigua-barbershop-culture-explained</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/antigua-wedding-barber-packages</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-all-saints-road-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-english-harbour-falmouth</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-jolly-harbour-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-near-vc-bird-airport</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-st-johns-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/black-hair-barbers-antigua-tourist-guide</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/how-to-find-barber-near-antigua-cruise-port</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/kids-haircuts-antigua-barbers</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/mobile-barbers-antigua-resort</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/tipping-barbers-antigua-guide</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-  <!-- BLOG POSTS - AUTO GENERATED -->
-  <url>
-    <loc>https://labarberguide.xyz/blog/antigua-barber-prices-2025</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/antigua-barbershop-culture-explained</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/antigua-wedding-barber-packages</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-all-saints-road-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-english-harbour-falmouth</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-jolly-harbour-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/barbers-near-vc-bird-airport</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-antigua-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-st-johns-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://labarberguide.xyz/blog/black-hair-barbers-antigua-tourist-guide</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/36afcb18-e15e-438e-bb41-58cace3b54ef</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/how-to-find-barber-near-antigua-cruise-port</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/a923bd94-676d-44b6-bd40-5f0b3e107003</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/kids-haircuts-antigua-barbers</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/7fd2bcf4-f55f-47ca-a1f2-0fc8f528eb19</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/mobile-barbers-antigua-resort</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/e820cc25-8f71-44ad-bc53-f5cf13b7ed08</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/tipping-barbers-antigua-guide</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/884741ba-a9e7-441b-80d8-ecce47556dca</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
-
-
-  <!-- BLOG POSTS - AUTO GENERATED -->
   <url>
-    <loc>https://labarberguide.xyz/blog/antigua-barber-prices-2025</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/f2f807aa-7a8d-4537-b305-a9fa4f957d6f</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/antigua-barbershop-culture-explained</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/65956b15-4520-4217-a8e7-048f7436558c</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/antigua-wedding-barber-packages</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/a8aeb18d-3d22-48b9-a7b8-332eb9c13982</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/barbers-all-saints-road-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/6ad75525-38c5-4a40-9a09-afe742ccaa01</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/barbers-english-harbour-falmouth</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/f43d12fe-dbe1-4efc-b364-955877545147</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/barbers-jolly-harbour-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/251f0a97-955f-482b-b12b-3b51d0f8ef67</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/barbers-near-vc-bird-airport</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/346c5f97-5527-49db-ae5a-fb1eda4197df</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-cassada-gardens-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/4eab8ea9-47db-462c-959a-14d6175d10f5</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-cobbs-cross-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/223b7ffe-aed9-4442-be21-7e06951d5976</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-liberta-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/aa0cbab5-536d-4e11-b559-2a50dcc70a68</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-piggotts-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/e76aa176-abcf-4cc9-9238-29335ff1e80a</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-st-johns-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/3899dff7-e437-4424-9aa4-0597ea65a1ad</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/best-barbers-winthorpes-antigua</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/5b46ae96-322c-422e-9f22-6e4168cee1f8</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/black-hair-barbers-antigua-tourist-guide</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/f5a7ae1f-40c1-4c06-bdf4-16cdedafaa24</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/how-to-find-barber-near-antigua-cruise-port</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/57ab07cf-4bc2-4bc0-b923-a6e438c5b499</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/kids-haircuts-antigua-barbers</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/ac5bbba2-0c44-49ad-9e8b-761c9a2e9e4a</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/mobile-barbers-antigua-resort</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/b0b5bab4-19ae-4b4b-99a1-8d3b0aa5a96c</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://labarberguide.xyz/blog/tipping-barbers-antigua-guide</loc>
-    <lastmod>2025-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://antiguabarbers.com/barbers/0c9d5a0d-7172-431b-aad2-baa7d4c2db3a</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
-
 </urlset>
