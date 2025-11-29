@@ -70,12 +70,12 @@ export function LinkedBlogContent({ content, barberMap }: LinkedBlogContentProps
                 strong: ({node, children, ...props}) => <strong className="font-black text-black" {...props}>{children}</strong>,
                 blockquote: ({node, children, ...props}) => (
                     <blockquote 
-                        className="bg-white border border-black/10 rounded-2xl p-8 my-10 shadow-lg hover:shadow-xl transition-shadow duration-300 not-italic text-gray-800 relative overflow-hidden group" 
+                        className="bg-white border border-black/10 rounded-xl p-6 my-8 shadow-md hover:shadow-lg transition-all duration-300 not-italic text-gray-800 relative overflow-hidden group [&_p]:before:content-none [&_p]:after:content-none [&_p]:mb-3 [&_p]:text-base [&_ul]:mb-4 [&_ul]:space-y-1 [&_li]:text-base [&_li]:leading-normal [&_h3]:text-xl [&_h3]:mt-0 [&_h3]:mb-2 [&_h3]:border-none [&_h3_a]:text-black [&_h3_a]:no-underline hover:[&_h3_a]:text-[#CE1126]" 
                         {...props}
                     >
                         {/* Decorative accent */}
-                        <div className="absolute top-0 left-0 w-2 h-full bg-[#FCD116]"></div>
-                        <div className="pl-4">
+                        <div className="absolute top-0 left-0 w-1.5 h-full bg-[#FCD116]"></div>
+                        <div className="pl-3">
                             {children}
                         </div>
                     </blockquote>
