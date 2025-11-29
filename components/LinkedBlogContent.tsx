@@ -68,7 +68,18 @@ export function LinkedBlogContent({ content, barberMap }: LinkedBlogContentProps
                 li: ({node, children, ...props}) => <li className="text-gray-800 text-lg leading-relaxed pl-2" {...props}>{children}</li>,
                 p: ({node, children, ...props}) => <p className="mb-6 text-lg leading-relaxed text-gray-600 font-medium" {...props}>{children}</p>,
                 strong: ({node, children, ...props}) => <strong className="font-black text-black" {...props}>{children}</strong>,
-                blockquote: ({node, children, ...props}) => <blockquote className="border-l-4 border-[#FCD116] pl-6 py-2 my-8 italic text-xl text-gray-800 bg-gray-50 rounded-r-lg" {...props}>{children}</blockquote>,
+                blockquote: ({node, children, ...props}) => (
+                    <blockquote 
+                        className="bg-white border border-black/10 rounded-2xl p-8 my-10 shadow-lg hover:shadow-xl transition-shadow duration-300 not-italic text-gray-800 relative overflow-hidden group" 
+                        {...props}
+                    >
+                        {/* Decorative accent */}
+                        <div className="absolute top-0 left-0 w-2 h-full bg-[#FCD116]"></div>
+                        <div className="pl-4">
+                            {children}
+                        </div>
+                    </blockquote>
+                ),
             }}
         >
             {processedContent}
