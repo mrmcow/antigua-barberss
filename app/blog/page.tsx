@@ -59,6 +59,7 @@ const BLOG_IMAGES: Record<string, string> = {
   'best-barbers-liberta-antigua': 'https://images.unsplash.com/photo-1605557626697-2e87166d88f9?q=80&w=2070&auto=format&fit=crop', // Village Vibe
   'best-barbers-piggotts-antigua': 'https://images.unsplash.com/photo-1589705296590-5c4c0e51c4f0?q=80&w=2070&auto=format&fit=crop', // Colorful Housing
   'best-barbers-winthorpes-antigua': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop', // Near Airport/Ocean
+  'best-barbers-willikies-antigua': 'https://images.unsplash.com/photo-1596436954828-a44264c4ae4a?q=80&w=2070&auto=format&fit=crop', // Village Street
   'barbers-all-saints-road-antigua': 'https://images.unsplash.com/photo-1570654621852-9dd23b79e37e?q=80&w=2070&auto=format&fit=crop', // Road/Street
   'barbers-near-vc-bird-airport': 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop', // Airplane/Sky
 
