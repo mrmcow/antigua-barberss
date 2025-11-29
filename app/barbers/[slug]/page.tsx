@@ -128,7 +128,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
   };
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA] pb-20">
+    <main className="min-h-screen bg-[#FAFAFA] pb-20 pt-28 sm:pt-32">
       {/* Inject JSON-LD */}
       <script
         type="application/ld+json"
@@ -136,19 +136,17 @@ export default async function BarberProfile({ params }: { params: { slug: string
       />
 
       {/* Back Nav */}
-      <div className="sticky top-[76px] md:top-[100px] z-40 pointer-events-none">
-        <div className="bg-[#FAFAFA]/95 backdrop-blur py-3 px-4 sm:px-6 border-b border-black/5 pointer-events-auto">
-          <div className="max-w-[1600px] mx-auto flex justify-between items-center">
-              <Link href="/browse" className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 transition-all shadow-sm border border-black/5">
-                  <ArrowLeft className="w-3 h-3" /> <span className="hidden sm:inline">Back to Directory</span><span className="sm:hidden">Back</span>
-              </Link>
+      <div className="px-4 sm:px-6 pb-6">
+        <div className="max-w-[1600px] mx-auto flex justify-between items-center">
+            <Link href="/browse" className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-black hover:bg-gray-50 transition-all shadow-sm border border-black/5">
+                <ArrowLeft className="w-3 h-3" /> <span className="hidden sm:inline">Back to Directory</span><span className="sm:hidden">Back</span>
+            </Link>
 
-              {nextBarberId && (
-                  <Link href={`/barbers/${nextBarberId}`} className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#CE1126] transition-all shadow-sm">
-                      Next <span className="hidden sm:inline">Shop</span> <ArrowRight className="w-3 h-3" />
-                  </Link>
-              )}
-          </div>
+            {nextBarberId && (
+                <Link href={`/barbers/${nextBarberId}`} className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#CE1126] transition-all shadow-sm">
+                    Next <span className="hidden sm:inline">Shop</span> <ArrowRight className="w-3 h-3" />
+                </Link>
+            )}
         </div>
       </div>
 
