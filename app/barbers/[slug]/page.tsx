@@ -165,11 +165,13 @@ export default async function BarberProfile({ params }: { params: { slug: string
     jsonLd.hasMap = barber.google_maps_url;
   }
 
-  if (barber.rating) {
+  if (barber.rating && barber.review_count && barber.review_count > 0) {
     jsonLd.aggregateRating = {
       "@type": "AggregateRating",
-      "ratingValue": barber.rating,
-      "reviewCount": barber.review_count || 1
+      "ratingValue": Number(barber.rating).toFixed(1),
+      "reviewCount": Number(barber.review_count),
+      "bestRating": 5,
+      "worstRating": 1
     };
   }
 
