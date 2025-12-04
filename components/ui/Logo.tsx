@@ -23,7 +23,7 @@ export function Logo({
 
   const textColor = theme === "dark" ? "text-white" : "text-black";
   const subTextColor = theme === "dark" ? "text-white/60" : "text-black/60";
-
+  
   return (
     <div className={`flex items-center gap-3 ${className} select-none`}>
       {/* Official Flag Graphic */}
@@ -39,7 +39,7 @@ export function Logo({
            </svg>
         </div>
       </div>
-
+      
       <div className="flex flex-col justify-center leading-none">
         <h1 className={`${textSize} font-black uppercase tracking-tighter ${textColor}`}>
           Antigua<span className="text-[#CE1126]">Barbers</span>

@@ -76,3 +76,5 @@ export function BarberGallery({ images, barberName }: BarberGalleryProps) {
     </>
   );
 }
+
+
