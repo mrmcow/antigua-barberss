@@ -7,6 +7,7 @@ import { MapEmbed } from "@/components/ui/MapEmbed";
 import { CommunityComments } from "@/components/CommunityComments";
 import { BarberGallery } from "@/components/BarberGallery";
 import { BarberContactActions, BarberLocationAction, BarberSocialActions } from "@/components/BarberActions";
+import { formatPhoneForTel } from "@/lib/phone-utils";
 import { GoogleReviews } from "@/components/GoogleReviews";
 
 // Force dynamic rendering since we rely on DB data
@@ -157,7 +158,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
   }
 
   if (barber.phone) {
-    jsonLd.telephone = barber.phone;
+    jsonLd.telephone = formatPhoneForTel(barber.phone);
   }
 
   if (barber.google_maps_url) {
