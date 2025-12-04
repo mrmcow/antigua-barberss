@@ -79,17 +79,17 @@ export default async function Home() {
                     <div className="w-1 h-4 bg-[#CE1126]"></div>
                     <div className="w-1 h-4 bg-[#FCD116]"></div>
                     <div className="w-1 h-4 bg-[#0072C6]"></div>
-                </div>
+          </div>
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                     Official Antigua Barber Directory
                 </span>
-             </div>
+        </div>
 
             {/* Headline */}
             <h1 className="text-6xl sm:text-8xl xl:text-[10rem] font-black uppercase leading-[0.8] tracking-tighter mb-8 text-white animate-fade-in-up delay-100">
                 Your Chair<br/>Awaits.
             </h1>
-            
+
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed font-medium tracking-wide animate-fade-in-up delay-200">
                 The #1 trusted guide to grooming in Antigua & Barbuda. 
                 <span className="hidden sm:inline"> From St. John's to English Harbour, find the best cuts on the island.</span>
@@ -101,9 +101,9 @@ export default async function Home() {
                 </Link>
                 <div className="flex items-center gap-2 text-white/60 text-xs font-bold uppercase tracking-wider px-6">
                     <span className="text-white">{barberCount}+</span> Verified Shops
-                </div>
             </div>
-         </div>
+          </div>
+        </div>
       </section>
 
       {/* ISLAND FAVORITES GRID */}
@@ -130,7 +130,7 @@ export default async function Home() {
                                 <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-300">
                                     <span className="font-black text-4xl opacity-20">AB</span>
                                 </div>
-                             )}
+                    )}
                              
                     {/* Rating Badge */}
                     {barber.rating && (
@@ -178,7 +178,7 @@ export default async function Home() {
                 {["St. John's", "English Harbour", "Jolly Harbour", "All Saints", "Dickenson Bay", "Liberta", "Old Road", "Crosbies"].map((hood) => (
                     <Link key={hood} href={`/browse?q=${hood}`} className="px-8 py-4 border border-white/10 bg-white/5 hover:bg-white hover:text-black hover:border-white hover:scale-105 transition-all text-sm font-bold uppercase tracking-wider rounded-full backdrop-blur-sm">
                         {hood}
-                    </Link>
+            </Link>
                 ))}
           </div>
         </div>

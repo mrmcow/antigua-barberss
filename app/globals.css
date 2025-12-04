@@ -34,13 +34,13 @@
   .container-main {
     @apply max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   /* "Go Harder" Utilities */
   .text-stroke {
     -webkit-text-stroke: 1px black;
     color: transparent;
   }
-  
+
   .text-stroke-white {
     -webkit-text-stroke: 1px rgba(255,255,255,0.5);
     color: transparent;
@@ -50,7 +50,7 @@
   .bg-grain {
     position: relative;
   }
-  
+
   .bg-grain::before {
     content: "";
     position: absolute;
@@ -64,5 +64,5 @@
   
   .mask-fade-right {
     mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    }
   }
-}

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from "react";
 import { Star, ExternalLink, User } from "lucide-react";
 import { trackAndNavigate } from "@/lib/analytics";
 
@@ -19,6 +20,45 @@ interface GoogleReviewsProps {
   barbershopId: string;
   googleMapsUrl: string | null;
   reviews: GoogleReview[];
+}
+
+function ReviewItem({ review }: { review: GoogleReview }) {
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <div className="border-b border-gray-100 pb-6 last:border-0 last:pb-0">
+      <div className="flex items-start gap-3 mb-2">
+        {review.profile_photo_url && !imageError ? (
+          <img 
+            src={review.profile_photo_url} 
+            alt={review.author_name} 
+            className="w-8 h-8 rounded-full object-cover"
+            referrerPolicy="no-referrer"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+            <User className="w-4 h-4 text-gray-400" />
+          </div>
+        )}
+        <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-900">{review.author_name}</span>
+            <span className="text-[10px] text-gray-400">{review.relative_time_description}</span>
+          </div>
+          <div className="flex text-[#FCD116] mb-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star 
+                key={star} 
+                className={`w-3 h-3 ${star <= review.rating ? "fill-current" : "text-gray-200"}`} 
+              />
+            ))}
+          </div>
+          <p className="text-xs text-gray-600 leading-relaxed mt-2">{review.text}</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function GoogleReviews({ 
@@ -70,32 +110,7 @@ export function GoogleReviews({
       <div className="space-y-6">
         {reviews.length > 0 ? (
           reviews.map((review, idx) => (
-            <div key={idx} className="border-b border-gray-100 pb-6 last:border-0 last:pb-0">
-              <div className="flex items-start gap-3 mb-2">
-                {review.profile_photo_url ? (
-                  <img src={review.profile_photo_url} alt={review.author_name} className="w-8 h-8 rounded-full object-cover" />
-                ) : (
-                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <User className="w-4 h-4 text-gray-400" />
-                  </div>
-                )}
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-gray-900">{review.author_name}</span>
-                    <span className="text-[10px] text-gray-400">{review.relative_time_description}</span>
-                  </div>
-                  <div className="flex text-[#FCD116] mb-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star 
-                        key={star} 
-                        className={`w-3 h-3 ${star <= review.rating ? "fill-current" : "text-gray-200"}`} 
-                      />
-                    ))}
-                  </div>
-                  <p className="text-xs text-gray-600 leading-relaxed mt-2">{review.text}</p>
-                </div>
-              </div>
-            </div>
+            <ReviewItem key={idx} review={review} />
           ))
         ) : (
           <div className="bg-gray-50 rounded-xl p-6 text-center">

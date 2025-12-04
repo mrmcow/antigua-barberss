@@ -95,10 +95,10 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
             <div>
               <div className="inline-block bg-[#CE1126] text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4">
                 Culture & Craft
-              </div>
+          </div>
               <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-[#1a1a1a] leading-none">
                 Island <span className="text-[#0072C6]">Standard</span>
-              </h1>
+            </h1>
             </div>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-md md:pb-2 md:ml-auto text-right">
               Showcasing the masters of the craft. From the bustling energy of St. John's to the laid-back west coast, discover the brilliance of Antiguan barbering.
@@ -128,7 +128,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
           >
             Cruise Guide
           </Link>
-        </div>
+            </div>
       </section>
 
       {/* Posts Grid - Compact */}
@@ -154,7 +154,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
                     <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider shadow-sm">
                       {post.category ? post.category.replace('-', ' ') : 'Guide'}
                     </div>
-                  </div>
+                      </div>
                   
                   <div className="p-5 flex flex-col flex-1">
                     <div className="flex items-center gap-2 text-[10px] text-gray-400 mb-2 font-medium uppercase tracking-wider">
@@ -182,7 +182,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
           ) : (
             <div className="text-center py-24 text-gray-400">
               <p>No articles found in this category.</p>
-            </div>
+          </div>
           )}
         </div>
       </section>

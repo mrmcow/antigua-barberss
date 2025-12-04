@@ -80,14 +80,14 @@ export default async function BrowsePage() {
             <p className="text-gray-500">Browse the full list of approved shops in Antigua & Barbuda.</p>
         </div>
 
-        <Suspense fallback={
+      <Suspense fallback={
           <div className="py-24 text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-[#CE1126] border-t-transparent"></div>
-          </div>
-        }>
-          <BrowseContent initialBarbers={barbers} />
-        </Suspense>
-      </div>
+        </div>
+      }>
+        <BrowseContent initialBarbers={barbers} />
+      </Suspense>
+        </div>
     </main>
   );
 }

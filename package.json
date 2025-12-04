@@ -16,7 +16,11 @@
     "generate:content": "node scripts/generate-blog-content.js",
     "generate:test": "node scripts/generate-mock-blog-content.js --test --limit=10",
     "generate:full": "node scripts/generate-mock-blog-content.js --full --limit=750",
-    "generate:mock": "node scripts/generate-mock-blog-content.js --limit=750"
+    "generate:mock": "node scripts/generate-mock-blog-content.js --limit=750",
+    "monthly:update": "tsx scripts/migrate-google-reviews.ts",
+    "monthly:force": "tsx scripts/migrate-google-reviews.ts --force",
+    "fix:phones": "tsx scripts/fix-phone-numbers.ts --fix",
+    "preview:phones": "tsx scripts/fix-phone-numbers.ts --preview"
   },
   "dependencies": {
     "@next/third-parties": "^16.0.4",

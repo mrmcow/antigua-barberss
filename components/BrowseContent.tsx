@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MapPin, Star, Phone, Navigation, ArrowRight, Car, MessageCircle, Search } from "lucide-react";
 import { trackClickEvent } from "@/lib/analytics";
 import { calculateDistance } from "@/lib/utils";
+import { formatPhoneForTel } from "@/lib/phone-utils";
 
 interface Barbershop {
     id: string;
@@ -138,7 +139,7 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                 ));
 
             return matchesSearch && matchesHood;
-        });
+    });
 
         // Sort
         if (sortBy === 'distance' && userLat && userLng) {
@@ -258,8 +259,8 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                             <div className="mt-auto flex gap-2">
                                         {barber.phone && (
                                             <a
-                                                href={`tel:${barber.phone}`}
-                                        onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name)}
+                                                href={`tel:${formatPhoneForTel(barber.phone)}`}
+                                        onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${formatPhoneForTel(barber.phone)}`, barber.name)}
                                         className="flex-1 py-3 rounded-full border border-black/10 bg-gray-50 text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors"
                                             >
                                         <Phone className="w-3.5 h-3.5" /> Call
@@ -273,7 +274,7 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                                             rel="noopener noreferrer"
                                         onClick={() => trackClickEvent(barber.id, 'website_click', barber.website!, barber.name)}
                                         className="flex-1 py-3 rounded-full bg-[#1a1a1a] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#CE1126] transition-colors"
-                                    >
+                                        >
                                         Book Now
                                     </a>
                                 ) : (

@@ -2,6 +2,7 @@
 
 import { Phone, MessageCircle, Globe, Instagram } from "lucide-react";
 import { trackClickEvent } from "@/lib/analytics";
+import { formatPhoneForTel, formatPhoneForWhatsApp } from "@/lib/phone-utils";
 
 interface BarberActionsProps {
   barber: {
@@ -17,19 +18,22 @@ interface BarberActionsProps {
 }
 
 export function BarberContactActions({ barber }: BarberActionsProps) {
+  const telLink = formatPhoneForTel(barber.phone);
+  const whatsappNumber = formatPhoneForWhatsApp(barber.phone);
+  
   return (
     <div className="flex flex-col sm:flex-row gap-4">
-      {barber.phone && (
+      {telLink && (
         <a
-          href={`tel:${barber.phone}`}
-          onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name)}
+          href={`tel:${telLink}`}
+          onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${telLink}`, barber.name)}
           className="flex-1 bg-[#1a1a1a] text-white px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-3 hover:scale-105 transition-transform shadow-lg"
         >
           <Phone className="w-4 h-4" /> Call Shop
         </a>
       )}
       <a
-        href={barber.phone ? `https://wa.me/${barber.phone.replace(/\D/g, '')}` : `https://wa.me/12680000000`}
+        href={`https://wa.me/${whatsappNumber}`}
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => trackClickEvent(barber.id, 'whatsapp_click', 'wa.me', barber.name)}

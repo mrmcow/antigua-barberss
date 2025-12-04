@@ -14,15 +14,15 @@ export default function PrivacyPage() {
         <div className="mb-16">
             <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#1a1a1a] mb-6">
                 Privacy Policy
-            </h1>
+          </h1>
             <p className="text-lg text-gray-500 font-medium leading-relaxed border-l-4 border-[#CE1126] pl-6">
                 We keep it simple. We don't sell your data, we don't spam you, and we respect your privacy. 
                 Here is exactly what we do.
-            </p>
+          </p>
         </div>
 
         <div className="space-y-16">
-            <section>
+          <section>
                 <h2 className="text-xl font-black uppercase tracking-wider mb-6 flex items-center gap-3">
                     <span className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm">1</span>
                     What We Collect
@@ -32,20 +32,20 @@ export default function PrivacyPage() {
                         <li className="flex items-start gap-3">
                             <span className="text-[#0072C6] text-lg">•</span>
                             <span><strong>Usage Data:</strong> We track which pages you visit to understand which barbers are popular.</span>
-                        </li>
+                </li>
                         <li className="flex items-start gap-3">
                             <span className="text-[#0072C6] text-lg">•</span>
                             <span><strong>Location:</strong> If you use the "Near Me" feature, we access your location once to calculate distance. We do not store this.</span>
-                        </li>
+                </li>
                         <li className="flex items-start gap-3">
                             <span className="text-[#0072C6] text-lg">•</span>
                             <span><strong>Contact Info:</strong> If you email us, we have your email address. That's it.</span>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+                </li>
+              </ul>
+            </div>
+          </section>
 
-            <section>
+          <section>
                 <h2 className="text-xl font-black uppercase tracking-wider mb-6 flex items-center gap-3">
                     <span className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm">2</span>
                     Third Parties
@@ -53,14 +53,14 @@ export default function PrivacyPage() {
                 <div className="bg-white p-8 rounded-[2rem] border border-black/5 shadow-sm">
                     <p className="text-gray-600 font-medium leading-relaxed mb-4">
                         We use <strong>Google Maps</strong> to show barber locations. Their privacy policy applies when you interact with the maps.
-                    </p>
+                </p>
                     <p className="text-gray-600 font-medium leading-relaxed">
                         We use <strong>Google Analytics</strong> to count visitors. All data is anonymized. We don't know who you are, just that someone visited.
-                    </p>
-                </div>
-            </section>
+              </p>
+            </div>
+          </section>
 
-            <section>
+          <section>
                 <h2 className="text-xl font-black uppercase tracking-wider mb-6 flex items-center gap-3">
                     <span className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm">3</span>
                     Your Rights
@@ -71,9 +71,9 @@ export default function PrivacyPage() {
                     </p>
                     <a href="mailto:hello@antiguabarbers.com" className="text-[#CE1126] font-bold uppercase tracking-widest text-xs hover:underline">
                         hello@antiguabarbers.com
-                    </a>
+              </a>
                 </div>
-            </section>
+          </section>
         </div>
 
       </main>

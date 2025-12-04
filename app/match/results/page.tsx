@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { trackClickEvent } from "@/lib/analytics";
+import { formatPhoneForTel } from "@/lib/phone-utils";
 
 interface Barbershop {
   id: string;
@@ -345,10 +346,10 @@ function MatchResultsContent() {
 
                         {/* Actions */}
                         <div className="grid grid-cols-3 gap-2">
-                          {barber.phone && (
-                            <a
-                              href={`tel:${barber.phone}`}
-                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${barber.phone}`, barber.name, barber.neighborhood || undefined)}
+                            {barber.phone && (
+                              <a
+                              href={`tel:${formatPhoneForTel(barber.phone)}`}
+                              onClick={() => trackClickEvent(barber.id, 'phone_call', `tel:${formatPhoneForTel(barber.phone)}`, barber.name, barber.neighborhood || undefined)}
                               className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                             >
                               <Phone className="w-4 h-4" />

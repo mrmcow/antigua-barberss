@@ -41,7 +41,7 @@ interface GoogleReview {
 }
 
 async function getBarber(id: string): Promise<Barbershop | null> {
-  const { data, error } = await supabase
+      const { data, error } = await supabase
     .from('barbershops')
     .select('*')
     .eq('id', id)
@@ -49,13 +49,13 @@ async function getBarber(id: string): Promise<Barbershop | null> {
 
   if (error || !data) return null;
   return data;
-}
+      }
 
 async function getNextBarber(currentName: string): Promise<string | null> {
   // Try to get next alphabetical
-  const { data } = await supabase
-    .from('barbershops')
-    .select('id')
+    const { data } = await supabase
+      .from('barbershops')
+      .select('id')
     .gt('name', currentName)
     .order('name', { ascending: true })
     .limit(1)
@@ -65,7 +65,7 @@ async function getNextBarber(currentName: string): Promise<string | null> {
 
   // Fallback to first (wrap around)
   const { data: first } = await supabase
-    .from('barbershops')
+      .from('barbershops')
     .select('id')
     .order('name', { ascending: true })
     .limit(1)
@@ -74,19 +74,28 @@ async function getNextBarber(currentName: string): Promise<string | null> {
   return first?.id || null;
 }
 
-async function getGoogleReviews(placeId: string): Promise<GoogleReview[]> {
-  if (!placeId || !process.env.GOOGLE_PLACES_API_KEY) return [];
-
+async function getGoogleReviews(barbershopId: string): Promise<GoogleReview[]> {
   try {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${process.env.GOOGLE_PLACES_API_KEY}`,
-      { next: { revalidate: 3600 } } // Cache for 1 hour
-    );
+    const { data, error } = await supabase
+      .from('google_reviews')
+      .select('*')
+      .eq('barbershop_id', barbershopId)
+      .order('time', { ascending: false })
+      .limit(5); // Limit to most recent 5 reviews
 
-    if (!response.ok) return [];
+    if (error) {
+      console.error('Error fetching Google reviews from database:', error);
+      return [];
+    }
 
-    const data = await response.json();
-    return data.result?.reviews || [];
+    return data?.map(review => ({
+      author_name: review.author_name,
+      rating: review.rating,
+      relative_time_description: review.relative_time_description,
+      text: review.text,
+      time: review.time,
+      profile_photo_url: review.profile_photo_url
+    })) || [];
   } catch (error) {
     console.error('Error fetching Google reviews:', error);
     return [];
@@ -107,8 +116,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: `${barber.name} - Antigua Barbers`,
       description: `Check out ${barber.name} in ${barber.neighborhood || "Antigua"}. View photos and reviews on Antigua Barbers.`,
       images: barber.images?.[0] ? [barber.images[0]] : [],
-    }
-  };
+      }
+    };
 }
 
 export default async function BarberProfile({ params }: { params: { slug: string } }) {
@@ -116,23 +125,23 @@ export default async function BarberProfile({ params }: { params: { slug: string
 
   if (!barber) {
     notFound();
-  }
+    }
 
   const [nextBarberId, googleReviews] = await Promise.all([
     getNextBarber(barber.name),
-    barber.google_place_id ? getGoogleReviews(barber.google_place_id) : Promise.resolve([])
+    getGoogleReviews(barber.id)
   ]);
 
   // JSON-LD Schema for LocalBusiness
-  const jsonLd = {
+  const jsonLd: any = {
     "@context": "https://schema.org",
     "@type": "BarberShop",
     "name": barber.name,
-    "image": barber.images?.[0],
-    "telephone": barber.phone,
+    "url": `https://www.antiguabarbers.com/barbers/${barber.id}`,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": barber.address,
+      "addressLocality": barber.neighborhood || "Saint John's",
       "addressCountry": "AG"
     },
     "geo": {
@@ -141,12 +150,27 @@ export default async function BarberProfile({ params }: { params: { slug: string
       "longitude": barber.lng
     },
     "priceRange": barber.price_range || "$$",
-    "aggregateRating": barber.rating ? {
+  };
+
+  if (barber.images?.[0]) {
+    jsonLd.image = [barber.images[0]];
+  }
+
+  if (barber.phone) {
+    jsonLd.telephone = barber.phone;
+  }
+
+  if (barber.google_maps_url) {
+    jsonLd.hasMap = barber.google_maps_url;
+  }
+
+  if (barber.rating) {
+    jsonLd.aggregateRating = {
       "@type": "AggregateRating",
       "ratingValue": barber.rating,
-      "reviewCount": barber.review_count
-    } : undefined
-  };
+      "reviewCount": barber.review_count || 1
+    };
+  }
 
   // Prepare simple barber object for client components
   const simpleBarber = {
@@ -219,8 +243,8 @@ export default async function BarberProfile({ params }: { params: { slug: string
                             <div key={i} className="flex justify-between border-b border-gray-100 pb-2 last:border-0">
                                 <span>{day.split(': ')[0]}</span>
                                 <span className="text-black">{day.split(': ')[1]}</span>
-                            </div>
-                        ))}
+                        </div>
+                      ))}
                     </div>
                 ) : (
                     <p className="text-gray-400 text-sm">Hours not available</p>
@@ -239,7 +263,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
                 googleMapsUrl={barber.google_maps_url}
                 reviews={googleReviews}
             />
-        </div>
+                </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
@@ -257,7 +281,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
             <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-black/5">
                 <h3 className="text-sm font-black uppercase tracking-widest mb-4 text-gray-400">Contact</h3>
                 <BarberSocialActions barber={simpleBarber} />
-            </div>
+          </div>
         </div>
 
       </div>

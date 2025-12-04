@@ -10,9 +10,9 @@ interface ShareButtonProps {
 export function ShareButton({ title, description }: ShareButtonProps) {
     const handleShare = async () => {
         const shareData = {
-            title,
-            text: description,
-            url: window.location.href,
+                title,
+                text: description,
+                url: window.location.href,
         };
 
         if (navigator.share && navigator.canShare(shareData)) {
@@ -27,7 +27,7 @@ export function ShareButton({ title, description }: ShareButtonProps) {
             // Fallback: copy to clipboard
             try {
                 await navigator.clipboard.writeText(window.location.href);
-                alert('Link copied to clipboard!');
+            alert('Link copied to clipboard!');
             } catch (error) {
                 console.error('Failed to copy:', error);
             }

@@ -37,14 +37,14 @@ export default function AboutPage() {
             <p className="text-gray-500 text-sm font-medium leading-relaxed">
               We don't just list anyone. We verify shops, check reviews, and ensure they meet the standard.
             </p>
-          </div>
+              </div>
           <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-black/5">
             <div className="w-12 h-12 bg-[#CE1126]/10 rounded-full flex items-center justify-center mb-6 text-2xl">🚢</div>
             <h3 className="text-xl font-black uppercase mb-3">Visitor Friendly</h3>
             <p className="text-gray-500 text-sm font-medium leading-relaxed">
               Clear pricing, map locations, and transport info helps visitors navigate the local scene with confidence.
             </p>
-          </div>
+            </div>
         </div>
 
         {/* Story Section */}

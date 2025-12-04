@@ -16,6 +16,7 @@ import {
   DollarSign
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { formatPhoneForTel } from "@/lib/phone-utils";
 
 interface Barbershop {
   id: string;
@@ -492,7 +493,7 @@ export default function NeedCutNowPage() {
                       <div className="grid grid-cols-3 gap-2">
                         {barber.phone ? (
                           <a
-                            href={`tel:${barber.phone}`}
+                            href={`tel:${formatPhoneForTel(barber.phone)}`}
                             className="border-2 border-black p-2 text-center font-bold uppercase text-xs flex flex-col items-center justify-center gap-1 active:bg-black active:text-white transition-colors"
                           >
                             <Phone className="w-4 h-4" />
