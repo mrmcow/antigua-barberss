@@ -172,7 +172,7 @@ export default async function BarberProfile({ params }: { params: { slug: string
       "reviewCount": Number(barber.review_count),
       "bestRating": 5,
       "worstRating": 1
-    };
+  };
   }
 
   // Prepare simple barber object for client components
