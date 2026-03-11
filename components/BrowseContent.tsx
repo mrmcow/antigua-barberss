@@ -7,6 +7,7 @@ import { MapPin, Star, Phone, Navigation, ArrowRight, Car, MessageCircle, Search
 import { trackClickEvent } from "@/lib/analytics";
 import { calculateDistance } from "@/lib/utils";
 import { formatPhoneForTel } from "@/lib/phone-utils";
+import { BarberImage } from "@/components/ui/BarberImage";
 
 interface Barbershop {
     id: string;
@@ -216,15 +217,12 @@ export function BrowseContent({ initialBarbers }: BrowseContentProps) {
                     <div key={barber.id} className="group bg-white rounded-[2rem] border border-black/5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col">
                         {/* Card Image */}
                         <Link href={`/barbers/${barber.id}`} className="block relative aspect-[4/3] bg-gray-100 overflow-hidden">
-                            {barber.images?.[0] ? (
-                                        <img
-                                            src={barber.images[0]}
-                                            alt={barber.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-gray-300 font-black text-4xl">AB</div>
-                            )}
+                            <BarberImage
+                                src={barber.images?.[0]}
+                                alt={barber.name}
+                                imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                className="w-full h-full"
+                            />
                             <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
                                 <Star className="w-3.5 h-3.5 fill-[#FCD116] text-[#FCD116]" />
                                 <span className="text-xs font-bold">{barber.rating?.toFixed(1)}</span>

@@ -3,6 +3,9 @@ import { ArrowRight, MapPin, Star, Phone, Search } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Logo } from "@/components/ui/Logo";
 import { Footer } from "@/components/Footer";
+import { BarberImage } from "@/components/ui/BarberImage";
+
+export const dynamic = 'force-dynamic';
 
 // Types
 interface Barbershop {
@@ -124,13 +127,12 @@ export default async function Home() {
                     <Link key={barber.id} href={`/barbers/${barber.id}`} className="group block">
                         {/* Image Card */}
                         <div className="relative aspect-[4/5] bg-gray-100 mb-6 overflow-hidden rounded-[2rem] shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2">
-                             {barber.images?.[0] ? (
-                                <img src={barber.images[0]} alt={barber.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                             ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-300">
-                                    <span className="font-black text-4xl opacity-20">AB</span>
-                                </div>
-                    )}
+                             <BarberImage
+                                src={barber.images?.[0]}
+                                alt={barber.name}
+                                imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                className="w-full h-full"
+                             />
                              
                     {/* Rating Badge */}
                     {barber.rating && (

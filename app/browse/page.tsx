@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { supabase } from "@/lib/supabase";
 import { BrowseContent } from "@/components/BrowseContent";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Browse Antigua Barbers - Find Shops Near You",
   description: "Search the official directory of barbershops in Antigua. Filter by neighborhood (St. John's, English Harbour, etc.), view ratings, and book appointments.",
@@ -34,7 +36,6 @@ async function getBarbers(): Promise<Barbershop[]> {
   const { data, error } = await supabase
     .from('barbershops')
     .select('*')
-    .not('images', 'is', null)
     .order('rating', { ascending: false, nullsFirst: false })
     .limit(100);
 
@@ -43,7 +44,7 @@ async function getBarbers(): Promise<Barbershop[]> {
     return [];
   }
 
-  return (data || []).filter(b => b.images && b.images.length > 0);
+  return data || [];
 }
 
 export default async function BrowsePage() {

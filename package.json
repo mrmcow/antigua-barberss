@@ -19,6 +19,7 @@
     "generate:mock": "node scripts/generate-mock-blog-content.js --limit=750",
     "monthly:update": "tsx scripts/migrate-google-reviews.ts",
     "monthly:force": "tsx scripts/migrate-google-reviews.ts --force",
+    "refresh:photos": "tsx scripts/refresh-photos.ts",
     "fix:phones": "tsx scripts/fix-phone-numbers.ts --fix",
     "preview:phones": "tsx scripts/fix-phone-numbers.ts --preview"
   },

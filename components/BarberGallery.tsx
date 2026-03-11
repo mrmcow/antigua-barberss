@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Maximize2 } from "lucide-react";
 import { Lightbox } from "@/components/ui/Lightbox";
+import { BarberImage } from "@/components/ui/BarberImage";
 
 interface BarberGalleryProps {
   images: string[];
@@ -37,11 +38,12 @@ export function BarberGallery({ images, barberName }: BarberGalleryProps) {
                 className="md:col-span-2 relative h-full bg-gray-100 cursor-pointer group"
                 onClick={() => openLightbox(0)}
             >
-                {mainImage ? (
-                    <img src={mainImage} alt={barberName} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-300 font-black text-6xl">AB</div>
-                )}
+                <BarberImage
+                    src={mainImage}
+                    alt={barberName}
+                    imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full"
+                />
                 <div className="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm">
                     Featured Barber
                 </div>
@@ -58,7 +60,12 @@ export function BarberGallery({ images, barberName }: BarberGalleryProps) {
                         className="relative bg-gray-100 h-full overflow-hidden cursor-pointer group"
                         onClick={() => openLightbox(i + 1)}
                     >
-                        <img src={img} alt="Shop view" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <BarberImage
+                            src={img}
+                            alt="Shop view"
+                            imgClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="w-full h-full"
+                        />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <Maximize2 className="w-8 h-8 text-white drop-shadow-lg" />
                         </div>
@@ -66,8 +73,8 @@ export function BarberGallery({ images, barberName }: BarberGalleryProps) {
                 ))}
                 {sideImages.length === 0 && (
                     <>
-                        <div className="bg-gray-50 h-full"></div>
-                        <div className="bg-gray-50 h-full"></div>
+                        <div className="bg-gray-900 h-full opacity-30"></div>
+                        <div className="bg-gray-900 h-full opacity-20"></div>
                     </>
                 )}
             </div>
